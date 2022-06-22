@@ -1,9 +1,16 @@
 import Head from 'next/head';
 // import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 
-export default function Home() {
+export default function Home(props) {
+  useEffect(() => {
+    props
+      .refreshUserProfile()
+      .catch(() => console.log('refresh user profile Failed'));
+  }, [props]);
+
   return (
     <div className={styles.container}>
       <Head>
