@@ -26,6 +26,9 @@ export default function Header(props) {
       🐒
       <div>
         <Link href="/">Home</Link>
+        <Link href="/recommendation">Recommendation</Link>
+        <Link href="/collection">Collection</Link>
+        <Link href="/selection">Selection</Link>
 
         {/*
           This is how Next.js used to require

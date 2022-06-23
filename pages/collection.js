@@ -1,15 +1,7 @@
 import Head from 'next/head';
-// import Image from 'next/image';
-import { useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 
-export default function Home(props) {
-  useEffect(() => {
-    props
-      .refreshUserProfile()
-      .catch(() => console.log('refresh user profile Failed'));
-  }, [props]);
-
+export default function Selection() {
   return (
     <div className={styles.container}>
       <Head>
@@ -17,11 +9,10 @@ export default function Home(props) {
         <meta name="description" content="every hour is cocktail hour" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className={styles.main}>
-        <h1>hello</h1>
-        here should be the login and a welcome text
+        <h1>full collection available for everyone</h1>
       </main>
-      login:
     </div>
   );
 }
