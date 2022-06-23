@@ -11,5 +11,6 @@ exports.up = async (sql) => {
 
 exports.down = async (sql) => {
   await sql`
+    DROP TABLE sessions
   `;
 };
