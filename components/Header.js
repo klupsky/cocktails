@@ -46,8 +46,8 @@ export default function Header(props) {
         <Link href="/logout">Logout</Link>
       ) : (
         <>
-          <Link href="/register">Register</Link>
-          <Link href="/login">Login</Link>
+          {/* <Link href="/register">Register</Link> */}
+          {/* <Link href="/login">Login</Link> */}
         </>
       )}
     </header>
