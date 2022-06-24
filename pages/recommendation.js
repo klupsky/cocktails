@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import styles from '../styles/Home.module.css';
 import { setStringifiedCookie } from '../util/cookies';
 import { getUserByValidSessionToken } from '../util/database';
 
@@ -12,17 +11,17 @@ export default function Recommendation(props) {
   // form submit links to recommended_cocktail page
   const onSubmit = (event) => {
     event.preventDefault();
-    window.location.href = '/recommended_cocktail';
+    window.location.href = '/recommendedCocktail';
   };
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Cocktails</title>
         <meta name="description" content="every hour is cocktail hour" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
+      <main>
         <h1>get a recommendation {props.user.username}</h1>
         <form onSubmit={onSubmit}>
           <div>
@@ -70,7 +69,7 @@ export default function Recommendation(props) {
           <button
             data-test-id="generate-recommendation"
             onClick={() => {
-              const recommendation = [
+              const cookieRecommendation = [
                 {
                   flavour: flavour,
                   spirit: spirit,
@@ -78,7 +77,7 @@ export default function Recommendation(props) {
                 },
               ];
 
-              setStringifiedCookie('recommendation', recommendation);
+              setStringifiedCookie('recommendation', cookieRecommendation);
             }}
           >
             get a recommendation

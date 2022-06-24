@@ -15,28 +15,30 @@ export function getParsedCookie(key: string) {
   }
 }
 
-export type Recommendation = {
-  id: number;
-  level: number;
+export type Cookierecommendation = {
   flavour: string;
   spirit: string;
+  level: number;
 };
 
-// export function setStringifiedCookie(key: string, value: Recommendation[]) {
-//   Cookies.set(key, JSON.stringify(value));
-// }
-
-// export function stringifyCookieValue(value: Recommendation[]) {
-//   return JSON.stringify(value);
-// }
-
-export function setStringifiedCookie(key: string, value: string) {
+export function setStringifiedCookie(
+  key: string,
+  value: Cookierecommendation[],
+) {
   Cookies.set(key, JSON.stringify(value));
 }
 
-export function stringifyCookieValue(value: string) {
+export function stringifyCookieValue(value: Cookierecommendation[]) {
   return JSON.stringify(value);
 }
+
+// export function setStringifiedCookie(key: string, value: string) {
+//   Cookies.set(key, JSON.stringify(value));
+// }
+
+// export function stringifyCookieValue(value: string) {
+//   return JSON.stringify(value);
+// }
 
 export function deleteCookie(key: string) {
   Cookies.remove(key);

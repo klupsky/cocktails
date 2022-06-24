@@ -168,3 +168,29 @@ export async function deleteExpiredSessions() {
 
   return sessions.map((session) => camelcaseKeys(session));
 }
+
+export async function getRecommendationBasedOnCookiesAndDatabase(
+  animalId: number,
+) {
+  // Join query
+  const [joinedRecommendation] = await sql`
+    SELECT
+      cocktails.name AS cocktail.name,
+      levels_id AS level_id,
+      flavours_id AS animal_type,
+      animals.accessory AS animal_accessory,
+      foods.id AS food_id,
+      foods.name AS food_name
+    FROM
+      cocktails,
+      flavours,
+      levels,
+      spirits,
+      cookies
+    WHERE
+      animals.id = ${animalId} AND
+      animals_foods.animal_id = animals.id AND
+      foods.id = animals_foods.food_id
+  `;
+  return camelcaseKeys(joinedRecommendation);
+}
