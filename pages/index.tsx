@@ -1,14 +1,20 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LoginResponseBody } from './api/login';
 import { errorStyles } from './register';
 
 type Props = {
   refreshUserProfile: () => Promise<void>;
 };
+
 export default function Home(props: Props) {
+  useEffect(() => {
+    props
+      .refreshUserProfile()
+      .catch(() => console.log('refresh user profile Failed'));
+  }, [props]);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<

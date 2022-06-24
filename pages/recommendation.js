@@ -5,6 +5,8 @@ import styles from '../styles/Home.module.css';
 import { getUserByValidSessionToken } from '../util/database';
 
 export default function Recommendation(props) {
+  const [recommendations, setRecommendations] = useState([]);
+
   const [flavour, setFlavour] = useState('');
   const [spirit, setSpirit] = useState('');
   const [level, setLevel] = useState('');
@@ -19,20 +21,22 @@ export default function Recommendation(props) {
 
       <main className={styles.main}>
         <h1>get a recommendation {props.user.username}</h1>
+        <div>
+          <label>
+            flavour
+            <input
+              data-test-id="flavour-1"
+              type="text"
+              value={flavour}
+              onChange={(event) => {
+                setFlavour(event.currentTarget.value);
+              }}
+            />
+          </label>
+        </div>
 
-        <div>flavour:</div>
-
-        <button
-          onClick={() => {
-            setFlavour('bitter');
-          }}
-        >
-          bitter
-        </button>
         <div>{flavour}</div>
-
         <div>spirit:</div>
-
         <div>alcohol level:</div>
         <buton>drink this</buton>
       </main>
