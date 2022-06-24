@@ -2,15 +2,16 @@ const cocktails = [
   {
     id: '1',
     name: 'first drink',
-    level_id: 3,
+    level_id: 1,
     flavour_id: 1,
-    spirit_id: 2,
+    spirit_id: 1,
     description: 'yay this is the first drink and it tastes like alcohol',
     glass: 'tumbler',
     ice: 'crushed ice',
     garnish: 'lavender',
     category_id: 1,
     image: 1,
+    size: 'small',
   },
 ];
 
@@ -29,6 +30,7 @@ exports.up = async (sql) => {
       'garnish',
       'category_id',
       'image',
+      'size',
     )}
   `;
 };
@@ -47,6 +49,8 @@ glass = ${cocktail.glass} AND
 ice = ${cocktail.ice} AND
 garnish = ${cocktail.garnish} AND
 category_id = ${cocktail.category_id} AND
-image = ${cocktail.image}`;
+image = ${cocktail.image} AND
+size = ${cocktail.size}
+`;
   }
 };

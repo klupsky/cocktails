@@ -170,23 +170,31 @@ export async function deleteExpiredSessions() {
 }
 
 export async function getRecommendationBasedOnCookiesAndDatabase(
-  animalId: number,
+  levelId: number,
+  flavourId: number,
+  spiritId: number,
+  categoryId: number,
 ) {
   // Join query
   const [joinedRecommendation] = await sql`
     SELECT
-      cocktails.name AS cocktail.name,
+      name AS name,
       levels_id AS level_id,
-      flavours_id AS animal_type,
-      animals.accessory AS animal_accessory,
-      foods.id AS food_id,
-      foods.name AS food_name
+      flavours_id AS flavour_id,
+      spirits_id AS spirit_id,
+      description AS description,
+      glass AS glass,
+      ice AS ice,
+      garnish AS garnish,
+      categories_id AS category_id,
+      image AS image
+
     FROM
       cocktails,
       flavours,
       levels,
-      spirits,
-      cookies
+      spirits
+
     WHERE
       animals.id = ${animalId} AND
       animals_foods.animal_id = animals.id AND
