@@ -1,16 +1,19 @@
-import Cookies from 'js-cookie';
 import Head from 'next/head';
 import { useState } from 'react';
 import styles from '../styles/Home.module.css';
+import { setStringifiedCookie } from '../util/cookies';
 import { getUserByValidSessionToken } from '../util/database';
 
 export default function Recommendation(props) {
-  const [recommendations, setRecommendations] = useState([]);
-
   const [flavour, setFlavour] = useState('');
   const [spirit, setSpirit] = useState('');
   const [level, setLevel] = useState('');
 
+  // form submit links to recommended_cocktail page
+  const onSubmit = (event) => {
+    event.preventDefault();
+    window.location.href = '/recommended_cocktail';
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -21,24 +24,66 @@ export default function Recommendation(props) {
 
       <main className={styles.main}>
         <h1>get a recommendation {props.user.username}</h1>
-        <div>
-          <label>
-            flavour
-            <input
-              data-test-id="flavour-1"
-              type="text"
-              value={flavour}
-              onChange={(event) => {
-                setFlavour(event.currentTarget.value);
-              }}
-            />
-          </label>
-        </div>
+        <form onSubmit={onSubmit}>
+          <div>
+            <label>
+              flavour
+              <input
+                data-test-id="flavour-1"
+                type="text"
+                value={flavour}
+                onChange={(event) => {
+                  setFlavour(event.currentTarget.value);
+                }}
+              />
+            </label>
+          </div>
+          <br />
+          <div>
+            <label>
+              spirit:
+              <input
+                data-test-id="spirit-1"
+                type="text"
+                value={spirit}
+                onChange={(event) => {
+                  setSpirit(event.currentTarget.value);
+                }}
+              />{' '}
+            </label>
+          </div>{' '}
+          <br />
+          <div>
+            <label>
+              alcohol level:
+              <input
+                data-test-id="level-1"
+                type="text"
+                value={level}
+                onChange={(event) => {
+                  setLevel(event.currentTarget.value);
+                }}
+              />{' '}
+            </label>
+          </div>{' '}
+          <br />
+          <button
+            data-test-id="generate-recommendation"
+            onClick={() => {
+              const recommendation = [
+                {
+                  flavour: flavour,
+                  spirit: spirit,
+                  level: level,
+                },
+              ];
 
-        <div>{flavour}</div>
-        <div>spirit:</div>
-        <div>alcohol level:</div>
-        <buton>drink this</buton>
+              setStringifiedCookie('recommendation', recommendation);
+            }}
+          >
+            get a recommendation
+          </button>
+        </form>
       </main>
     </div>
   );

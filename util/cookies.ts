@@ -22,11 +22,19 @@ export type Recommendation = {
   spirit: string;
 };
 
-export function setStringifiedCookie(key: string, value: Recommendation[]) {
+// export function setStringifiedCookie(key: string, value: Recommendation[]) {
+//   Cookies.set(key, JSON.stringify(value));
+// }
+
+// export function stringifyCookieValue(value: Recommendation[]) {
+//   return JSON.stringify(value);
+// }
+
+export function setStringifiedCookie(key: string, value: string) {
   Cookies.set(key, JSON.stringify(value));
 }
 
-export function stringifyCookieValue(value: Recommendation[]) {
+export function stringifyCookieValue(value: string) {
   return JSON.stringify(value);
 }
 
