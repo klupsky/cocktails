@@ -169,9 +169,10 @@ export async function deleteExpiredSessions() {
   return sessions.map((session) => camelcaseKeys(session));
 }
 
-export async function getRecommendationBasedOnCookiesAndDatabase(cocktailId) {
+export async function getRecommendationBasedOnCookiesAndDatabase() {
   const [joinedRecommendation] = await sql`
     SELECT
+      cocktails.id AS cocktail_id,
       cocktails.name AS cocktail_name,
       levels.id AS level_id,
       flavours.id AS flavour_id,
@@ -192,9 +193,9 @@ export async function getRecommendationBasedOnCookiesAndDatabase(cocktailId) {
       categories
 
     WHERE
-    cocktails.level_id = 2 AND
-    cocktails.flavour_id = 2 AND
-    cocktails.spirit_id = 2
+    cocktails.level_id = 1 AND
+    cocktails.flavour_id = 1 AND
+    cocktails.spirit_id = 1
 
   `;
   return camelcaseKeys(joinedRecommendation);

@@ -14,7 +14,7 @@ export default function RecommendedCocktail(props) {
       </Head>
 
       <main>
-        <h1>hey {props.user.username} drink this</h1>
+        <h1>hey {props.user.username}, you should get a</h1>
       </main>
     </div>
   );

@@ -71,9 +71,9 @@ export default function Recommendation(props) {
             onClick={() => {
               const cookieRecommendation = [
                 {
-                  flavour: flavour,
-                  spirit: spirit,
-                  level: level,
+                  flavourId: flavour,
+                  spiritId: spirit,
+                  levelId: level,
                 },
               ];
 
