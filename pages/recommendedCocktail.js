@@ -1,14 +1,10 @@
 import Head from 'next/head';
-import { useState } from 'react';
-import { getUserByValidSessionToken } from '../util/database';
+import {
+  getRecommendationBasedOnCookiesAndDatabase,
+  getUserByValidSessionToken,
+} from '../util/database';
 
 export default function RecommendedCocktail(props) {
-  const [flavour, setFlavour] = useState('');
-  const [spirit, setSpirit] = useState('');
-  const [level, setLevel] = useState('');
-
-  // form submit links to recommended_cocktail page
-
   return (
     <div>
       <Head>
@@ -29,6 +25,11 @@ export async function getServerSideProps(context) {
     context.req.cookies.sessionToken,
   );
 
+  const recommendedCocktail = await getRecommendationBasedOnCookiesAndDatabase(
+    context.query.cocktailId,
+  );
+  console.log(recommendedCocktail);
+
   if (user) {
     return {
       props: {
@@ -39,7 +40,7 @@ export async function getServerSideProps(context) {
 
   return {
     redirect: {
-      destination: `/login?returnTo=/recommendation`,
+      destination: `/login?returnTo=/recommendedCocktail`,
       permanent: false,
     },
   };

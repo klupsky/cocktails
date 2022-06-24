@@ -1,4 +1,7 @@
-const flavours = [{ id: '1', name: 'bitter' }];
+const flavours = [
+  { id: 1, name: 'bitter' },
+  { id: 2, name: 'sour' },
+];
 
 exports.up = async (sql) => {
   await sql`
