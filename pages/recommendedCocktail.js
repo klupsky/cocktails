@@ -40,6 +40,7 @@ export async function getServerSideProps(context) {
     context.query,
   );
   // console.log(recommendedCocktails);
+
   const recommendedCocktail = {
     name: recommendedCocktails.name,
     level: recommendedCocktails.level,
@@ -53,7 +54,7 @@ export async function getServerSideProps(context) {
     image: recommendedCocktails.image,
     size: recommendedCocktails.size,
   };
-  console.log(recommendedCocktail);
+  // console.log(recommendedCocktail);
 
   if (user) {
     return {

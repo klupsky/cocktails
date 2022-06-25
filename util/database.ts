@@ -231,6 +231,13 @@ export async function getFullCollectionOfCocktails() {
       spirits,
       categories
 
+     WHERE
+      cocktails.spirit_id = spirits.id AND
+      cocktails.flavour_id = flavours.id AND
+      cocktails.level_id = levels.id
+
+      ORDER BY name ASC;
+
   `;
   return camelcaseKeys(collection);
 }
