@@ -1,4 +1,7 @@
-const spirits = [{ id: 1, name: 'gin' }];
+const spirits = [
+  { id: 1, name: 'gin' },
+  { id: 1, name: 'whiskey' },
+];
 
 exports.up = async (sql) => {
   await sql`

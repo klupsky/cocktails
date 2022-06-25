@@ -27,6 +27,20 @@ const cocktails = [
     image: 1,
     size: 'small',
   },
+  {
+    id: 3,
+    name: 'third drink',
+    level_id: 2,
+    flavour_id: 2,
+    spirit_id: 2,
+    description: 'yay this is the second drink and it tastes like alcohol',
+    glass: 'tumbler',
+    ice: 'crushed ice',
+    garnish: 'lavender',
+    category_id: 1,
+    image: 1,
+    size: 'small',
+  },
 ];
 
 // adding

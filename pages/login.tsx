@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { LoginResponseBody } from './api/login';
@@ -88,6 +89,8 @@ export default function Login(props: Props) {
             />
           </label>
           <button onClick={() => loginHandler()}>Login</button>
+          <Link href="/register">or register</Link>
+
           {errors.map((error) => (
             <div css={errorStyles} key={`error-${error.message}`}>
               {error.message}

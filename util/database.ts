@@ -171,19 +171,20 @@ export async function deleteExpiredSessions() {
 
 export async function getRecommendationBasedOnCookiesAndDatabase() {
   const [joinedRecommendation] = await sql`
+
     SELECT
-      cocktails.id AS cocktail_id,
-      cocktails.name AS cocktail_name,
-      levels.id AS level_id,
-      flavours.id AS flavour_id,
-      spirits.id AS spirit_id,
-      cocktails.description AS cocktail_description,
-      cocktails.glass AS cocktail_glass,
-      cocktails.ice AS cocktail_ice,
-      cocktails.garnish AS cocktail_garnish,
-      categories.id AS category_id,
-      cocktails.image AS cocktail_image,
-      cocktails.size AS cocktail_size
+      cocktails.id AS id,
+      cocktails.name AS name,
+      levels.level AS level,
+      flavours.name AS flavour,
+      spirits.name AS spirit,
+      cocktails.description AS description,
+      cocktails.glass AS glass,
+      cocktails.ice AS ice,
+      cocktails.garnish AS garnish,
+      categories.name AS category,
+      cocktails.image AS image,
+      cocktails.size AS size
 
     FROM
       cocktails,
@@ -193,10 +194,15 @@ export async function getRecommendationBasedOnCookiesAndDatabase() {
       categories
 
     WHERE
-    cocktails.level_id = 1 AND
-    cocktails.flavour_id = 1 AND
-    cocktails.spirit_id = 1
+    cocktails.spirit_id = 2 AND
+    spirits.id = 2 AND
+    cocktails.flavour_id = 2 AND
+    flavours.id = 2 AND
+    cocktails.level_id = 2 AND
+    levels.id = 2
 
+    -- ORDER BY RAND()
+    LIMIT 1
   `;
   return camelcaseKeys(joinedRecommendation);
 }

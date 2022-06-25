@@ -26,7 +26,7 @@ export async function getServerSideProps(context) {
   );
 
   const recommendedCocktail = await getRecommendationBasedOnCookiesAndDatabase(
-    context.query.cocktailId,
+    context.query,
   );
   console.log(recommendedCocktail);
 
@@ -34,6 +34,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         user: user,
+        recommendedCocktail: recommendedCocktail,
       },
     };
   }
