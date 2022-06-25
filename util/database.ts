@@ -206,3 +206,31 @@ export async function getRecommendationBasedOnCookiesAndDatabase() {
   `;
   return camelcaseKeys(joinedRecommendation);
 }
+
+export async function getFullCollectionOfCocktails() {
+  const collection = await sql`
+
+    SELECT
+      cocktails.id AS id,
+      cocktails.name AS name,
+      levels.level AS level,
+      flavours.name AS flavour,
+      spirits.name AS spirit,
+      cocktails.description AS description,
+      cocktails.glass AS glass,
+      cocktails.ice AS ice,
+      cocktails.garnish AS garnish,
+      categories.name AS category,
+      cocktails.image AS image,
+      cocktails.size AS size
+
+    FROM
+      cocktails,
+      flavours,
+      levels,
+      spirits,
+      categories
+
+  `;
+  return camelcaseKeys(collection);
+}

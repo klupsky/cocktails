@@ -15,6 +15,17 @@ export default function RecommendedCocktail(props) {
 
       <main>
         <h1>hey {props.user.username}, you should get a</h1>
+        {props.recommendedCocktail.name}
+        {props.recommendedCocktail.level}
+        {props.recommendedCocktail.flavour}
+        {props.recommendedCocktail.spirit}
+        {props.recommendedCocktail.description}
+        {props.recommendedCocktail.glass}
+        {props.recommendedCocktail.ice}
+        {props.recommendedCocktail.garnish}
+        {props.recommendedCocktail.category}
+        {props.recommendedCocktail.image}
+        {props.recommendedCocktail.size}
       </main>
     </div>
   );
@@ -25,16 +36,30 @@ export async function getServerSideProps(context) {
     context.req.cookies.sessionToken,
   );
 
-  const recommendedCocktail = await getRecommendationBasedOnCookiesAndDatabase(
+  const recommendedCocktails = await getRecommendationBasedOnCookiesAndDatabase(
     context.query,
   );
+  // console.log(recommendedCocktails);
+  const recommendedCocktail = {
+    name: recommendedCocktails.name,
+    level: recommendedCocktails.level,
+    flavour: recommendedCocktails.flavour,
+    spirit: recommendedCocktails.spirit,
+    description: recommendedCocktails.description,
+    glass: recommendedCocktails.glass,
+    ice: recommendedCocktails.ice,
+    garnish: recommendedCocktails.garnish,
+    category: recommendedCocktails.category,
+    image: recommendedCocktails.image,
+    size: recommendedCocktails.size,
+  };
   console.log(recommendedCocktail);
 
   if (user) {
     return {
       props: {
         user: user,
-        recommendedCocktail: recommendedCocktail,
+        recommendedCocktail,
       },
     };
   }
