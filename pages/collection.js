@@ -15,7 +15,16 @@ export default function Collection(props) {
 
       <main>
         <h1>hey {props.user.username}, this is the full collection:</h1>
-        {props.collectionCocktail.name}
+        <ul>
+          {props.collectionCocktail.cocktailNames.map((cocktailName) => {
+            return (
+              <li key={`cocktailName-${cocktailName.id}`}>
+                {' '}
+                {cocktailName.name}
+              </li>
+            );
+          })}
+        </ul>
       </main>
     </div>
   );
@@ -28,12 +37,13 @@ export async function getServerSideProps(context) {
 
   const collectionCocktails = await getFullCollectionOfCocktails(context.query);
 
-  console.log(collectionCocktails);
+  // console.log(collectionCocktails);
 
   const collectionCocktail = {
-    names: collectionCocktails.map((name) => {
+    cocktailNames: collectionCocktails.map((cocktailName) => {
       return {
-        name: name.name,
+        id: cocktailName.id,
+        name: cocktailName.name,
       };
     }),
   };
