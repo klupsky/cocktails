@@ -24,6 +24,9 @@ export default function Home(props: Props) {
   >([]);
   const router = useRouter();
 
+  const cookieStuff = props.cookieCocktail;
+  console.log(cookieStuff);
+
   async function loginHandler() {
     const loginResponse = await fetch('/api/login', {
       method: 'POST',

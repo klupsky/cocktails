@@ -32,15 +32,18 @@ export default function RecommendedCocktail(props) {
 }
 
 export async function getServerSideProps(context) {
+  // get the token from the cookies
   const user = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
   );
 
+  // get the cocktail data from the database query
   const recommendedCocktails = await getRecommendationBasedOnCookiesAndDatabase(
     context.query,
   );
-  // console.log(recommendedCocktails);
 
+  // console.log(recommendedCocktails);
+  // get the informations that i want from database query
   const recommendedCocktail = {
     name: recommendedCocktails.name,
     level: recommendedCocktails.level,
@@ -56,11 +59,47 @@ export async function getServerSideProps(context) {
   };
   // console.log(recommendedCocktail);
 
+  // get the valid cookie informations
+
+  const cookieCocktailInfo = JSON.parse(
+    context.req.cookies.recommendation || '[]',
+  );
+  console.log(cookieCocktailInfo);
+
+  const cookieCocktailFlavour = {
+    cookieCocktailFlavour: cookieCocktailInfo.map((cookieCocktailFlavour) => {
+      return {
+        flavour: cookieCocktailFlavour.flavourId,
+      };
+    }),
+  };
+  const cookieCocktailLevel = {
+    cookieCocktailLevel: cookieCocktailInfo.map((cookieCocktailLevel) => {
+      return {
+        level: cookieCocktailLevel.levelId,
+      };
+    }),
+  };
+  const cookieCocktailSpirit = {
+    cookieCocktailSpirit: cookieCocktailInfo.map((cookieCocktailSpirit) => {
+      return {
+        spirit: cookieCocktailSpirit.spiritId,
+      };
+    }),
+  };
+
+  // console.log(cookieCocktailFlavour);
+  // console.log(cookieCocktailLevel);
+  // console.log(cookieCocktailSpirit);
+
   if (user) {
     return {
       props: {
         user: user,
         recommendedCocktail,
+        cookieCocktailFlavour,
+        cookieCocktailLevel,
+        cookieCocktailSpirit,
       },
     };
   }

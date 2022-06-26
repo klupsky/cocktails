@@ -68,7 +68,6 @@ export default function Login(props: Props) {
 
         <main>
           <h1>Login</h1>
-
           <label>
             username:{' '}
             <input
@@ -78,7 +77,6 @@ export default function Login(props: Props) {
               }}
             />
           </label>
-
           <label>
             password:{' '}
             <input
@@ -90,7 +88,6 @@ export default function Login(props: Props) {
           </label>
           <button onClick={() => loginHandler()}>Login</button>
           <Link href="/register">or register</Link>
-
           {errors.map((error) => (
             <div css={errorStyles} key={`error-${error.message}`}>
               {error.message}
