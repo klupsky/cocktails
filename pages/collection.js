@@ -37,17 +37,7 @@ export async function getServerSideProps(context) {
 
   const collectionCocktails = await getFullCollectionOfCocktails(context.query);
 
-  // console.log(collectionCocktails);
-
-  const collectionCocktail = {
-    cocktailNames: collectionCocktails.map((cocktailName) => {
-      return {
-        id: cocktailName.id,
-        name: cocktailName.name,
-      };
-    }),
-  };
-  console.log(collectionCocktail);
+  console.log(collectionCocktails);
 
   if (user) {
     return {
