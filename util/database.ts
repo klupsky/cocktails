@@ -234,7 +234,9 @@ export async function getFullCollectionOfCocktails() {
      WHERE
       cocktails.spirit_id = spirits.id AND
       cocktails.flavour_id = flavours.id AND
-      cocktails.level_id = levels.id
+      cocktails.level_id = levels.id AND
+      cocktails.category_id = categories.id
+
 
       ORDER BY name ASC;
 

@@ -1,8 +1,5 @@
 import Head from 'next/head';
-import {
-  getFullCollectionOfCocktails,
-  getUserByValidSessionToken,
-} from '../util/database';
+import { getFullCollectionOfCocktails } from '../util/database';
 
 export default function Collection(props) {
   return (
@@ -14,7 +11,7 @@ export default function Collection(props) {
       </Head>
 
       <main>
-        <h1>hey {props.user.username}, this is the full collection:</h1>
+        <h1>hey, this is the full collection:</h1>
         <ul>
           {props.collectionCocktail.map((cocktailName) => {
             return (
@@ -31,27 +28,13 @@ export default function Collection(props) {
 }
 
 export async function getServerSideProps(context) {
-  const user = await getUserByValidSessionToken(
-    context.req.cookies.sessionToken,
-  );
-
   const collectionCocktail = await getFullCollectionOfCocktails(context.query);
 
   console.log(collectionCocktail);
 
-  if (user) {
-    return {
-      props: {
-        user: user,
-        collectionCocktail,
-      },
-    };
-  }
-
   return {
-    redirect: {
-      destination: `/login?returnTo=/collection`,
-      permanent: false,
+    props: {
+      collectionCocktail,
     },
   };
 }
