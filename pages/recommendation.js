@@ -1,17 +1,17 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { setStringifiedCookie } from '../util/cookies';
 import { getUserByValidSessionToken } from '../util/database';
 
 export default function Recommendation(props) {
-  const [flavour, setFlavour] = useState('');
-  const [spirit, setSpirit] = useState('');
-  const [level, setLevel] = useState('');
+  const [flavourId, setFlavourId] = useState('');
+  const [spiritId, setSpiritId] = useState('');
+  const [levelId, setLevelId] = useState('');
+  const [recommendationUrl, setRecommendationUrl] = useState('');
 
   // form submit links to recommended_cocktail page
   const onSubmit = (event) => {
     event.preventDefault();
-    window.location.href = '/recommendedCocktail';
+    window.location.href = recommendationUrl;
   };
   return (
     <div>
@@ -29,10 +29,9 @@ export default function Recommendation(props) {
               flavour
               <input
                 data-test-id="flavour-1"
-                type="text"
-                value={flavour}
+                value={flavourId}
                 onChange={(event) => {
-                  setFlavour(event.currentTarget.value);
+                  setFlavourId(event.currentTarget.value);
                 }}
               />
             </label>
@@ -43,10 +42,9 @@ export default function Recommendation(props) {
               spirit:
               <input
                 data-test-id="spirit-1"
-                type="text"
-                value={spirit}
+                value={spiritId}
                 onChange={(event) => {
-                  setSpirit(event.currentTarget.value);
+                  setSpiritId(event.currentTarget.value);
                 }}
               />{' '}
             </label>
@@ -57,10 +55,9 @@ export default function Recommendation(props) {
               alcohol level:
               <input
                 data-test-id="level-1"
-                type="text"
-                value={level}
+                value={levelId}
                 onChange={(event) => {
-                  setLevel(event.currentTarget.value);
+                  setLevelId(event.currentTarget.value);
                 }}
               />{' '}
             </label>
@@ -69,15 +66,9 @@ export default function Recommendation(props) {
           <button
             data-test-id="generate-recommendation"
             onClick={() => {
-              const cookieRecommendation = [
-                {
-                  flavourId: flavour,
-                  spiritId: spirit,
-                  levelId: level,
-                },
-              ];
-
-              //  setStringifiedCookie('recommendation', cookieRecommendation);
+              setRecommendationUrl(
+                `/recommendation/cocktail/flavour${flavourId}/spirit${spiritId}/level${levelId}`,
+              );
             }}
           >
             get a recommendation

@@ -2,7 +2,7 @@ import Head from 'next/head';
 import {
   getRecommendationBasedOnCookiesAndDatabase,
   getUserByValidSessionToken,
-} from '../util/database';
+} from '../../util/database';
 
 export default function RecommendedCocktail(props) {
   return (
