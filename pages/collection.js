@@ -16,7 +16,7 @@ export default function Collection(props) {
       <main>
         <h1>hey {props.user.username}, this is the full collection:</h1>
         <ul>
-          {props.collectionCocktail.cocktailNames.map((cocktailName) => {
+          {props.collectionCocktail.map((cocktailName) => {
             return (
               <li key={`cocktailName-${cocktailName.id}`}>
                 {' '}
@@ -35,9 +35,9 @@ export async function getServerSideProps(context) {
     context.req.cookies.sessionToken,
   );
 
-  const collectionCocktails = await getFullCollectionOfCocktails(context.query);
+  const collectionCocktail = await getFullCollectionOfCocktails(context.query);
 
-  console.log(collectionCocktails);
+  console.log(collectionCocktail);
 
   if (user) {
     return {
