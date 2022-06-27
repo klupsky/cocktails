@@ -24,16 +24,6 @@ export default function Home(props: Props) {
   >([]);
   const router = useRouter();
 
-  const cookieStuff = props.cookieCocktail;
-  console.log(cookieStuff);
-  // const cookieStuffFlavour = {
-  //   cookieCocktailFlavour: cookieCocktailInfo.map((cookieCocktailFlavour) => {
-  //     return {
-  //       flavour: cookieCocktailFlavour.flavourId,
-  //     };
-  //   }),
-  // };
-
   async function loginHandler() {
     const loginResponse = await fetch('/api/login', {
       method: 'POST',
@@ -84,7 +74,6 @@ export default function Home(props: Props) {
 
         <main>
           <h1>Login</h1>
-          {cookieStuff}
           <label>
             username:{' '}
             <input

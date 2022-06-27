@@ -59,47 +59,11 @@ export async function getServerSideProps(context) {
   };
   // console.log(recommendedCocktail);
 
-  // get the valid cookie informations
-
-  const cookieCocktailInfo = JSON.parse(
-    context.req.cookies.recommendation || '[]',
-  );
-  console.log(cookieCocktailInfo);
-
-  const cookieCocktailFlavour = {
-    cookieCocktailFlavour: cookieCocktailInfo.map((cookieCocktailFlavour) => {
-      return {
-        flavour: cookieCocktailFlavour.flavourId,
-      };
-    }),
-  };
-  const cookieCocktailLevel = {
-    cookieCocktailLevel: cookieCocktailInfo.map((cookieCocktailLevel) => {
-      return {
-        level: cookieCocktailLevel.levelId,
-      };
-    }),
-  };
-  const cookieCocktailSpirit = {
-    cookieCocktailSpirit: cookieCocktailInfo.map((cookieCocktailSpirit) => {
-      return {
-        spirit: cookieCocktailSpirit.spiritId,
-      };
-    }),
-  };
-
-  // console.log(cookieCocktailFlavour);
-  // console.log(cookieCocktailLevel);
-  // console.log(cookieCocktailSpirit);
-
   if (user) {
     return {
       props: {
         user: user,
         recommendedCocktail,
-        cookieCocktailFlavour,
-        cookieCocktailLevel,
-        cookieCocktailSpirit,
       },
     };
   }

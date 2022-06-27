@@ -243,3 +243,16 @@ export async function getFullCollectionOfCocktails() {
   `;
   return camelcaseKeys(collection);
 }
+
+// export async function getServerSideProps(context) {
+//   // get the valid cookie informations
+
+//   const cookieCocktailInfo = JSON.parse(context.req.cookies.recommendation);
+//   console.log(cookieCocktailInfo);
+
+//   return {
+//     props: {
+//       cookieCocktailInfo,
+//     },
+//   };
+// }

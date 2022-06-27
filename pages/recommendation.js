@@ -77,7 +77,7 @@ export default function Recommendation(props) {
                 },
               ];
 
-              setStringifiedCookie('recommendation', cookieRecommendation);
+              //  setStringifiedCookie('recommendation', cookieRecommendation);
             }}
           >
             get a recommendation

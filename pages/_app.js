@@ -5,16 +5,6 @@ import Layout from '../components/Layout';
 export default function App({ Component, pageProps }) {
   // set the user cookie in order to pass it to the components / prop drill
   const [user, setUser] = useState();
-  // set the cookies in the cart in order to pass it to the components / prop drill
-  const [cookieCocktail, setCookieCocktail] = useState([]);
-  // get the cookies to pass it to the components / prop drill
-
-  useEffect(() => {
-    const cookieRecommendation = Cookies.get('redommendation')
-      ? JSON.parse(Cookies.get('redommendation'))
-      : [];
-    setCookieCocktail(cookieRecommendation);
-  }, []);
 
   const refreshUserProfile = useCallback(async () => {
     const profileResponse = await fetch('/api/profile');
@@ -35,21 +25,12 @@ export default function App({ Component, pageProps }) {
   }, [refreshUserProfile]);
 
   return (
-    <Layout
-      user={user}
-      cookieCocktail={cookieCocktail}
-      setCookieCocktail={setCookieCocktail}
-    >
+    <Layout user={user}>
       {/*
           The "Component" component refers to
           the current page that is being rendered
         */}
-      <Component
-        {...pageProps}
-        refreshUserProfile={refreshUserProfile}
-        cookieCocktail={cookieCocktail}
-        setCookieCocktail={setCookieCocktail}
-      />
+      <Component {...pageProps} refreshUserProfile={refreshUserProfile} />
     </Layout>
   );
 }
