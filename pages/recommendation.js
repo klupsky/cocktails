@@ -9,13 +9,16 @@ export default function Recommendation(props) {
   const [levelId, setLevelId] = useState('');
   const router = useRouter();
 
-  // const [recommendationUrl, setRecommendationUrl] = useState('');
+  function handleFlavourChange(event) {
+    setFlavourId(event.target.value);
+  }
+  function handleSpiritChange(event) {
+    setSpiritId(event.target.value);
+  }
+  function handleLevelChange(event) {
+    setLevelId(event.target.value);
+  }
 
-  // form submit links to recommended_cocktail page
-  // const onSubmit = (event) => {
-  //   event.preventDefault();
-  //  window.location.href = recommendationUrl;
-  // };
   return (
     <div>
       <Head>
@@ -26,60 +29,78 @@ export default function Recommendation(props) {
 
       <main>
         <h1>get a recommendation {props.user.username}</h1>
-        {/* <form onSubmit={onSubmit}> */}
         <div>
-          <label>
-            flavour
-            <input
-              data-test-id="flavour-1"
+          <span id="flavour">pick a flavour:</span>
+          <form name="flavour">
+            <fieldset
+              className="flavour"
               value={flavourId}
-              onChange={(event) => {
-                setFlavourId(event.currentTarget.value);
-              }}
-            />
-          </label>
+              onChange={(event) => handleFlavourChange(event)}
+            >
+              <label for="flavourId1">
+                <input type="radio" name="flavour-option" value="1" />
+                flavourId1
+              </label>
+              <label for="flavourId2">
+                <input type="radio" name="flavour-option" value="2" />
+                flavourId2
+              </label>
+            </fieldset>
+          </form>
+
+          <span id="spirit">pick a spirit:</span>
+          <fieldset
+            className="spirit"
+            value={spiritId}
+            onChange={(event) => handleSpiritChange(event)}
+          >
+            <label for="spiritId1">
+              <input type="radio" name="spirit-option" value="1" />
+              spiritId1
+            </label>
+            <label for="spiritId2">
+              <input type="radio" name="spirit-option" value="2" />
+              spiritId1
+            </label>
+          </fieldset>
+          <span id="spirit">pick an alc level:</span>
+          <fieldset
+            className="level"
+            value={levelId}
+            onChange={(event) => handleLevelChange(event)}
+          >
+            <label for="levelId1">
+              <input type="radio" name="level-option" value="1" required />
+              levelId1
+            </label>
+            <label for="levelId2">
+              <input type="radio" name="level-option" value="2" />
+              levelId2
+            </label>
+            <label for="levelId3">
+              <input type="radio" name="level-option" value="3" />
+              levelId3
+            </label>
+          </fieldset>
         </div>
         <br />
-        <div>
-          <label>
-            spirit:
-            <input
-              data-test-id="spirit-1"
-              value={spiritId}
-              onChange={(event) => {
-                setSpiritId(event.currentTarget.value);
-              }}
-            />{' '}
-          </label>
-        </div>{' '}
-        <br />
-        <div>
-          <label>
-            alcohol level:
-            <input
-              data-test-id="level-1"
-              value={levelId}
-              onChange={(event) => {
-                setLevelId(event.currentTarget.value);
-              }}
-            />{' '}
-          </label>
-        </div>{' '}
-        <br />
-        <button
-          data-test-id="generate-recommendation"
-          type="button"
-          onClick={() => {
-            router
-              .push(
-                `/recommendedCocktail/recommendation?flavour=${flavourId}&spirit=${spiritId}&level=${levelId}`,
-              )
-              .catch(console.log('error'));
-          }}
-        >
-          Get a recommendation
-        </button>
-        {/* </form> */}
+        {!flavourId | !spiritId | !levelId ? (
+          <button disabled>Get a recommendation</button>
+        ) : (
+          <button
+            data-test-id="generate-recommendation"
+            type="button"
+            onClick={() => {
+              router
+                .push(
+                  `/recommendedCocktail/recommendation?flavour=${flavourId}&spirit=${spiritId}&level=${levelId}`,
+                )
+                .catch(console.log('error'));
+            }}
+          >
+            Get a recommendation
+          </button>
+        )}
       </main>
     </div>
   );
