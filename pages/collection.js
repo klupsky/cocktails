@@ -28,9 +28,11 @@ export default function Collection(props) {
 }
 
 export async function getServerSideProps(context) {
-  const collectionCocktail = await getFullCollectionOfCocktails(context.query);
+  const collectionCocktail = await getFullCollectionOfCocktails(
+    context.query.cocktail,
+  );
 
-  console.log(collectionCocktail);
+  // console.log(collectionCocktail);
 
   return {
     props: {

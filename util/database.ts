@@ -169,9 +169,14 @@ export async function deleteExpiredSessions() {
   return sessions.map((session) => camelcaseKeys(session));
 }
 
-export async function getRecommendationBasedOnCookiesAndDatabase() {
-  const [joinedRecommendation] = await sql`
+export async function getRecommendationBasedOnUrlAndDatabase(
+  flavour: number | string,
+  spirit: number | string,
+  level: number | string,
+) {
+  console.log(flavour, spirit, level);
 
+  const [joinedRecommendation] = await sql`
     SELECT
       cocktails.id AS id,
       cocktails.name AS name,
@@ -194,15 +199,15 @@ export async function getRecommendationBasedOnCookiesAndDatabase() {
       categories
 
     WHERE
-    cocktails.spirit_id = 2 AND
-    spirits.id = 2 AND
-    cocktails.flavour_id = 2 AND
-    flavours.id = 2 AND
-    cocktails.level_id = 2 AND
-    levels.id = 2
+      cocktails.flavour_id = ${flavour} AND
+      flavours.id = ${flavour} AND
+      cocktails.spirit_id = ${spirit} AND
+      spirits.id = ${spirit} AND
+      cocktails.level_id = ${level} AND
+      levels.id = ${level}
 
-    -- ORDER BY RAND()
     LIMIT 1
+
   `;
   return camelcaseKeys(joinedRecommendation);
 }
@@ -243,16 +248,3 @@ export async function getFullCollectionOfCocktails() {
   `;
   return camelcaseKeys(collection);
 }
-
-// export async function getServerSideProps(context) {
-//   // get the valid cookie informations
-
-//   const cookieCocktailInfo = JSON.parse(context.req.cookies.recommendation);
-//   console.log(cookieCocktailInfo);
-
-//   return {
-//     props: {
-//       cookieCocktailInfo,
-//     },
-//   };
-// }

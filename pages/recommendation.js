@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { getUserByValidSessionToken } from '../util/database';
 
@@ -6,13 +7,15 @@ export default function Recommendation(props) {
   const [flavourId, setFlavourId] = useState('');
   const [spiritId, setSpiritId] = useState('');
   const [levelId, setLevelId] = useState('');
-  const [recommendationUrl, setRecommendationUrl] = useState('');
+  const router = useRouter();
+
+  // const [recommendationUrl, setRecommendationUrl] = useState('');
 
   // form submit links to recommended_cocktail page
-  const onSubmit = (event) => {
-    event.preventDefault();
-    window.location.href = recommendationUrl;
-  };
+  // const onSubmit = (event) => {
+  //   event.preventDefault();
+  //  window.location.href = recommendationUrl;
+  // };
   return (
     <div>
       <Head>
@@ -23,57 +26,60 @@ export default function Recommendation(props) {
 
       <main>
         <h1>get a recommendation {props.user.username}</h1>
-        <form onSubmit={onSubmit}>
-          <div>
-            <label>
-              flavour
-              <input
-                data-test-id="flavour-1"
-                value={flavourId}
-                onChange={(event) => {
-                  setFlavourId(event.currentTarget.value);
-                }}
-              />
-            </label>
-          </div>
-          <br />
-          <div>
-            <label>
-              spirit:
-              <input
-                data-test-id="spirit-1"
-                value={spiritId}
-                onChange={(event) => {
-                  setSpiritId(event.currentTarget.value);
-                }}
-              />{' '}
-            </label>
-          </div>{' '}
-          <br />
-          <div>
-            <label>
-              alcohol level:
-              <input
-                data-test-id="level-1"
-                value={levelId}
-                onChange={(event) => {
-                  setLevelId(event.currentTarget.value);
-                }}
-              />{' '}
-            </label>
-          </div>{' '}
-          <br />
-          <button
-            data-test-id="generate-recommendation"
-            onClick={() => {
-              setRecommendationUrl(
-                `/recommendation/cocktail/flavour${flavourId}/spirit${spiritId}/level${levelId}`,
-              );
-            }}
-          >
-            get a recommendation
-          </button>
-        </form>
+        {/* <form onSubmit={onSubmit}> */}
+        <div>
+          <label>
+            flavour
+            <input
+              data-test-id="flavour-1"
+              value={flavourId}
+              onChange={(event) => {
+                setFlavourId(event.currentTarget.value);
+              }}
+            />
+          </label>
+        </div>
+        <br />
+        <div>
+          <label>
+            spirit:
+            <input
+              data-test-id="spirit-1"
+              value={spiritId}
+              onChange={(event) => {
+                setSpiritId(event.currentTarget.value);
+              }}
+            />{' '}
+          </label>
+        </div>{' '}
+        <br />
+        <div>
+          <label>
+            alcohol level:
+            <input
+              data-test-id="level-1"
+              value={levelId}
+              onChange={(event) => {
+                setLevelId(event.currentTarget.value);
+              }}
+            />{' '}
+          </label>
+        </div>{' '}
+        <br />
+        <button
+          data-test-id="generate-recommendation"
+          type="button"
+          onClick={() => {
+            router
+              .push(
+                `/recommendedCocktail/recommendation?flavour=${flavourId}&spirit=${spiritId}&level=${levelId}`,
+              )
+              .catch(console.log('error'));
+          }}
+        >
+          Get a recommendation
+        </button>
+        {/* </form> */}
       </main>
     </div>
   );
