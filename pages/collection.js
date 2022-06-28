@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { getFullCollectionOfCocktails } from '../util/database';
 
 export default function Collection(props) {
@@ -16,8 +17,10 @@ export default function Collection(props) {
           {props.collectionCocktail.map((cocktailName) => {
             return (
               <li key={`cocktailName-${cocktailName.id}`}>
-                {' '}
-                {cocktailName.name}
+                <Link href={`/collection/${cocktailName.id}`}>
+                  {cocktailName.name}
+                </Link>
+                {cocktailName.category}
               </li>
             );
           })}
@@ -27,10 +30,8 @@ export default function Collection(props) {
   );
 }
 
-export async function getServerSideProps(context) {
-  const collectionCocktail = await getFullCollectionOfCocktails(
-    context.query.cocktail,
-  );
+export async function getServerSideProps() {
+  const collectionCocktail = await getFullCollectionOfCocktails();
 
   // console.log(collectionCocktail);
 

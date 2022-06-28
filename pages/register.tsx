@@ -63,7 +63,7 @@ export default function Register(props: Props) {
       // if you want to use userProfile with username redirect to /users/username
       // await router.push(`/users/${loginResponseBody.user.id}`);
       await props.refreshUserProfile();
-      await router.push(`/recommendation`);
+      await router.push(`/`);
     }
   }
 

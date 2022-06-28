@@ -174,7 +174,7 @@ export async function getRecommendationBasedOnUrlAndDatabase(
   spirit: number | string,
   level: number | string,
 ) {
-  console.log(flavour, spirit, level);
+  // console.log(flavour, spirit, level);
 
   const [joinedRecommendation] = await sql`
     SELECT
@@ -247,4 +247,16 @@ export async function getFullCollectionOfCocktails() {
 
   `;
   return camelcaseKeys(collection);
+}
+
+export async function getSingleCocktailFromCollection(cocktailId: any) {
+  const [collectionCocktail] = await sql`
+    SELECT
+      *
+    FROM
+      cocktails
+    WHERE
+    cocktails.id = ${cocktailId}
+  `;
+  return camelcaseKeys(collectionCocktail);
 }
