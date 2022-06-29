@@ -28,7 +28,6 @@ export default function Header(props) {
         <Link href="/">Home</Link>
         <Link href="/recommendation">Recommendation</Link>
         <Link href="/collection">Collection</Link>
-        <Link href="/selection">Selection</Link>
 
         {/*
           This is how Next.js used to require
@@ -40,7 +39,10 @@ export default function Header(props) {
         */}
       </div>
       {props.user && (
-        <Link href="/users/private-profile">{props.user.username}</Link>
+        <Link href="/users/private-profile/">{props.user.username}</Link>
+      )}
+      {props.user && (
+        <Link href={`/users/${props.user.id}`}>your selection</Link>
       )}
       {props.user ? (
         <Link href="/logout">Logout</Link>

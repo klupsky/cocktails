@@ -257,7 +257,7 @@ export async function getFullCollectionOfCocktails() {
   return camelcaseKeys(collection);
 }
 
-export async function getSingleCocktailFromCollection(cocktailId: any) {
+export async function getSingleCocktailFromCollection(cocktailId: number) {
   const [collectionCocktail] = await sql`
     SELECT
       *
@@ -267,4 +267,47 @@ export async function getSingleCocktailFromCollection(cocktailId: any) {
       cocktails.id = ${cocktailId}
   `;
   return camelcaseKeys(collectionCocktail);
+}
+
+export async function getUserFavourites(selectionId: number) {
+  const favouriteCocktails = await sql`
+    SELECT
+      *
+
+    FROM
+      favourites
+
+    WHERE
+      favourites.id = ${selectionId}
+  `;
+  return camelcaseKeys(favouriteCocktails);
+}
+
+export async function addUserFavourite(userId: number, cocktailId: number) {
+  const [addFavouriteCocktail] = await sql`
+    INSERT INTO
+    favourites
+      (user_id, cocktail_id)
+
+    VALUES
+      (${userId}, ${cocktailId})
+
+    RETURNING
+      id,
+      user_id,
+      cocktail_id
+  `;
+  return camelcaseKeys(addFavouriteCocktail);
+}
+
+export async function deleteUserFavourite(userId: number, cocktailId: number) {
+  const deleteFavouriteCocktail = await sql`
+    DELETE FROM
+      favourites
+    WHERE
+      user_id = ${userId} AND
+      cocktail_id = ${cocktailId}
+    RETURNING *
+  `;
+  return camelcaseKeys(deleteFavouriteCocktail);
 }

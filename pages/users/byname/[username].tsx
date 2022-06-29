@@ -33,6 +33,7 @@ export default function UserDetail(props: Props) {
         </h1>
         <div>id: {props.user.id}</div>
         <div>username: {props.user.username}</div>
+        hey
       </main>
     </div>
   );
