@@ -269,45 +269,64 @@ export async function getSingleCocktailFromCollection(cocktailId: number) {
   return camelcaseKeys(collectionCocktail);
 }
 
-export async function getUserFavourites(selectionId: number) {
-  const favouriteCocktails = await sql`
+export async function getAllFavourites() {
+  const favouriteCocktailList = await sql`
     SELECT
       *
 
     FROM
-      favourites
+      favourites,
+      cocktails,
+      users
+
+  `;
+  return camelcaseKeys(favouriteCocktailList);
+}
+
+export async function getUserFavourites(userId: number) {
+  const favouriteCocktails = await sql`
+    SELECT
+*
+    FROM
+      favourites,
+      cocktails,
+      users
 
     WHERE
-      favourites.id = ${selectionId}
+      favourites.user_id = ${userId} AND
+      users.id = ${userId} AND
+
+      favourites.cocktail_id = cocktails.id
+
   `;
   return camelcaseKeys(favouriteCocktails);
 }
 
-export async function addUserFavourite(userId: number, cocktailId: number) {
-  const [addFavouriteCocktail] = await sql`
-    INSERT INTO
-    favourites
-      (user_id, cocktail_id)
+// export async function addUserFavourite(userId: number, cocktailId: number) {
+//   const [addFavouriteCocktail] = await sql`
+//     INSERT INTO
+//     favourites
+//       (user_id, cocktail_id)
 
-    VALUES
-      (${userId}, ${cocktailId})
+//     VALUES
+//       (${userId}, ${cocktailId})
 
-    RETURNING
-      id,
-      user_id,
-      cocktail_id
-  `;
-  return camelcaseKeys(addFavouriteCocktail);
-}
+//     RETURNING
+//       id,
+//       user_id,
+//       cocktail_id
+//   `;
+//   return camelcaseKeys(addFavouriteCocktail);
+// }
 
-export async function deleteUserFavourite(userId: number, cocktailId: number) {
-  const deleteFavouriteCocktail = await sql`
-    DELETE FROM
-      favourites
-    WHERE
-      user_id = ${userId} AND
-      cocktail_id = ${cocktailId}
-    RETURNING *
-  `;
-  return camelcaseKeys(deleteFavouriteCocktail);
-}
+// export async function deleteUserFavourite(userId: number, cocktailId: number) {
+//   const deleteFavouriteCocktail = await sql`
+//     DELETE FROM
+//       favourites
+//     WHERE
+//       user_id = ${userId} AND
+//       cocktail_id = ${cocktailId}
+//     RETURNING *
+//   `;
+//   return camelcaseKeys(deleteFavouriteCocktail);
+// }

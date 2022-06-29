@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { getUserById, User } from '../../util/database';
+import { getUserById, getUserFavourites, User } from '../../util/database';
 
 type Props = {
   user?: User;
@@ -19,6 +19,18 @@ export default function UserDetail(props: Props) {
       </>
     );
   }
+  // else if (props.user.username !== props.favouriteCocktails.username) {
+  //   return (
+  //     <>
+  //       <Head>
+  //         <title>User not found</title>
+  //         <meta name="description" content="User not found" />
+  //       </Head>
+  //       <h1>404 - User not found</h1>
+  //       sorry no
+  //     </>
+  //   );
+  // }
 
   return (
     <div>
@@ -33,6 +45,16 @@ export default function UserDetail(props: Props) {
         </h1>
         <div>id: {props.user.id}</div>
         <div>username: {props.user.username}</div>
+        heyhey
+        <br />
+        {/* your favourite cocktail is #{props.favouriteCocktails.name} called{' '}
+        {props.favouriteCocktails.id} {props.favouriteCocktails.username} */}
+        {/* hier noch einbauen dass wenn die context id nicht die user id ist, das nicht geht! und auch dass man hier nur herkommt wenn man eingeloggt ist  */}
+        {props.favouriteCocktails.map((favourite) => {
+          return (
+            <li key={`cocktailName-${favourite.user_id}`}>{favourite.name}</li>
+          );
+        })}
       </main>
     </div>
   );
@@ -50,6 +72,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   // if you want to use username in the URL call function getUserByUsername and don't use parse int
   const user = await getUserById(parseInt(userIdFromUrl));
 
+  const favouriteCocktails = await getUserFavourites(context.query.userId);
+  // const favouriteCocktailList = await getAllFavourites();
+
   if (!user) {
     context.res.statusCode = 404;
     return { props: {} };
@@ -58,6 +83,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       user: user,
+      favouriteCocktails: favouriteCocktails,
+      // favouriteCocktailList: favouriteCocktailList,
     },
   };
 }
