@@ -181,13 +181,17 @@ export async function getRecommendationBasedOnUrlAndDatabase(
       cocktails.id AS id,
       cocktails.name AS name,
       levels.level AS level,
+      levels.id AS levelId,
+      flavours.id AS flavourId,
       flavours.name AS flavour,
       spirits.name AS spirit,
+      spirits.id AS spiritId,
       cocktails.description AS description,
       cocktails.glass AS glass,
       cocktails.ice AS ice,
       cocktails.garnish AS garnish,
       categories.name AS category,
+      categories.id AS categoryId,
       cocktails.image AS image,
       cocktails.size AS size
 
@@ -219,13 +223,17 @@ export async function getFullCollectionOfCocktails() {
       cocktails.id AS id,
       cocktails.name AS name,
       levels.level AS level,
+      levels.id AS levelId,
+      flavours.id AS flavourId,
       flavours.name AS flavour,
       spirits.name AS spirit,
+      spirits.id AS spiritId,
       cocktails.description AS description,
       cocktails.glass AS glass,
       cocktails.ice AS ice,
       cocktails.garnish AS garnish,
       categories.name AS category,
+      categories.id AS categoryId,
       cocktails.image AS image,
       cocktails.size AS size
 
@@ -256,7 +264,7 @@ export async function getSingleCocktailFromCollection(cocktailId: any) {
     FROM
       cocktails
     WHERE
-    cocktails.id = ${cocktailId}
+      cocktails.id = ${cocktailId}
   `;
   return camelcaseKeys(collectionCocktail);
 }

@@ -2,6 +2,20 @@ import Head from 'next/head';
 import { getSingleCocktailFromCollection } from '../../util/database';
 
 export default function Cocktail(props) {
+  if (props.collectionCocktail === null) {
+    return (
+      <div>
+        {' '}
+        <Head>
+          <title>Cocktails</title>
+          <meta name="description" content="this cocktail does not exist" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <main>this cocktail does not exist</main>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Head>
@@ -37,7 +51,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      collectionCocktail: collectionCocktail,
+      collectionCocktail: collectionCocktail || null,
     },
   };
 }

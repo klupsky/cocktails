@@ -6,7 +6,19 @@ import {
 } from '../../util/database';
 
 export default function RecommendedCocktail(props) {
-  // const { query } = useRouter();
+  if (props.urlInfoQuery === null) {
+    return (
+      <div>
+        {' '}
+        <Head>
+          <title>Cocktails</title>
+          <meta name="description" content="this cocktail does not exist" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <main>this cocktail does not exist</main>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -54,7 +66,7 @@ export async function getServerSideProps(context) {
     return {
       props: {
         user: user,
-        urlInfoQuery: urlInfoQuery,
+        urlInfoQuery: urlInfoQuery || null,
       },
     };
   }
