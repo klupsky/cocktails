@@ -19,9 +19,45 @@ export default function UserDetail(props: Props) {
   );
   const [favouriteUserId, setFavouriteUserId] = useState('');
   const [favouriteCocktailId, setFavouriteCocktailId] = useState('');
-  async function favouriteHandler() {
-    const registerResponse = await fetch('/api/favourites', {
-      method: 'POST',
+
+  useEffect(() => {
+    async function getUserFavourites() {
+      const response = await fetch(`api/favourites/${id}`);
+      const favourites = await response.json();
+
+      setFavouritesList(favourites);
+    }
+    getUserFavourites().catch(() => {
+      // console.log('favourites request fails');
+    });
+  }, []);
+
+  // async function favouriteHandler(id: number) {
+  //   const userFavouriteResponse = await fetch(`api/favourites/${id}`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       userId: favouriteUserId,
+  //       cocktailId: favouriteCocktailId,
+  //     }),
+  //   });
+
+  //   const createdNewFavourite = await userFavouriteResponse.json();
+
+  //   // copy state
+  //   // update copy of the state
+  //   const newState = [...favouritesList, createdNewFavourite];
+  //   // use setState func
+  //   setFavouritesList(newState);
+  //   setFavouriteCocktailId('');
+  //   setFavouriteUserId('');
+  // }
+
+  async function deleteFavouriteHandler(id: number) {
+    const response = await fetch(`api/favourites/${id}`, {
+      method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -30,36 +66,14 @@ export default function UserDetail(props: Props) {
         cocktailId: favouriteCocktailId,
       }),
     });
-
-    const registerResponseBody: RegisterResponseBody =
-      await registerResponse.json();
-
-    // console.log(registerResponseBody);
-
-    // if we have error show an error message
-    if ('errors' in registerResponseBody) {
-      setErrors(registerResponseBody.errors);
-      return;
-    }
-
-    const returnTo = router.query.returnTo;
-
-    if (
-      returnTo &&
-      !Array.isArray(returnTo) &&
-      // Security: Validate returnTo parameter against valid path
-      // (because this is untrusted user input)
-      /^\/[a-zA-Z0-9-?=/]*$/.test(returnTo)
-    ) {
-      await props.refreshUserProfile();
-      await router.push(returnTo);
-    } else {
-      // redirect user to user profile
-      // if you want to use userProfile with username redirect to /users/username
-      // await router.push(`/users/${loginResponseBody.user.id}`);
-      await props.refreshUserProfile();
-      await router.push(`/`);
-    }
+    const deletedFavourite = await response.json();
+    // copy state
+    // update copy of the state
+    const newState = favouritesList.filter(
+      (favourite: any) => favourite.id !== deletedFavourite.id,
+    );
+    // use setState func
+    setFavouritesList(newState);
   }
 
   if (!props.user) {
@@ -93,7 +107,7 @@ export default function UserDetail(props: Props) {
         {/* your favourite cocktail is #{props.favouriteCocktails.name} called{' '}
         {props.favouriteCocktails.id} {props.favouriteCocktails.username} */}
         {/* hier noch einbauen dass wenn die context id nicht die user id ist, das nicht geht! und auch dass man hier nur herkommt wenn man eingeloggt ist  */}
-        {favouritesList.map((favourite) => {
+        {favouritesList.map((favourite: any) => {
           return (
             <div key={`cocktailName-${favourite.id}`}>
               {favourite.name} {favourite.id} {favourite.userId}{' '}
@@ -101,6 +115,9 @@ export default function UserDetail(props: Props) {
                 onClick={() => {
                   setFavouriteCocktailId(favouriteCocktailId);
                   setFavouriteUserId(favouriteUserId);
+                  deleteFavouriteHandler(favourite.userId).catch(() => {
+                    console.log('delete favourite request fails');
+                  });
                 }}
               >
                 delete
@@ -124,10 +141,11 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   // if you want to use username in the URL call function getUserByUsername and don't use parse int
   const user = await getUserById(parseInt(userIdFromUrl));
+
   const userSession = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
   );
-
+  // console.log(context.query);
   const favouriteCocktails = await getUserFavourites(context.query.userId);
 
   if (!user) {

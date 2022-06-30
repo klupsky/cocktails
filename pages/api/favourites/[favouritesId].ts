@@ -26,12 +26,15 @@ export default async function handler(
   // if method DELETE
 
   if (req.method === 'DELETE') {
-    const deletedFavourite = await deleteUserFavourite(
-      req.body.userId,
-      req.body.cocktailId,
-    );
+    console.log(req.query.favouritesId);
+    const favouritesIdDelete = Number(req.query.favouritesId);
+
+    const deletedFavourite = await deleteUserFavourite(favouritesIdDelete);
 
     // TODO: add a fail case when id is not a valid favouriteId
+    if (!deletedFavourite) {
+      return res.status(400).json({ error: 'userId must be a valid id' });
+    }
 
     return res.status(200).json(deletedFavourite);
   }
