@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useState } from 'react';
 // import { useRouter } from 'next/router';
 import {
   getRecommendationBasedOnUrlAndDatabase,
@@ -42,6 +43,7 @@ export default function RecommendedCocktail(props) {
         {props.urlInfoQuery.category}
         {props.urlInfoQuery.image}
         {props.urlInfoQuery.size}
+        <button>add this to favourites</button>
       </main>
     </div>
   );
