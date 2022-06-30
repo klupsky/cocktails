@@ -22,6 +22,7 @@ export default async function handler(
 ) {
   // check the method to be post
   if (req.method === 'POST') {
+    // console.log(req.body);
     if (
       typeof req.body.username !== 'string' ||
       typeof req.body.password !== 'string' ||

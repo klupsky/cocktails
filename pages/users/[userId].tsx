@@ -1,6 +1,11 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { getUserById, getUserFavourites, User } from '../../util/database';
+import {
+  getUserById,
+  getUserByValidSessionToken,
+  getUserFavourites,
+  User,
+} from '../../util/database';
 
 type Props = {
   user?: User;
@@ -19,18 +24,6 @@ export default function UserDetail(props: Props) {
       </>
     );
   }
-  // else if (props.user.username !== props.favouriteCocktails.username) {
-  //   return (
-  //     <>
-  //       <Head>
-  //         <title>User not found</title>
-  //         <meta name="description" content="User not found" />
-  //       </Head>
-  //       <h1>404 - User not found</h1>
-  //       sorry no
-  //     </>
-  //   );
-  // }
 
   return (
     <div>
@@ -52,7 +45,9 @@ export default function UserDetail(props: Props) {
         {/* hier noch einbauen dass wenn die context id nicht die user id ist, das nicht geht! und auch dass man hier nur herkommt wenn man eingeloggt ist  */}
         {props.favouriteCocktails.map((favourite) => {
           return (
-            <li key={`cocktailName-${favourite.user_id}`}>{favourite.name}</li>
+            <li key={`cocktailName-${favourite.id}`}>
+              {favourite.name} {favourite.id} {favourite.userId}
+            </li>
           );
         })}
       </main>
@@ -71,20 +66,28 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   // if you want to use username in the URL call function getUserByUsername and don't use parse int
   const user = await getUserById(parseInt(userIdFromUrl));
+  const userSession = await getUserByValidSessionToken(
+    context.req.cookies.sessionToken,
+  );
 
   const favouriteCocktails = await getUserFavourites(context.query.userId);
-  // const favouriteCocktailList = await getAllFavourites();
 
   if (!user) {
     context.res.statusCode = 404;
     return { props: {} };
+  } else if (!userSession) {
+    return {
+      redirect: {
+        destination: `/login?returnTo=/login`,
+        permanent: false,
+      },
+    };
   }
 
   return {
     props: {
       user: user,
       favouriteCocktails: favouriteCocktails,
-      // favouriteCocktailList: favouriteCocktailList,
     },
   };
 }

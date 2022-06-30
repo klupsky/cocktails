@@ -295,29 +295,44 @@ export async function getUserFavourites(userId: number) {
     WHERE
       favourites.user_id = ${userId} AND
       users.id = ${userId} AND
-
       favourites.cocktail_id = cocktails.id
 
   `;
   return camelcaseKeys(favouriteCocktails);
 }
 
-// export async function addUserFavourite(userId: number, cocktailId: number) {
-//   const [addFavouriteCocktail] = await sql`
-//     INSERT INTO
-//     favourites
-//       (user_id, cocktail_id)
+export async function getUserFavouritesApi(userId: number) {
+  const favouriteCocktails = await sql`
+    SELECT
+*
+    FROM
+      favourites,
+      cocktails,
+      users
 
-//     VALUES
-//       (${userId}, ${cocktailId})
+    WHERE
+      favourites.user_id = ${userId} AND
+      users.id = ${userId} AND
+      favourites.cocktail_id = cocktails.id
 
-//     RETURNING
-//       id,
-//       user_id,
-//       cocktail_id
-//   `;
-//   return camelcaseKeys(addFavouriteCocktail);
-// }
+  `;
+  return camelcaseKeys(favouriteCocktails);
+}
+
+export async function addUserFavourite(userId: number, cocktailId: number) {
+  const [addFavouriteCocktail] = await sql`
+    INSERT INTO
+    favourites
+      (user_id, cocktail_id)
+
+    VALUES
+      (${userId}, ${cocktailId})
+
+    RETURNING
+      *
+  `;
+  return camelcaseKeys(addFavouriteCocktail);
+}
 
 // export async function deleteUserFavourite(userId: number, cocktailId: number) {
 //   const deleteFavouriteCocktail = await sql`
