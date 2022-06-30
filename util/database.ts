@@ -301,24 +301,6 @@ export async function getUserFavourites(userId: number) {
   return camelcaseKeys(favouriteCocktails);
 }
 
-export async function getUserFavouritesApi(userId: number) {
-  const favouriteCocktails = await sql`
-    SELECT
-*
-    FROM
-      favourites,
-      cocktails,
-      users
-
-    WHERE
-      favourites.user_id = ${userId} AND
-      users.id = ${userId} AND
-      favourites.cocktail_id = cocktails.id
-
-  `;
-  return camelcaseKeys(favouriteCocktails);
-}
-
 export async function addUserFavourite(userId: number, cocktailId: number) {
   const [addFavouriteCocktail] = await sql`
     INSERT INTO
@@ -334,14 +316,15 @@ export async function addUserFavourite(userId: number, cocktailId: number) {
   return camelcaseKeys(addFavouriteCocktail);
 }
 
-// export async function deleteUserFavourite(userId: number, cocktailId: number) {
-//   const deleteFavouriteCocktail = await sql`
-//     DELETE FROM
-//       favourites
-//     WHERE
-//       user_id = ${userId} AND
-//       cocktail_id = ${cocktailId}
-//     RETURNING *
-//   `;
-//   return camelcaseKeys(deleteFavouriteCocktail);
-// }
+export async function deleteUserFavourite(userId: number, cocktailId: number) {
+  const deletedFavouriteCocktail = await sql`
+    DELETE FROM
+      favourites
+    WHERE
+      user_id = ${userId} AND
+      cocktail_id = ${cocktailId}
+    RETURNING
+    *
+  `;
+  return camelcaseKeys(deletedFavouriteCocktail);
+}

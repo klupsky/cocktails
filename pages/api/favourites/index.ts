@@ -5,6 +5,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  // missing
+  // 1. we get the csrfToken from the body
+  // 2. we get the sessionToken from the cookies
+  // 3. we get the session for this session Token
+
   if (req.method === 'GET') {
     const cocktails = await getAllFavourites();
     res.status(200).json(cocktails);
@@ -18,6 +23,11 @@ export default async function handler(
           'you need to add a user id and a cocktail id and both have to be numbers',
       });
     }
+
+    // missing
+    // 1. we get the csrfToken from the body
+    // 2. we get the sessionToken from the cookies
+    // 3. we get the session for this session Token
 
     const newFavourite = await addUserFavourite(
       req.body.userId,
