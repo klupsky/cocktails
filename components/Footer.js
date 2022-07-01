@@ -8,5 +8,5 @@ const footerStyles = css`
 `;
 
 export default function Footer() {
-  return <footer css={footerStyles}>ssss 🐍 copyright 2022</footer>;
+  return <footer css={footerStyles}>copyright 2022</footer>;
 }

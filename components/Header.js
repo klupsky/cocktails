@@ -23,7 +23,7 @@ const headerStyles = css`
 export default function Header(props) {
   return (
     <header css={headerStyles}>
-      🐒
+      🥂🍷🍸🍾🍹
       <div>
         <Link href="/">Home</Link>
         <Link href="/recommendation">Recommendation</Link>

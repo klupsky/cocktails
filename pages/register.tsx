@@ -90,6 +90,7 @@ export default function Register(props: Props) {
         <label>
           password:{' '}
           <input
+            type="password"
             value={password}
             onChange={(event) => {
               setPassword(event.currentTarget.value);

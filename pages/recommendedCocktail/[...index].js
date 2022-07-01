@@ -73,7 +73,9 @@ export default function RecommendedCocktail(props) {
           data-test-id="generate-recommendation-2"
           type="button"
           onClick={() => {
-            location.reload();
+            location.reload().catch(() => {
+              console.log('reload failed');
+            });
           }}
         >
           no i don't like this, give me another{' '}

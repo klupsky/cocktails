@@ -87,6 +87,7 @@ export default function Home(props: Props) {
           <label>
             password:{' '}
             <input
+              type="password"
               value={password}
               onChange={(event) => {
                 setPassword(event.currentTarget.value);

@@ -10,7 +10,6 @@ import {
 
 type Props = {
   user?: User;
-  favouriteCocktails: any;
 };
 
 export default function UserDetail(props: Props) {
@@ -21,8 +20,10 @@ export default function UserDetail(props: Props) {
   const [favouriteCocktailId, setFavouriteCocktailId] = useState('');
   const [favouriteId, setFavouriteId] = useState('');
 
+  // get the favourites
+
   useEffect(() => {
-    async function getUserFavourites(props: any) {
+    async function getUserFavourites(props) {
       const response = await fetch(`api/favourites/${props.user.id}`);
       const favourites = await response.json();
       setFavouritesLists(favourites);
@@ -32,18 +33,14 @@ export default function UserDetail(props: Props) {
     });
   }, []);
 
-  async function deleteFavouriteHandler(
-    favouriteId: any,
-    favouriteUserId: any,
-  ) {
-    const response = await fetch(`api/favourites/${favouriteUserId}`, {
+  // delete the favourite
+
+  async function deleteFavouriteHandler(id) {
+    const response = await fetch(`api/favourites/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        id: favouriteId,
-      }),
     });
     const deletedFavourite = await response.json();
     console.log(deletedFavourite);
@@ -84,6 +81,7 @@ export default function UserDetail(props: Props) {
         </h1>
         <div>id: {props.user.id}</div>
         <div>username: {props.user.username}</div>
+        <br />
         <br />
         hey {favouriteUserId} {favouriteCocktailId} {favouriteId}
         {favouritesLists.map((favourite: any) => {
