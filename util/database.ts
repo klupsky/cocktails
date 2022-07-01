@@ -333,7 +333,7 @@ export async function addUserFavourite(userId: number, cocktailId: number) {
   return camelcaseKeys(addFavouriteCocktail);
 }
 
-export async function deleteUserFavourite(id: number) {
+export async function deleteUserFavourite(id) {
   const [deletedFavouriteCocktail] = await sql`
     DELETE FROM
       favourites

@@ -35,12 +35,16 @@ export default function UserDetail(props: Props) {
 
   // delete the favourite
 
-  async function deleteFavouriteHandler(id) {
-    const response = await fetch(`../api/favourites/${id}`, {
+  async function deleteFavouriteHandler(favouriteUserId, favouriteId) {
+    const response = await fetch(`../api/favourites/${favouriteUserId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        userId: favouriteUserId,
+        id: favouriteId,
+      }),
     });
     const deletedFavourite = await response.json();
 
