@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default function UserDetail(props: Props) {
-  const [favouritesList, setFavouritesList] = useState(
+  const [favouritesLists, setFavouritesLists] = useState(
     props.favouriteCocktails,
   );
   const [favouriteUserId, setFavouriteUserId] = useState('');
@@ -25,7 +25,7 @@ export default function UserDetail(props: Props) {
       const response = await fetch(`api/favourites/${id}`);
       const favourites = await response.json();
 
-      setFavouritesList(favourites);
+      setFavouritesLists(favourites);
     }
     getUserFavourites().catch(() => {
       // console.log('favourites request fails');
@@ -69,11 +69,11 @@ export default function UserDetail(props: Props) {
     const deletedFavourite = await response.json();
     // copy state
     // update copy of the state
-    const newState = favouritesList.filter(
+    const newState = favouritesLists.filter(
       (favourite: any) => favourite.id !== deletedFavourite.id,
     );
     // use setState func
-    setFavouritesList(newState);
+    setFavouritesLists(newState);
   }
 
   if (!props.user) {
@@ -104,17 +104,16 @@ export default function UserDetail(props: Props) {
         <div>username: {props.user.username}</div>
         <br />
         hey {favouriteUserId} {favouriteCocktailId}
-        {/* your favourite cocktail is #{props.favouriteCocktails.name} called{' '}
-        {props.favouriteCocktails.id} {props.favouriteCocktails.username} */}
-        {/* hier noch einbauen dass wenn die context id nicht die user id ist, das nicht geht! und auch dass man hier nur herkommt wenn man eingeloggt ist  */}
-        {favouritesList.map((favourite: any) => {
+        {favouritesLists.map((favourite: any) => {
           return (
             <div key={`cocktailName-${favourite.id}`}>
               {favourite.name} {favourite.id} {favourite.userId}{' '}
+              {favourite.cocktailId}{' '}
               <button
                 onClick={() => {
-                  setFavouriteCocktailId(favouriteCocktailId);
-                  setFavouriteUserId(favouriteUserId);
+                  setFavouriteUserId(favourite.userId);
+                  setFavouriteCocktailId(favourite.cocktailId);
+
                   deleteFavouriteHandler(favourite.userId).catch(() => {
                     console.log('delete favourite request fails');
                   });
