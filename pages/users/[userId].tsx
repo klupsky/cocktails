@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   getUserById,
   getUserByValidSessionToken,
@@ -19,41 +19,18 @@ export default function UserDetail(props: Props) {
   );
   const [favouriteUserId, setFavouriteUserId] = useState('');
   const [favouriteCocktailId, setFavouriteCocktailId] = useState('');
+  const [favouriteId, setFavouriteId] = useState('');
 
-  useEffect(() => {
-    async function getUserFavourites() {
-      const response = await fetch(`api/favourites/${id}`);
-      const favourites = await response.json();
-
-      setFavouritesLists(favourites);
-    }
-    getUserFavourites().catch(() => {
-      // console.log('favourites request fails');
-    });
-  }, []);
-
-  // async function favouriteHandler(id: number) {
-  //   const userFavouriteResponse = await fetch(`api/favourites/${id}`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       userId: favouriteUserId,
-  //       cocktailId: favouriteCocktailId,
-  //     }),
+  // useEffect(() => {
+  //   async function getUserFavourites(id: number) {
+  //     const response = await fetch(`api/favourites/${id}`);
+  //     const favourites = await response.json();
+  //     setFavouritesLists(props.favouriteCocktails);
+  //   }
+  //   getUserFavourites().catch(() => {
+  //     console.log('favourites request fails');
   //   });
-
-  //   const createdNewFavourite = await userFavouriteResponse.json();
-
-  //   // copy state
-  //   // update copy of the state
-  //   const newState = [...favouritesList, createdNewFavourite];
-  //   // use setState func
-  //   setFavouritesList(newState);
-  //   setFavouriteCocktailId('');
-  //   setFavouriteUserId('');
-  // }
+  // }, []);
 
   async function deleteFavouriteHandler(id: number) {
     const response = await fetch(`api/favourites/${id}`, {
@@ -62,8 +39,7 @@ export default function UserDetail(props: Props) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id: id,
-        cocktailId: favouriteCocktailId,
+        id: favouriteId,
       }),
     });
     const deletedFavourite = await response.json();
@@ -106,7 +82,7 @@ export default function UserDetail(props: Props) {
         <div>id: {props.user.id}</div>
         <div>username: {props.user.username}</div>
         <br />
-        hey {favouriteUserId} {favouriteCocktailId}
+        hey {favouriteUserId} {favouriteCocktailId} {favouriteId}
         {favouritesLists.map((favourite: any) => {
           return (
             <div key={`cocktailName-${favourite.id}`}>
@@ -116,6 +92,7 @@ export default function UserDetail(props: Props) {
                 onClick={() => {
                   setFavouriteUserId(favourite.userId);
                   setFavouriteCocktailId(favourite.cocktailId);
+                  setFavouriteId(favourite.id);
                   deleteFavouriteHandler(favourite.id).catch(() => {
                     console.log('delete favourite request fails');
                   });

@@ -5,6 +5,20 @@ import {
 } from '../../util/database';
 
 export default function RecommendedCocktail(props) {
+  async function addToFavouritesHandler(props) {
+    const favouriteResponse = await fetch('api/favourites', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: props.user.id,
+        cocktailId: props.urlInfoQuery.id,
+      }),
+    });
+    const createdCocktail = await favouriteResponse.json();
+  }
+
   if (props.urlInfoQuery === null) {
     return (
       <div>
@@ -28,8 +42,12 @@ export default function RecommendedCocktail(props) {
       </Head>
 
       <main>
-        <h1>hey {props.user.username}, you should get a</h1> <br />
-        {props.urlInfoQuery.id}
+        <h1>
+          hey {props.user.username} user id: {props.user.id}, you should get a
+        </h1>{' '}
+        <br />
+        <br />
+        cocktail id = {props.urlInfoQuery.id}
         {props.urlInfoQuery.name}
         {props.urlInfoQuery.level}
         {props.urlInfoQuery.flavour}
@@ -41,7 +59,15 @@ export default function RecommendedCocktail(props) {
         {props.urlInfoQuery.category}
         {props.urlInfoQuery.image}
         {props.urlInfoQuery.size}
-        <button>add this to favourites</button>
+        <button
+          onClick={() => {
+            addToFavouritesHandler().catch(() => {
+              console.log('adding favourite failed');
+            });
+          }}
+        >
+          add this to favourites
+        </button>
       </main>
     </div>
   );

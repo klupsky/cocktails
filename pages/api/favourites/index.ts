@@ -9,7 +9,6 @@ export default async function handler(
   // 1. we get the csrfToken from the body
   // 2. we get the sessionToken from the cookies
   // 3. we get the session for this session Token
-
   if (req.method === 'GET') {
     const cocktails = await getAllFavourites();
     res.status(200).json(cocktails);
@@ -23,16 +22,18 @@ export default async function handler(
           'you need to add a user id and a cocktail id and both have to be numbers',
       });
     }
-
+    console.log(req.body.userId, req.body.cocktailId);
     // missing
     // 1. we get the csrfToken from the body
     // 2. we get the sessionToken from the cookies
     // 3. we get the session for this session Token
+    // console.log(req.body.userId, req.body.cocktailId);
 
     const newFavourite = await addUserFavourite(
       req.body.userId,
       req.body.cocktailId,
     );
+    console.log(newFavourite);
 
     return res.status(200).json(newFavourite);
   }

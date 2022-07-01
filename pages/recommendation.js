@@ -60,7 +60,7 @@ export default function Recommendation(props) {
             </label>
             <label for="spiritId2">
               <input type="radio" name="spirit-option" value="2" />
-              spiritId1
+              spiritId2
             </label>
           </fieldset>
           <span id="spirit">pick an alc level:</span>

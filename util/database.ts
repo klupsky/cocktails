@@ -272,12 +272,22 @@ export async function getSingleCocktailFromCollection(cocktailId: number) {
 export async function getAllFavourites() {
   const favouriteCocktailList = await sql`
     SELECT
-      *
+      favourites.id,
+      favourites.user_id,
+      favourites.cocktail_id,
+      users.username,
+      cocktails.name,
+      cocktails.image
+
 
     FROM
       favourites,
       cocktails,
       users
+
+    WHERE
+      users.id = favourites.user_id AND
+      favourites.cocktail_id = cocktails.id
 
   `;
   return camelcaseKeys(favouriteCocktailList);
@@ -286,12 +296,12 @@ export async function getAllFavourites() {
 export async function getUserFavourites(userId: number) {
   const favouriteCocktails = await sql`
     SELECT
-favourites.id,
-favourites.user_id,
-favourites.cocktail_id,
-users.username,
-cocktails.name,
-cocktails.image
+      favourites.id,
+      favourites.user_id,
+      favourites.cocktail_id,
+      users.username,
+      cocktails.name,
+      cocktails.image
 
     FROM
       favourites,
@@ -326,9 +336,9 @@ export async function deleteUserFavourite(id: number) {
   const [deletedFavouriteCocktail] = await sql`
     DELETE FROM
       favourites
+
     WHERE
       id = ${id}
-
 
     RETURNING
     *
