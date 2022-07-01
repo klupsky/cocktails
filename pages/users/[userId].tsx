@@ -62,17 +62,20 @@ export default function UserDetail(props: Props) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userId: favouriteUserId,
+        id: id,
         cocktailId: favouriteCocktailId,
       }),
     });
     const deletedFavourite = await response.json();
+    console.log(deletedFavourite);
+
     // copy state
     // update copy of the state
     const newState = favouritesLists.filter(
       (favourite: any) => favourite.id !== deletedFavourite.id,
     );
     // use setState func
+    console.log(newState);
     setFavouritesLists(newState);
   }
 
@@ -107,14 +110,13 @@ export default function UserDetail(props: Props) {
         {favouritesLists.map((favourite: any) => {
           return (
             <div key={`cocktailName-${favourite.id}`}>
-              {favourite.name} {favourite.id} {favourite.userId}{' '}
+              {favourite.id} {favourite.name} {favourite.userId}{' '}
               {favourite.cocktailId}{' '}
               <button
                 onClick={() => {
                   setFavouriteUserId(favourite.userId);
                   setFavouriteCocktailId(favourite.cocktailId);
-
-                  deleteFavouriteHandler(favourite.userId).catch(() => {
+                  deleteFavouriteHandler(favourite.id).catch(() => {
                     console.log('delete favourite request fails');
                   });
                 }}
