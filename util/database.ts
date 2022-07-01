@@ -329,6 +329,7 @@ export async function addUserFavourite(userId: number, cocktailId: number) {
     RETURNING
       *
   `;
+  console.log(addFavouriteCocktail);
   return camelcaseKeys(addFavouriteCocktail);
 }
 
@@ -338,10 +339,11 @@ export async function deleteUserFavourite(id: number) {
       favourites
 
     WHERE
-      id = ${id}
+      favourites.id = ${id}
 
     RETURNING
     *
   `;
+  console.log(deletedFavouriteCocktail);
   return camelcaseKeys(deletedFavouriteCocktail);
 }

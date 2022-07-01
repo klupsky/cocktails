@@ -24,7 +24,7 @@ export default function UserDetail(props: Props) {
 
   useEffect(() => {
     async function getUserFavourites(props) {
-      const response = await fetch(`api/favourites/${props.user.id}`);
+      const response = await fetch(`../api/favourites/${props.user.id}`);
       const favourites = await response.json();
       setFavouritesLists(favourites);
     }
@@ -36,14 +36,13 @@ export default function UserDetail(props: Props) {
   // delete the favourite
 
   async function deleteFavouriteHandler(id) {
-    const response = await fetch(`api/favourites/${id}`, {
+    const response = await fetch(`../api/favourites/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
     });
     const deletedFavourite = await response.json();
-    console.log(deletedFavourite);
 
     // copy state
     // update copy of the state
@@ -126,7 +125,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   );
   // console.log(context.query);
   const favouriteCocktails = await getUserFavourites(context.query.userId);
-
+  // console.log(favouriteCocktails);
   if (!user) {
     context.res.statusCode = 404;
     return { props: {} };
