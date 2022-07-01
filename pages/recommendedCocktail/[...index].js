@@ -68,6 +68,16 @@ export default function RecommendedCocktail(props) {
         >
           add this to favourites
         </button>
+        <br />
+        <button
+          data-test-id="generate-recommendation-2"
+          type="button"
+          onClick={() => {
+            location.reload();
+          }}
+        >
+          no i don't like this, give me another{' '}
+        </button>
       </main>
     </div>
   );

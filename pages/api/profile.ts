@@ -13,6 +13,7 @@ export default async function handler(
       res
         .status(400)
         .json({ errors: [{ message: 'No session token passed' }] });
+      return;
     }
 
     // 2. Get the user from the token
@@ -22,6 +23,7 @@ export default async function handler(
       res
         .status(400)
         .json({ errors: [{ message: 'Session token not valid' }] });
+      return;
     }
 
     // 3. Return the user
@@ -31,5 +33,6 @@ export default async function handler(
       .json({ user: user });
   } else {
     res.status(405).json({ errors: [{ message: 'method not allowed' }] });
+    return;
   }
 }

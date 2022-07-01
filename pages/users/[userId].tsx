@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   getUserById,
   getUserByValidSessionToken,
@@ -21,19 +21,22 @@ export default function UserDetail(props: Props) {
   const [favouriteCocktailId, setFavouriteCocktailId] = useState('');
   const [favouriteId, setFavouriteId] = useState('');
 
-  // useEffect(() => {
-  //   async function getUserFavourites(id: number) {
-  //     const response = await fetch(`api/favourites/${id}`);
-  //     const favourites = await response.json();
-  //     setFavouritesLists(props.favouriteCocktails);
-  //   }
-  //   getUserFavourites().catch(() => {
-  //     console.log('favourites request fails');
-  //   });
-  // }, []);
+  useEffect(() => {
+    async function getUserFavourites(props: any) {
+      const response = await fetch(`api/favourites/${props.user.id}`);
+      const favourites = await response.json();
+      setFavouritesLists(favourites);
+    }
+    getUserFavourites().catch(() => {
+      console.log('favourites request fails');
+    });
+  }, []);
 
-  async function deleteFavouriteHandler(id: number) {
-    const response = await fetch(`api/favourites/${id}`, {
+  async function deleteFavouriteHandler(
+    favouriteId: any,
+    favouriteUserId: any,
+  ) {
+    const response = await fetch(`api/favourites/${favouriteUserId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
