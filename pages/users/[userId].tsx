@@ -28,14 +28,14 @@ export default function UserDetail(props: Props) {
       const favourites = await response.json();
       setFavouritesLists(favourites);
     }
-    getUserFavourites().catch(() => {
+    getUserFavourites(props).catch(() => {
       console.log('favourites request fails');
     });
   }, []);
 
   // delete the favourite
 
-  async function deleteFavouriteHandler(favouriteUserId, favouriteId) {
+  async function deleteFavouriteHandler(favouriteUserId) {
     const response = await fetch(`../api/favourites/${favouriteUserId}`, {
       method: 'DELETE',
       headers: {

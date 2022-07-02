@@ -4,9 +4,9 @@ import {
   getUserByValidSessionToken,
 } from '../../util/database';
 
-export default function RecommendedCocktail(props) {
-  async function addToFavouritesHandler(props) {
-    const favouriteResponse = await fetch('api/favourites', {
+export default function recommendedCocktail(props) {
+  async function addToFavouritesHandler() {
+    const favouriteResponse = await fetch('../api/favourites', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
