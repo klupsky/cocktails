@@ -37,7 +37,6 @@ export default function Cocktail(props) {
         {props.collectionCocktail.garnish}
         {props.collectionCocktail.category}
         {props.collectionCocktail.size}
-        {props.collectionCocktail.image}
       </main>
     </div>
   );

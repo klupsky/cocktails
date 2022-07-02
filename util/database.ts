@@ -192,7 +192,6 @@ export async function getRecommendationBasedOnUrlAndDatabase(
       cocktails.garnish AS garnish,
       categories.name AS category,
       categories.id AS categoryId,
-      cocktails.image AS image,
       cocktails.size AS size
 
     FROM
@@ -234,7 +233,6 @@ export async function getFullCollectionOfCocktails() {
       cocktails.garnish AS garnish,
       categories.name AS category,
       categories.id AS categoryId,
-      cocktails.image AS image,
       cocktails.size AS size
 
     FROM
@@ -276,9 +274,7 @@ export async function getAllFavourites() {
       favourites.user_id,
       favourites.cocktail_id,
       users.username,
-      cocktails.name,
-      cocktails.image
-
+      cocktails.name
 
     FROM
       favourites,
@@ -300,8 +296,7 @@ export async function getUserFavourites(userId: number) {
       favourites.user_id,
       favourites.cocktail_id,
       users.username,
-      cocktails.name,
-      cocktails.image
+      cocktails.name
 
     FROM
       favourites,
@@ -329,11 +324,10 @@ export async function addUserFavourite(userId: number, cocktailId: number) {
     RETURNING
       *
   `;
-  console.log(addFavouriteCocktail);
   return camelcaseKeys(addFavouriteCocktail);
 }
 
-export async function deleteUserFavourite(userId) {
+export async function deleteUserFavourite(userId: number) {
   const [deletedFavouriteCocktail] = await sql`
     DELETE FROM
       favourites

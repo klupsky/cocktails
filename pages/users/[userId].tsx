@@ -10,6 +10,13 @@ import {
 
 type Props = {
   user?: User;
+  favouriteCocktails: {
+    id: number;
+    userId: number;
+    cocktailId: number;
+    username: string;
+    name: number;
+  };
 };
 
 export default function UserDetail(props: Props) {
@@ -23,7 +30,7 @@ export default function UserDetail(props: Props) {
   // get the favourites
 
   useEffect(() => {
-    async function getUserFavourites(props) {
+    async function getUserFavourites() {
       const response = await fetch(`../api/favourites/${props.user.id}`);
       const favourites = await response.json();
       setFavouritesLists(favourites);
@@ -51,7 +58,7 @@ export default function UserDetail(props: Props) {
     // copy state
     // update copy of the state
     const newState = favouritesLists.filter(
-      (favourite: any) => favourite.id !== deletedFavourite.id,
+      (favourite) => favourite.id !== deletedFavourite.id,
     );
     // use setState func
     console.log(newState);
@@ -87,7 +94,7 @@ export default function UserDetail(props: Props) {
         <br />
         <br />
         hey {favouriteUserId} {favouriteCocktailId} {favouriteId}
-        {favouritesLists.map((favourite: any) => {
+        {favouritesLists.map((favourite) => {
           return (
             <div key={`cocktailName-${favourite.id}`}>
               {favourite.id} {favourite.name} {favourite.userId}{' '}

@@ -11,7 +11,6 @@ exports.up = async (sql) => {
 			ice varchar(20) NOT NULL,
 			garnish varchar(20) NOT NULL,
 			category_id integer NOT NULL,
-			image integer NOT NULL,
       size varchar(20) NOT NULL
     )
   `;

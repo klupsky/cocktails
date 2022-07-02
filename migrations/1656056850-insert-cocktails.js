@@ -10,7 +10,6 @@ const cocktails = [
     ice: 'crushed ice',
     garnish: 'lavender',
     category_id: 1,
-    image: 1,
     size: 'small',
   },
   {
@@ -24,7 +23,6 @@ const cocktails = [
     ice: 'crushed ice',
     garnish: 'lavender',
     category_id: 1,
-    image: 1,
     size: 'small',
   },
   {
@@ -38,7 +36,6 @@ const cocktails = [
     ice: 'crushed ice',
     garnish: 'lavender',
     category_id: 1,
-    image: 1,
     size: 'small',
   },
 ];
@@ -57,7 +54,6 @@ exports.up = async (sql) => {
       'ice',
       'garnish',
       'category_id',
-      'image',
       'size',
     )}
   `;
@@ -77,7 +73,6 @@ glass = ${cocktail.glass} AND
 ice = ${cocktail.ice} AND
 garnish = ${cocktail.garnish} AND
 category_id = ${cocktail.category_id} AND
-image = ${cocktail.image} AND
 size = ${cocktail.size}
 `;
   }

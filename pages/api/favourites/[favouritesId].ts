@@ -1,5 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { deleteUserFavourite, getUserFavourites } from '../../../util/database';
+import {
+  deleteUserFavourite,
+  getUserByValidSessionToken,
+  getUserFavourites,
+} from '../../../util/database';
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,17 +12,35 @@ export default async function handler(
   const favouritesId = Number(req.query.favouritesId);
 
   if (req.method === 'GET') {
-    // console.log(req.query.favouritesId);
+    //
+
+    // 1. Get the cookie from the request
+    const token = req.cookies.sessionToken;
+
+    if (!token) {
+      res
+        .status(400)
+        .json({ errors: [{ message: 'No session token passed' }] });
+      return;
+    }
+
+    // 2. Get the user from the token
+    const user = await getUserByValidSessionToken(token);
+
+    if (!user) {
+      res
+        .status(400)
+        .json({ errors: [{ message: 'Session token not valid' }] });
+      return;
+    }
+
+    //
+
     const userFavourites = await getUserFavourites(favouritesId);
 
     if (!userFavourites) {
       return res.status(400).json({ error: 'userId must be a valid id' });
     }
-
-    // missing
-    // 1. we get the csrfToken from the body
-    // 2. we get the sessionToken from the cookies
-    // 3. we get the session for this session Token
 
     return res.status(200).json(userFavourites);
   }
@@ -26,6 +48,30 @@ export default async function handler(
   // if method DELETE
 
   if (req.method === 'DELETE') {
+    //
+
+    // 1. Get the cookie from the request
+    const token = req.cookies.sessionToken;
+
+    if (!token) {
+      res
+        .status(400)
+        .json({ errors: [{ message: 'No session token passed' }] });
+      return;
+    }
+
+    // 2. Get the user from the token
+    const user = await getUserByValidSessionToken(token);
+
+    if (!user) {
+      res
+        .status(400)
+        .json({ errors: [{ message: 'Session token not valid' }] });
+      return;
+    }
+
+    //
+
     const deletedFavourite = await deleteUserFavourite(req.body.userId);
 
     // TODO: add a fail case when id is not a valid favouriteId

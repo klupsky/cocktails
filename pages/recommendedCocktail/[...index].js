@@ -57,7 +57,6 @@ export default function recommendedCocktail(props) {
         {props.urlInfoQuery.ice}
         {props.urlInfoQuery.garnish}
         {props.urlInfoQuery.category}
-        {props.urlInfoQuery.image}
         {props.urlInfoQuery.size}
         <button
           onClick={() => {

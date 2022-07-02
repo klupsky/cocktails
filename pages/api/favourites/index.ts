@@ -1,20 +1,44 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { addUserFavourite, getAllFavourites } from '../../../util/database';
+import {
+  addUserFavourite,
+  getAllFavourites,
+  getUserByValidSessionToken,
+} from '../../../util/database';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  // missing
-  // 1. we get the csrfToken from the body
-  // 2. we get the sessionToken from the cookies
-  // 3. we get the session for this session Token
   if (req.method === 'GET') {
     const cocktails = await getAllFavourites();
     return res.status(200).json(cocktails);
   }
 
   if (req.method === 'POST') {
+    //
+
+    // 1. Get the cookie from the request
+    const token = req.cookies.sessionToken;
+
+    if (!token) {
+      res
+        .status(400)
+        .json({ errors: [{ message: 'No session token passed' }] });
+      return;
+    }
+
+    // 2. Get the user from the token
+    const user = await getUserByValidSessionToken(token);
+
+    if (!user) {
+      res
+        .status(400)
+        .json({ errors: [{ message: 'Session token not valid' }] });
+      return;
+    }
+
+    //
+
     if (!req.body.userId || !req.body.cocktailId) {
       return res.status(400).json({
         error: 'Insert a userId and a cocktailId',
@@ -25,7 +49,6 @@ export default async function handler(
       req.body.userId,
       req.body.cocktailId,
     );
-    console.log(newFavourite);
 
     return res.status(200).json(newFavourite);
   }
