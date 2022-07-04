@@ -45,6 +45,12 @@ export default async function handler(
       });
     }
 
+    if (user.id && req.body.cocktailId) {
+      return res.status(400).json({
+        errors: [{ message: 'cocktail is already in your favourites list' }],
+      });
+    }
+
     const newFavourite = await addUserFavourite(user.id, req.body.cocktailId);
 
     return res.status(200).json(newFavourite);

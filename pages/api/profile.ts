@@ -27,12 +27,8 @@ export default async function handler(
     }
 
     // 3. Return the user
-    res
-      .status(200)
-      // Tells the browser to create the cookie for us
-      .json({ user: user });
+    return res.status(200).json({ user: user });
   } else {
-    res.status(405).json({ errors: [{ message: 'method not allowed' }] });
-    return;
+    res.status(405).json({ errors: [{ message: 'Method not allowed' }] });
   }
 }

@@ -1,10 +1,14 @@
 import Head from 'next/head';
+import { useState } from 'react';
 import {
   getRecommendationBasedOnUrlAndDatabase,
   getUserByValidSessionToken,
 } from '../../util/database';
+import { errorStyles } from '../register';
 
-export default function recommendedCocktail(props) {
+export default function RecommendedCocktail(props) {
+  const [errors, setErrors] = useState([]);
+
   async function addToFavouritesHandler() {
     const favouriteResponse = await fetch('../api/favourites', {
       method: 'POST',
@@ -16,7 +20,13 @@ export default function recommendedCocktail(props) {
         cocktailId: props.urlInfoQuery.id,
       }),
     });
+
     const createdCocktail = await favouriteResponse.json();
+    // if we have error show an error message
+    if ('errors' in createdCocktail) {
+      setErrors(createdCocktail.errors);
+      return;
+    }
   }
 
   if (props.urlInfoQuery === null) {
@@ -67,12 +77,17 @@ export default function recommendedCocktail(props) {
         >
           add this to favourites
         </button>
+        {errors.map((error) => (
+          <div css={errorStyles} key={`error-${error.message}`}>
+            {error.message}
+          </div>
+        ))}
         <br />
         <button
           data-test-id="generate-recommendation-2"
           type="button"
           onClick={() => {
-            location.reload().catch(() => {
+            window.location.reload().catch(() => {
               console.log('reload failed');
             });
           }}
@@ -91,8 +106,6 @@ export async function getServerSideProps(context) {
     context.query.spirit,
     context.query.level,
   );
-
-  // console.log(context.query.flavour, context.query.spirit, context.query.level);
 
   // get the token from the cookies
   const user = await getUserByValidSessionToken(

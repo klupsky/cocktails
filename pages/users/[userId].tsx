@@ -15,7 +15,7 @@ type Props = {
     userId: number | undefined;
     cocktailId: number | undefined;
     username: string | undefined;
-    name: number | undefined;
+    name: string | undefined;
   };
 };
 
@@ -31,9 +31,13 @@ export default function UserDetail(props: Props) {
   const [favouritesLists, setFavouritesLists] = useState(
     props.favouriteCocktails,
   );
-  const [favouriteUserId, setFavouriteUserId] = useState('');
-  const [favouriteCocktailId, setFavouriteCocktailId] = useState('');
-  const [favouriteId, setFavouriteId] = useState('');
+  const [favouriteUserId, setFavouriteUserId] = useState<
+    Favourite['userId'] | ''
+  >('');
+  const [favouriteCocktailId, setFavouriteCocktailId] = useState<
+    Favourite['cocktailId'] | ''
+  >('');
+  const [favouriteId, setFavouriteId] = useState<Favourite['id'] | ''>('');
 
   // get the favourites
 
