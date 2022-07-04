@@ -1,6 +1,10 @@
 const categories = [
-  { id: 1, name: 'tiki' },
-  { id: 2, name: 'longdrink' },
+  { id: 1, name: 'Classic' },
+  { id: 2, name: 'Highball' },
+  { id: 3, name: 'Schaumwein' },
+  { id: 4, name: 'Barrel-aged' },
+  { id: 5, name: 'Tiki' },
+  { id: 6, name: 'Sour' },
 ];
 
 exports.up = async (sql) => {

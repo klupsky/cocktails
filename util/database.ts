@@ -188,11 +188,10 @@ export async function getRecommendationBasedOnUrlAndDatabase(
       spirits.id AS spiritId,
       cocktails.description AS description,
       cocktails.glass AS glass,
-      cocktails.ice AS ice,
+      cocktails.method AS method,
       cocktails.garnish AS garnish,
       categories.name AS category,
-      categories.id AS categoryId,
-      cocktails.size AS size
+      categories.id AS categoryId
 
     FROM
       cocktails,
@@ -229,11 +228,10 @@ export async function getFullCollectionOfCocktails() {
       spirits.id AS spiritId,
       cocktails.description AS description,
       cocktails.glass AS glass,
-      cocktails.ice AS ice,
+      cocktails.method AS method,
       cocktails.garnish AS garnish,
       categories.name AS category,
-      categories.id AS categoryId,
-      cocktails.size AS size
+      categories.id AS categoryId
 
     FROM
       cocktails,
@@ -248,8 +246,7 @@ export async function getFullCollectionOfCocktails() {
       cocktails.level_id = levels.id AND
       cocktails.category_id = categories.id
 
-
-      ORDER BY name ASC;
+    ORDER BY name ASC;
 
   `;
   return camelcaseKeys(collection);
@@ -340,4 +337,19 @@ export async function deleteUserFavourite(userId: number, id: number) {
     *
   `;
   return camelcaseKeys(deletedFavouriteCocktail);
+}
+
+export async function getCategories() {
+  const categories = await sql`
+
+    SELECT
+      categories.name
+
+    FROM
+      categories
+
+    ORDER BY name ASC;
+
+  `;
+  return camelcaseKeys(categories);
 }

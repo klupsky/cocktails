@@ -73,7 +73,7 @@ export default function UserDetail(props: Props) {
       (favourite: Favourite) => favourite.id !== deletedFavourite.id,
     );
     // use setState func
-    console.log(newState);
+
     setFavouritesLists(newState);
   }
 
@@ -89,6 +89,19 @@ export default function UserDetail(props: Props) {
       </>
     );
   }
+
+  // else if (props.user.id !== props.userSession.id) {
+  //   return (
+  //     <>
+  //       <Head>
+  //         <title>User not found</title>
+  //         <meta name="description" content="User not found" />
+  //       </Head>
+  //       <h1>404 - User not found</h1>
+  //       no this is not allowed
+  //     </>
+  //   );
+  // }
 
   return (
     <div>
@@ -145,6 +158,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const userSession = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
   );
+
   const favouriteCocktails = await getUserFavourites(context.query.userId);
   if (!user) {
     context.res.statusCode = 404;
@@ -162,6 +176,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     props: {
       user: user,
       favouriteCocktails: favouriteCocktails,
+      userSession,
     },
   };
 }

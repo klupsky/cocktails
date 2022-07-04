@@ -33,10 +33,9 @@ export default function Cocktail(props) {
         {props.collectionCocktail.spirit}
         {props.collectionCocktail.description}
         {props.collectionCocktail.glass}
-        {props.collectionCocktail.ice}
+        {props.collectionCocktail.method}
         {props.collectionCocktail.garnish}
         {props.collectionCocktail.category}
-        {props.collectionCocktail.size}
       </main>
     </div>
   );

@@ -64,10 +64,9 @@ export default function RecommendedCocktail(props) {
         {props.urlInfoQuery.spirit}
         {props.urlInfoQuery.description}
         {props.urlInfoQuery.glass}
-        {props.urlInfoQuery.ice}
+        {props.urlInfoQuery.method}
         {props.urlInfoQuery.garnish}
         {props.urlInfoQuery.category}
-        {props.urlInfoQuery.size}
         <button
           onClick={() => {
             addToFavouritesHandler().catch(() => {

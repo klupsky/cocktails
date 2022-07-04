@@ -59,43 +59,41 @@ export default function Login(props: Props) {
   }
 
   return (
-    <main>
-      <div>
-        <Head>
-          <title>Login</title>
-          <meta name="login" content="Login a new user" />
-        </Head>
+    <div>
+      <Head>
+        <title>Login</title>
+        <meta name="login" content="Login a new user" />
+      </Head>
 
-        <main>
-          <h1>Login</h1>
-          <label>
-            username:{' '}
-            <input
-              value={username}
-              onChange={(event) => {
-                setUsername(event.currentTarget.value);
-              }}
-            />
-          </label>
-          <label>
-            password:{' '}
-            <input
-              type="password"
-              value={password}
-              onChange={(event) => {
-                setPassword(event.currentTarget.value);
-              }}
-            />
-          </label>
-          <button onClick={() => loginHandler()}>Login</button>
-          <Link href="/register">or register</Link>
-          {errors.map((error) => (
-            <div css={errorStyles} key={`error-${error.message}`}>
-              {error.message}
-            </div>
-          ))}
-        </main>
-      </div>
-    </main>
+      <main>
+        <h1>Login</h1>
+        <label>
+          username:{' '}
+          <input
+            value={username}
+            onChange={(event) => {
+              setUsername(event.currentTarget.value);
+            }}
+          />
+        </label>
+        <label>
+          password:{' '}
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => {
+              setPassword(event.currentTarget.value);
+            }}
+          />
+        </label>
+        <button onClick={() => loginHandler()}>Login</button>
+        <Link href="/register">or register</Link>
+        {errors.map((error) => (
+          <div css={errorStyles} key={`error-${error.message}`}>
+            {error.message}
+          </div>
+        ))}
+      </main>
+    </div>
   );
 }
