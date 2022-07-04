@@ -45,7 +45,7 @@ export default function Header(props) {
         <Link href={`/users/${props.user.id}`}>your selection</Link>
       )}
       {props.user ? (
-        <Link href="/logout">Logout</Link>
+        <a href="/logout">Logout</a>
       ) : (
         <>
           {/* <Link href="/register">Register</Link> */}

@@ -18,7 +18,6 @@ export default function App({ Component, pageProps }) {
     }
   }, []);
 
-  // useEffect is only frontend
   useEffect(() => {
     refreshUserProfile().catch(() => console.log('fetch api failed'));
   }, [refreshUserProfile]);
