@@ -7,8 +7,8 @@ export default function Collection(props) {
   const [cocktailList, setCocktailList] = useState(props.collectionCocktail);
   const showCocktailCategory = (category) => {
     setCocktailList(
-      cocktailList.filter(
-        (category) => category.name === cocktailList.category,
+      props.collectionCocktail.filter(
+        (cocktail) => cocktail.category === category,
       ),
     );
   };
@@ -24,7 +24,7 @@ export default function Collection(props) {
 
       <main>
         {/* {cocktailCategory} */}
-        <button onClick={() => setCocktailList(cocktailList)}>
+        <button onClick={() => setCocktailList(props.collectionCocktail)}>
           FULL COLLECTION
         </button>
 
