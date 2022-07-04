@@ -17,6 +17,8 @@ type Props = {
 export default function Register(props: Props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+
   const [errors, setErrors] = useState<
     {
       message: string;
@@ -33,6 +35,7 @@ export default function Register(props: Props) {
       body: JSON.stringify({
         username: username,
         password: password,
+        email: email,
       }),
     });
 
@@ -88,6 +91,17 @@ export default function Register(props: Props) {
         </label>
 
         <label>
+          email:{' '}
+          <input
+            type="text"
+            value={email}
+            onChange={(event) => {
+              setEmail(event.currentTarget.value);
+            }}
+          />
+        </label>
+
+        <label>
           password:{' '}
           <input
             type="password"
@@ -97,6 +111,7 @@ export default function Register(props: Props) {
             }}
           />
         </label>
+
         <button onClick={() => registerHandler()}>Register</button>
         {errors.map((error) => (
           <div css={errorStyles} key={`error-${error.message}`}>

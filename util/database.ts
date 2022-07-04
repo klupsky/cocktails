@@ -45,15 +45,20 @@ type UserWithPasswordHash = User & {
   passwordHash: string;
 };
 
-export async function createUser(username: string, passwordHash: string) {
+export async function createUser(
+  username: string,
+  passwordHash: string,
+  email: string,
+) {
   const [user] = await sql<[User]>`
   INSERT INTO users
-    (username, password_hash)
+    (username, password_hash, email)
   VALUES
-    (${username}, ${passwordHash})
+    (${username}, ${passwordHash}, ${email})
   RETURNING
     id,
-    username
+    username,
+    email
   `;
 
   return camelcaseKeys(user);

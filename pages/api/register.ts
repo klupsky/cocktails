@@ -45,7 +45,11 @@ export default async function handler(
     const passwordHash = await bcrypt.hash(req.body.password, 12);
 
     // create the user
-    const newUser = await createUser(req.body.username, passwordHash);
+    const newUser = await createUser(
+      req.body.username,
+      passwordHash,
+      req.body.email,
+    );
 
     // TODO: create a session for this user
     const token = crypto.randomBytes(80).toString('base64');
