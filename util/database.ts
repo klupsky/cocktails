@@ -327,13 +327,14 @@ export async function addUserFavourite(userId: number, cocktailId: number) {
   return camelcaseKeys(addFavouriteCocktail);
 }
 
-export async function deleteUserFavourite(userId: number) {
+export async function deleteUserFavourite(userId: number, id: number) {
   const [deletedFavouriteCocktail] = await sql`
     DELETE FROM
       favourites
 
     WHERE
-      favourites.id = ${userId}
+      favourites.id = ${userId} AND
+      favourites.user_id = ${id}
 
     RETURNING
     *

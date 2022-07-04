@@ -9,14 +9,22 @@ import {
 } from '../../util/database';
 
 type Props = {
-  user?: User;
+  user: User;
   favouriteCocktails: {
     id: number;
-    userId: number;
-    cocktailId: number;
-    username: string;
-    name: number;
+    userId: number | undefined;
+    cocktailId: number | undefined;
+    username: string | undefined;
+    name: number | undefined;
   };
+};
+
+type Favourite = {
+  id: number | undefined;
+  name: string | undefined;
+  userId: number | undefined;
+  cocktailId: number | undefined;
+  username: string | undefined;
 };
 
 export default function UserDetail(props: Props) {
@@ -35,10 +43,10 @@ export default function UserDetail(props: Props) {
       const favourites = await response.json();
       setFavouritesLists(favourites);
     }
-    getUserFavourites(props).catch(() => {
+    getUserFavourites().catch(() => {
       console.log('favourites request fails');
     });
-  }, []);
+  }, [props]);
 
   // delete the favourite
 
@@ -58,7 +66,7 @@ export default function UserDetail(props: Props) {
     // copy state
     // update copy of the state
     const newState = favouritesLists.filter(
-      (favourite) => favourite.id !== deletedFavourite.id,
+      (favourite: Favourite) => favourite.id !== deletedFavourite.id,
     );
     // use setState func
     console.log(newState);
@@ -94,7 +102,7 @@ export default function UserDetail(props: Props) {
         <br />
         <br />
         hey {favouriteUserId} {favouriteCocktailId} {favouriteId}
-        {favouritesLists.map((favourite) => {
+        {favouritesLists.map((favourite: Favourite) => {
           return (
             <div key={`cocktailName-${favourite.id}`}>
               {favourite.id} {favourite.name} {favourite.userId}{' '}
@@ -127,16 +135,13 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   if (!userIdFromUrl || Array.isArray(userIdFromUrl)) {
     return { props: {} };
   }
-
   // if you want to use username in the URL call function getUserByUsername and don't use parse int
   const user = await getUserById(parseInt(userIdFromUrl));
 
   const userSession = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
   );
-  // console.log(context.query);
   const favouriteCocktails = await getUserFavourites(context.query.userId);
-  // console.log(favouriteCocktails);
   if (!user) {
     context.res.statusCode = 404;
     return { props: {} };

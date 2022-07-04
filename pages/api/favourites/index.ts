@@ -45,10 +45,7 @@ export default async function handler(
       });
     }
 
-    const newFavourite = await addUserFavourite(
-      req.body.userId,
-      req.body.cocktailId,
-    );
+    const newFavourite = await addUserFavourite(user.id, req.body.cocktailId);
 
     return res.status(200).json(newFavourite);
   }
