@@ -220,6 +220,48 @@ export async function getRecommendationBasedOnUrlAndDatabase(
   return camelcaseKeys(joinedRecommendation);
 }
 
+export async function getRecommendationBasedOnUrlAndDatabaseBackup(
+  spirit: number | string,
+) {
+  // console.log(flavour, spirit, level);
+
+  const [joinedRecommendation] = await sql`
+    SELECT
+      cocktails.id AS id,
+      cocktails.name AS name,
+      levels.level AS level,
+      levels.id AS levelId,
+      flavours.id AS flavourId,
+      flavours.name AS flavour,
+      spirits.name AS spirit,
+      spirits.id AS spiritId,
+      cocktails.description AS description,
+      cocktails.glass AS glass,
+      cocktails.method AS method,
+      cocktails.garnish AS garnish,
+      categories.name AS category,
+      categories.id AS categoryId
+
+    FROM
+      cocktails,
+      flavours,
+      levels,
+      spirits,
+      categories
+
+    WHERE
+      cocktails.flavour_id = flavours.id AND
+      cocktails.spirit_id = ${spirit} AND
+      spirits.id = ${spirit} AND
+      cocktails.level_id = levels.id AND
+      cocktails.category_id = categories.id
+
+    ORDER BY RANDOM()
+
+  `;
+  return camelcaseKeys(joinedRecommendation);
+}
+
 export async function getFullCollectionOfCocktails() {
   const collection = await sql`
 

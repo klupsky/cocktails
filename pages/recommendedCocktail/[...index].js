@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import {
   getRecommendationBasedOnUrlAndDatabase,
+  getRecommendationBasedOnUrlAndDatabaseBackup,
   getUserByValidSessionToken,
 } from '../../util/database';
 import { errorStyles } from '../register';
@@ -36,11 +37,49 @@ export default function RecommendedCocktail(props) {
         {' '}
         <Head>
           <title>Cocktails</title>
-          <meta name="description" content="this cocktail does not exist" />
+          <meta name="description" content="your cocktail recommendation" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main>
-          <div>sorry, there is no recommendation for you</div>
+          <h1>
+            sorry {props.user.username}, we can't recommend any drink that
+            matches all of your criteria. instead, maybe try a{' '}
+          </h1>
+          {props.urlInfoQueryBackup.name}
+          {props.urlInfoQueryBackup.level}
+          {props.urlInfoQueryBackup.flavour}
+          {props.urlInfoQueryBackup.spirit}
+          {props.urlInfoQueryBackup.description}
+          {props.urlInfoQueryBackup.glass}
+          {props.urlInfoQueryBackup.method}
+          {props.urlInfoQueryBackup.garnish}
+          {props.urlInfoQueryBackup.category}
+          <button
+            onClick={() => {
+              addToFavouritesHandler().catch(() => {
+                console.log('adding favourite failed');
+              });
+            }}
+          >
+            ADD TO FAVOURITES
+          </button>
+          {errors.map((error) => (
+            <div css={errorStyles} key={`error-${error.message}`}>
+              {error.message}
+            </div>
+          ))}
+          <br />
+          <button
+            data-test-id="generate-recommendation-2"
+            type="button"
+            onClick={() => {
+              window.location.reload().catch(() => {
+                console.log('reload failed');
+              });
+            }}
+          >
+            GIVE ME ANOTHER!{' '}
+          </button>
           <Link href="/recommendation">
             <button>GO BACK</button>
           </Link>
@@ -53,17 +92,15 @@ export default function RecommendedCocktail(props) {
     <div>
       <Head>
         <title>Cocktails</title>
-        <meta name="description" content="every hour is cocktail hour" />
+        <meta name="description" content="your cocktail recommendatiomn" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <h1>
-          hey {props.user.username} user id: {props.user.id}, you should get a
-        </h1>{' '}
+        <h1>{props.user.username}, we recommend a</h1>
         <br />
         <br />
-        cocktail id = {props.urlInfoQuery.id}
+
         {props.urlInfoQuery.name}
         {props.urlInfoQuery.level}
         {props.urlInfoQuery.flavour}
@@ -115,6 +152,10 @@ export async function getServerSideProps(context) {
     context.query.level,
   );
 
+  const urlInfoQueryBackup = await getRecommendationBasedOnUrlAndDatabaseBackup(
+    context.query.spirit,
+  );
+
   // get the token from the cookies
   const user = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
@@ -125,6 +166,7 @@ export async function getServerSideProps(context) {
       props: {
         user: user,
         urlInfoQuery: urlInfoQuery || null,
+        urlInfoQueryBackup: urlInfoQueryBackup || null,
       },
     };
   }
