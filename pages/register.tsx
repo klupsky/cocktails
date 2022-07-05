@@ -80,9 +80,11 @@ export default function Register(props: Props) {
       <main>
         <h1>Register</h1>
 
-        <label>
+        <label for="username">
           username:{' '}
           <input
+            type="text"
+            id="username"
             value={username}
             onChange={(event) => {
               setUsername(event.currentTarget.value);
@@ -90,10 +92,11 @@ export default function Register(props: Props) {
           />
         </label>
 
-        <label>
+        <label for="email">
           email:{' '}
           <input
-            type="text"
+            type="email"
+            id="email"
             value={email}
             onChange={(event) => {
               setEmail(event.currentTarget.value);
@@ -101,9 +104,10 @@ export default function Register(props: Props) {
           />
         </label>
 
-        <label>
+        <label for="password">
           password:{' '}
           <input
+            id="password"
             type="password"
             value={password}
             onChange={(event) => {

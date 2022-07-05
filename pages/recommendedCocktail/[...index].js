@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useState } from 'react';
 import {
   getRecommendationBasedOnUrlAndDatabase,
@@ -38,7 +39,12 @@ export default function RecommendedCocktail(props) {
           <meta name="description" content="this cocktail does not exist" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <main>this cocktail does not exist</main>
+        <main>
+          <div>sorry, there is no recommendation for you</div>
+          <Link href="/recommendation">
+            <button>GO BACK</button>
+          </Link>
+        </main>
       </div>
     );
   }
@@ -74,7 +80,7 @@ export default function RecommendedCocktail(props) {
             });
           }}
         >
-          add this to favourites
+          ADD TO FAVOURITES
         </button>
         {errors.map((error) => (
           <div css={errorStyles} key={`error-${error.message}`}>
@@ -91,8 +97,11 @@ export default function RecommendedCocktail(props) {
             });
           }}
         >
-          no i don't like this, give me another{' '}
+          GIVE ME ANOTHER!{' '}
         </button>
+        <Link href="/recommendation">
+          <button>GO BACK</button>
+        </Link>
       </main>
     </div>
   );

@@ -1,5 +1,6 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import {
   getUserById,
@@ -122,8 +123,10 @@ export default function UserDetail(props: Props) {
         {favouritesLists.map((favourite: Favourite) => {
           return (
             <div key={`cocktailName-${favourite.id}`}>
-              {favourite.id} {favourite.name} {favourite.userId}{' '}
-              {favourite.cocktailId}{' '}
+              <Link href={`../collection/${favourite.cocktailId}`}>
+                {favourite.name}
+              </Link>{' '}
+              {favourite.userId} {favourite.cocktailId}
               <button
                 onClick={() => {
                   setFavouriteUserId(favourite.userId);
@@ -134,7 +137,7 @@ export default function UserDetail(props: Props) {
                   });
                 }}
               >
-                delete
+                DELETE
               </button>
             </div>
           );

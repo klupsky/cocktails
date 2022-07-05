@@ -211,9 +211,10 @@ export async function getRecommendationBasedOnUrlAndDatabase(
       cocktails.spirit_id = ${spirit} AND
       spirits.id = ${spirit} AND
       cocktails.level_id = ${level} AND
-      levels.id = ${level}
+      levels.id = ${level} AND
+      cocktails.category_id = categories.id
 
-    LIMIT 1
+    ORDER BY RANDOM()
 
   `;
   return camelcaseKeys(joinedRecommendation);
@@ -357,4 +358,48 @@ export async function getCategories() {
 
   `;
   return camelcaseKeys(categories);
+}
+
+export async function getLevels() {
+  const levels = await sql`
+
+    SELECT
+      *
+
+    FROM
+      levels
+
+
+  `;
+  return camelcaseKeys(levels);
+}
+
+export async function getFlavours() {
+  const flavours = await sql`
+
+    SELECT
+      *
+
+    FROM
+      flavours
+
+    ORDER BY name ASC;
+
+  `;
+  return camelcaseKeys(flavours);
+}
+
+export async function getSpirits() {
+  const spirits = await sql`
+
+    SELECT
+      *
+
+    FROM
+      spirits
+
+    ORDER BY name ASC;
+
+  `;
+  return camelcaseKeys(spirits);
 }

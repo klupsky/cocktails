@@ -1,8 +1,8 @@
 const flavours = [
   { id: 1, name: 'dry' },
   { id: 2, name: 'fizzy' },
-  { id: 3, name: 'sour' },
-  { id: 4, name: 'bitter' },
+  { id: 3, name: 'bitter' },
+  { id: 4, name: 'sour' },
 ];
 
 exports.up = async (sql) => {

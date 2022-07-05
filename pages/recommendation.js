@@ -1,7 +1,13 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { getUserByValidSessionToken } from '../util/database';
+import {
+  getFlavours,
+  getLevels,
+  getSpirits,
+  getUserByValidSessionToken,
+} from '../util/database';
 
 export default function Recommendation(props) {
   const [flavourId, setFlavourId] = useState('');
@@ -30,62 +36,79 @@ export default function Recommendation(props) {
       <main>
         <h1>get a recommendation {props.user.username}</h1>
         <div>
-          <span id="flavour">pick a flavour:</span>
-          <form name="flavour">
-            <fieldset
-              className="flavour"
-              value={flavourId}
-              onChange={(event) => handleFlavourChange(event)}
-            >
-              <label for="flavourId1">
-                <input type="radio" name="flavour-option" value="1" />
-                flavourId1
-              </label>
-              <label for="flavourId2">
-                <input type="radio" name="flavour-option" value="2" />
-                flavourId2
-              </label>
-            </fieldset>
-          </form>
-
-          <span id="spirit">pick a spirit:</span>
+          <fieldset
+            className="flavour"
+            value={flavourId}
+            onChange={(event) => handleFlavourChange(event)}
+          >
+            <div id="flavour">pick a flavour:</div>
+            {props.flavours.map((flavour) => {
+              return (
+                <span key={flavour.id}>
+                  <label for={flavour.name}>
+                    <input
+                      id={flavour.name}
+                      type="radio"
+                      name="flavour-option"
+                      value={flavour.id}
+                    />
+                    {flavour.name}
+                  </label>
+                </span>
+              );
+            })}{' '}
+          </fieldset>
+        </div>
+        <div>
           <fieldset
             className="spirit"
             value={spiritId}
             onChange={(event) => handleSpiritChange(event)}
           >
-            <label for="spiritId1">
-              <input type="radio" name="spirit-option" value="1" />
-              spiritId1
-            </label>
-            <label for="spiritId2">
-              <input type="radio" name="spirit-option" value="2" />
-              spiritId2
-            </label>
+            <div id="spirit">pick a spirit:</div>
+            {props.spirits.map((spirit) => {
+              return (
+                <span key={spirit.id}>
+                  <label for={spirit.name}>
+                    <input
+                      id={spirit.name}
+                      type="radio"
+                      name="spirit-option"
+                      value={spirit.id}
+                    />
+                    {spirit.name}
+                  </label>
+                </span>
+              );
+            })}
           </fieldset>
-          <span id="spirit">pick an alc level:</span>
+
           <fieldset
             className="level"
             value={levelId}
             onChange={(event) => handleLevelChange(event)}
           >
-            <label for="levelId1">
-              <input type="radio" name="level-option" value="1" required />
-              levelId1
-            </label>
-            <label for="levelId2">
-              <input type="radio" name="level-option" value="2" />
-              levelId2
-            </label>
-            <label for="levelId3">
-              <input type="radio" name="level-option" value="3" />
-              levelId3
-            </label>
+            <div id="level">pick an alc level:</div>
+            {props.levels.map((level) => {
+              return (
+                <span key={level.id}>
+                  <label for={level.level}>
+                    <input
+                      type="radio"
+                      id={level.level}
+                      name="level-option"
+                      value={level.id}
+                    />
+                    {level.level}
+                  </label>
+                </span>
+              );
+            })}
           </fieldset>
         </div>
         <br />
         {!flavourId | !spiritId | !levelId ? (
-          <button disabled>Get a recommendation</button>
+          <button disabled>GET A RECOMMENDATION</button>
         ) : (
           <button
             data-test-id="generate-recommendation"
@@ -96,9 +119,12 @@ export default function Recommendation(props) {
                   `/recommendedCocktail/recommendation?flavour=${flavourId}&spirit=${spiritId}&level=${levelId}`,
                 )
                 .catch(console.log('error'));
+              setFlavourId('');
+              setLevelId('');
+              setLevelId('');
             }}
           >
-            Get a recommendation
+            GET A RECOMMENDATION
           </button>
         )}
       </main>
@@ -111,10 +137,17 @@ export async function getServerSideProps(context) {
     context.req.cookies.sessionToken,
   );
 
+  const spirits = await getSpirits();
+  const levels = await getLevels();
+  const flavours = await getFlavours();
+
   if (user) {
     return {
       props: {
         user: user,
+        spirits,
+        flavours,
+        levels,
       },
     };
   }
