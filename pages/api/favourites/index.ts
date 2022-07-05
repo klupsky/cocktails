@@ -3,7 +3,6 @@ import {
   addUserFavourite,
   getAllFavourites,
   getUserByValidSessionToken,
-  getUserFavourites,
 } from '../../../util/database';
 
 export default async function handler(

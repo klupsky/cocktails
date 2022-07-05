@@ -10,6 +10,7 @@ import { errorStyles } from '../register';
 
 export default function RecommendedCocktail(props) {
   const [errors, setErrors] = useState([]);
+  const [disable, setDisable] = useState(false);
 
   async function addToFavouritesHandler() {
     const favouriteResponse = await fetch('../api/favourites', {
@@ -19,7 +20,27 @@ export default function RecommendedCocktail(props) {
       },
       body: JSON.stringify({
         userId: props.user.id,
-        cocktailId: props.urlInfoQuery.id,
+        cocktailId: props.urlInfoQuery.cocktailId,
+      }),
+    });
+
+    const createdCocktail = await favouriteResponse.json();
+    // if we have error show an error message
+    if ('errors' in createdCocktail) {
+      setErrors(createdCocktail.errors);
+      return;
+    }
+  }
+
+  async function addToFavouritesHandlerBackup() {
+    const favouriteResponse = await fetch('../api/favourites', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: props.user.id,
+        cocktailId: props.urlInfoQueryBackup.cocktailId,
       }),
     });
 
@@ -45,6 +66,8 @@ export default function RecommendedCocktail(props) {
             sorry {props.user.username}, we can't recommend any drink that
             matches all of your criteria. instead, maybe try a{' '}
           </h1>
+          {props.urlInfoQueryBackup.cocktailId}
+
           {props.urlInfoQueryBackup.name}
           {props.urlInfoQueryBackup.level}
           {props.urlInfoQueryBackup.flavour}
@@ -55,14 +78,19 @@ export default function RecommendedCocktail(props) {
           {props.urlInfoQueryBackup.garnish}
           {props.urlInfoQueryBackup.category}
           <button
+            id="add to favourites"
+            disabled={disable}
             onClick={() => {
-              addToFavouritesHandler().catch(() => {
+              setDisable(true);
+
+              addToFavouritesHandlerBackup().catch(() => {
                 console.log('adding favourite failed');
               });
             }}
           >
             ADD TO FAVOURITES
           </button>
+
           {errors.map((error) => (
             <div css={errorStyles} key={`error-${error.message}`}>
               {error.message}
@@ -100,7 +128,7 @@ export default function RecommendedCocktail(props) {
         <h1>{props.user.username}, we recommend a</h1>
         <br />
         <br />
-
+        {props.urlInfoQuery.cocktailId}
         {props.urlInfoQuery.name}
         {props.urlInfoQuery.level}
         {props.urlInfoQuery.flavour}
@@ -110,8 +138,12 @@ export default function RecommendedCocktail(props) {
         {props.urlInfoQuery.method}
         {props.urlInfoQuery.garnish}
         {props.urlInfoQuery.category}
+
         <button
+          id="add to favourites"
+          disabled={disable}
           onClick={() => {
+            setDisable(true);
             addToFavouritesHandler().catch(() => {
               console.log('adding favourite failed');
             });
@@ -151,15 +183,18 @@ export async function getServerSideProps(context) {
     context.query.spirit,
     context.query.level,
   );
+  // console.log(urlInfoQuery.cocktailId);
 
   const urlInfoQueryBackup = await getRecommendationBasedOnUrlAndDatabaseBackup(
     context.query.spirit,
   );
+  // console.log(urlInfoQueryBackup.cocktailId);
 
   // get the token from the cookies
   const user = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
   );
+  // console.log(user);
 
   if (user) {
     return {

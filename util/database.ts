@@ -183,7 +183,7 @@ export async function getRecommendationBasedOnUrlAndDatabase(
 
   const [joinedRecommendation] = await sql`
     SELECT
-      cocktails.id AS id,
+      cocktails.id AS cocktail_id,
       cocktails.name AS name,
       levels.level AS level,
       levels.id AS levelId,
@@ -227,7 +227,7 @@ export async function getRecommendationBasedOnUrlAndDatabaseBackup(
 
   const [joinedRecommendation] = await sql`
     SELECT
-      cocktails.id AS id,
+      cocktails.id AS cocktail_id,
       cocktails.name AS name,
       levels.level AS level,
       levels.id AS levelId,
@@ -445,3 +445,19 @@ export async function getSpirits() {
   `;
   return camelcaseKeys(spirits);
 }
+
+// export async function checkUserFavourites(id: number, cocktailId: number) {
+//   const checkfavouriteCocktails = await sql`
+//     SELECT
+//       *
+
+//     FROM
+//       favourites
+
+//     WHERE
+//       favourites.user_id = ${id} AND
+//       favourites.cocktail_id = ${cocktailId}
+
+//   `;
+//   return camelcaseKeys(checkfavouriteCocktails);
+// }

@@ -108,11 +108,14 @@ export default function Recommendation(props) {
         </div>
         <br />
         {!flavourId | !spiritId | !levelId ? (
-          <button disabled>GET A RECOMMENDATION</button>
+          <button id="disabled recommendation" disabled>
+            GET A RECOMMENDATION
+          </button>
         ) : (
           <button
             data-test-id="generate-recommendation"
             type="button"
+            id="get a recommendation"
             onClick={() => {
               router
                 .push(
