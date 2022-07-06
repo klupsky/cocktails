@@ -12,26 +12,12 @@ import { errorStyles } from '../register';
 export default function RecommendedCocktail(props) {
   const [errors, setErrors] = useState([]);
   const [disable, setDisable] = useState(false);
-  // const [favouriteCocktail, setFavouriteCocktail] = useState(
-  //   props.urlInfoQuery,
-  // );
 
   function refreshPage() {
     window.location.reload();
   }
 
   // get the user favourites
-
-  // useEffect(() => {
-  //   async function getUserFavourites() {
-  //     const response = await fetch(`../api/favourites/${props.user.id}`);
-  //     const favourites = await response.json();
-  //     setFavouriteCocktail(favourites);
-  //   }
-  //   getUserFavourites().catch(() => {
-  //     console.log('favourites request fails');
-  //   });
-  // }, [props]);
 
   async function addToFavouritesHandler() {
     const favouriteResponse = await fetch('../api/favourites', {
@@ -96,12 +82,7 @@ export default function RecommendedCocktail(props) {
           {props.urlInfoQueryBackup.method}
           {props.urlInfoQueryBackup.garnish}
           {props.urlInfoQueryBackup.category}
-          {/* {console.log(props.favouritesCheckBackup)} */}
           {!props.favouritesCheckBackup ? (
-            <button id="add to favourites" disabled>
-              IS ALREADY FAVOURITE
-            </button>
-          ) : (
             <button
               id="add to favourites"
               disabled={disable}
@@ -113,6 +94,10 @@ export default function RecommendedCocktail(props) {
               }}
             >
               ADD TO FAVOURITES
+            </button>
+          ) : (
+            <button id="add to favourites" disabled>
+              IS ALREADY FAVOURITE
             </button>
           )}
           {errors.map((error) => (
@@ -158,8 +143,7 @@ export default function RecommendedCocktail(props) {
         {props.urlInfoQuery.method}
         {props.urlInfoQuery.garnish}
         {props.urlInfoQuery.category}
-        {/* {console.log(props.favouritesCheck)} */}
-        {props.favouritesCheck.cocktailId ? (
+        {!props.favouritesCheck ? (
           <button
             id="add to favourites"
             disabled={disable}
@@ -210,12 +194,10 @@ export async function getServerSideProps(context) {
     context.query.spirit,
     context.query.level,
   );
-  // console.log(urlInfoQuery.cocktailId);
 
   const urlInfoQueryBackup = await getRecommendationBasedOnUrlAndDatabaseBackup(
     context.query.spirit,
   );
-  // console.log(urlInfoQueryBackup.cocktailId);
 
   // get the token from the cookies
   const user = await getUserByValidSessionToken(
@@ -233,23 +215,21 @@ export async function getServerSideProps(context) {
         user: user,
         urlInfoQuery: urlInfoQuery || null,
         urlInfoQueryBackup: urlInfoQueryBackup || null,
-        favouritesCheck: favouritesCheck,
+        favouritesCheck: favouritesCheck || null,
       },
     };
-  }
-
-  if (user && urlInfoQueryBackup) {
+  } else {
     const favouritesCheckBackup = await checkFavourites(
       user.id,
       urlInfoQueryBackup.cocktailId,
     );
-    // console.log(favouritesCheckBackup);
+    console.log(favouritesCheckBackup);
     return {
       props: {
         user: user,
         urlInfoQuery: urlInfoQuery || null,
         urlInfoQueryBackup: urlInfoQueryBackup || null,
-        favouritesCheckBackup: favouritesCheckBackup,
+        favouritesCheckBackup: favouritesCheckBackup || null,
       },
     };
   }
