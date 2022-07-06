@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import {
+  checkFavourites,
   getRecommendationBasedOnUrlAndDatabase,
   getRecommendationBasedOnUrlAndDatabaseBackup,
   getUserByValidSessionToken,
@@ -11,6 +12,10 @@ import { errorStyles } from '../register';
 export default function RecommendedCocktail(props) {
   const [errors, setErrors] = useState([]);
   const [disable, setDisable] = useState(false);
+
+  function refreshPage() {
+    window.location.reload();
+  }
 
   async function addToFavouritesHandler() {
     const favouriteResponse = await fetch('../api/favourites', {
@@ -23,7 +28,6 @@ export default function RecommendedCocktail(props) {
         cocktailId: props.urlInfoQuery.cocktailId,
       }),
     });
-
     const createdCocktail = await favouriteResponse.json();
     // if we have error show an error message
     if ('errors' in createdCocktail) {
@@ -67,7 +71,6 @@ export default function RecommendedCocktail(props) {
             matches all of your criteria. instead, maybe try a{' '}
           </h1>
           {props.urlInfoQueryBackup.cocktailId}
-
           {props.urlInfoQueryBackup.name}
           {props.urlInfoQueryBackup.level}
           {props.urlInfoQueryBackup.flavour}
@@ -77,20 +80,25 @@ export default function RecommendedCocktail(props) {
           {props.urlInfoQueryBackup.method}
           {props.urlInfoQueryBackup.garnish}
           {props.urlInfoQueryBackup.category}
-          <button
-            id="add to favourites"
-            disabled={disable}
-            onClick={() => {
-              setDisable(true);
-
-              addToFavouritesHandlerBackup().catch(() => {
-                console.log('adding favourite failed');
-              });
-            }}
-          >
-            ADD TO FAVOURITES
-          </button>
-
+          {console.log(props.favouritesCheckBackup)}
+          {props.favouritesCheckBackup ? (
+            <button id="add to favourites" disabled>
+              IS ALREADY FAVOURITE
+            </button>
+          ) : (
+            <button
+              id="add to favourites"
+              disabled={disable}
+              onClick={() => {
+                setDisable(true);
+                addToFavouritesHandlerBackup().catch(() => {
+                  console.log('adding favourite failed');
+                });
+              }}
+            >
+              ADD TO FAVOURITES
+            </button>
+          )}
           {errors.map((error) => (
             <div css={errorStyles} key={`error-${error.message}`}>
               {error.message}
@@ -100,11 +108,7 @@ export default function RecommendedCocktail(props) {
           <button
             data-test-id="generate-recommendation-2"
             type="button"
-            onClick={() => {
-              window.location.reload().catch(() => {
-                console.log('reload failed');
-              });
-            }}
+            onClick={refreshPage}
           >
             GIVE ME ANOTHER!{' '}
           </button>
@@ -120,7 +124,7 @@ export default function RecommendedCocktail(props) {
     <div>
       <Head>
         <title>Cocktails</title>
-        <meta name="description" content="your cocktail recommendatiomn" />
+        <meta name="description" content="your cocktail recommendation" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -139,18 +143,26 @@ export default function RecommendedCocktail(props) {
         {props.urlInfoQuery.garnish}
         {props.urlInfoQuery.category}
 
-        <button
-          id="add to favourites"
-          disabled={disable}
-          onClick={() => {
-            setDisable(true);
-            addToFavouritesHandler().catch(() => {
-              console.log('adding favourite failed');
-            });
-          }}
-        >
-          ADD TO FAVOURITES
-        </button>
+        {console.log(props.favouritesCheck)}
+        {!props.favouritesCheck ? (
+          <button
+            id="add to favourites"
+            disabled={disable}
+            onClick={() => {
+              setDisable(true);
+              addToFavouritesHandler().catch(() => {
+                console.log('adding favourite failed');
+              });
+            }}
+          >
+            ADD TO FAVOURITES
+          </button>
+        ) : (
+          <button id="add to favourites" disabled>
+            IS ALREADY FAVOURITE
+          </button>
+        )}
+
         {errors.map((error) => (
           <div css={errorStyles} key={`error-${error.message}`}>
             {error.message}
@@ -194,14 +206,35 @@ export async function getServerSideProps(context) {
   const user = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
   );
-  // console.log(user);
 
-  if (user) {
+  if (user && urlInfoQuery) {
+    const favouritesCheck = await checkFavourites(
+      user.id,
+      urlInfoQuery.cocktailId,
+    );
+
     return {
       props: {
         user: user,
         urlInfoQuery: urlInfoQuery || null,
         urlInfoQueryBackup: urlInfoQueryBackup || null,
+        favouritesCheck: favouritesCheck,
+      },
+    };
+  }
+
+  if (user && urlInfoQueryBackup) {
+    const favouritesCheckBackup = await checkFavourites(
+      user.id,
+      urlInfoQueryBackup.cocktailId,
+    );
+    // console.log(favouritesCheckBackup);
+    return {
+      props: {
+        user: user,
+        urlInfoQuery: urlInfoQuery || null,
+        urlInfoQueryBackup: urlInfoQueryBackup || null,
+        favouritesCheckBackup: favouritesCheckBackup,
       },
     };
   }

@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   addUserFavourite,
+  checkFavourites,
   getAllFavourites,
   getUserByValidSessionToken,
 } from '../../../util/database';
@@ -37,19 +38,11 @@ export default async function handler(
       return;
     }
 
-    //
-
     if (!req.body.userId || !req.body.cocktailId) {
       return res.status(400).json({
         error: 'Insert a userId and a cocktailId',
       });
     }
-
-    // if (user.id && req.body.cocktailId) {
-    //   return res.status(400).json({
-    //     errors: [{ message: 'cocktail is already in your favourites list' }],
-    //   });
-    // }
 
     const newFavourite = await addUserFavourite(user.id, req.body.cocktailId);
 

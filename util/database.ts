@@ -446,18 +446,34 @@ export async function getSpirits() {
   return camelcaseKeys(spirits);
 }
 
-// export async function checkUserFavourites(id: number, cocktailId: number) {
-//   const checkfavouriteCocktails = await sql`
+// export async function getFavouriteCocktailIds() {
+//   const favouriteCocktailList = await sql`
 //     SELECT
-//       *
+//       favourites.cocktail_id
 
 //     FROM
 //       favourites
 
-//     WHERE
-//       favourites.user_id = ${id} AND
-//       favourites.cocktail_id = ${cocktailId}
-
 //   `;
-//   return camelcaseKeys(checkfavouriteCocktails);
+//   return camelcaseKeys(favouriteCocktailList);
 // }
+
+export async function checkFavourites(id: number, cocktailId: number) {
+  // console.log(id, cocktailId);
+  const favouritesCheck = await sql`
+    SELECT
+      favourites.cocktail_Id
+
+    FROM
+      favourites
+
+    WHERE
+      favourites.user_Id = ${id} AND
+      favourites.cocktail_Id = ${cocktailId}
+
+
+  `;
+  // console.log(favouritesCheck);
+
+  return camelcaseKeys(favouritesCheck);
+}

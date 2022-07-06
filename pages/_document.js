@@ -4,10 +4,8 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {/* <link
-          href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
-          rel="stylesheet"
-        /> */}
+        <link rel="stylesheet" href="https://use.typekit.net/ikl0uvo.css" />
+
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <body>

@@ -1,3 +1,4 @@
+import { css, Global } from '@emotion/react';
 import { useCallback, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 
@@ -23,12 +24,33 @@ export default function App({ Component, pageProps }) {
   }, [refreshUserProfile]);
 
   return (
-    <Layout user={user}>
-      {/*
+    <>
+      <Global
+        styles={css`
+          html,
+          body {
+            padding: 0;
+            font-family: roc-grotesk, sans-serif;
+            font-weight: 500;
+            font-style: normal;
+            letter-spacing: 0.5px;
+            background: #fafafa;
+            font-size: 15pt;
+          }
+
+          * {
+            box-sizing: border-box;
+          }
+        `}
+      />
+
+      <Layout user={user}>
+        {/*
           The "Component" component refers to
           the current page that is being rendered
         */}
-      <Component {...pageProps} refreshUserProfile={refreshUserProfile} />
-    </Layout>
+        <Component {...pageProps} refreshUserProfile={refreshUserProfile} />
+      </Layout>
+    </>
   );
 }
