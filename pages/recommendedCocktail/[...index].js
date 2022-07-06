@@ -12,10 +12,26 @@ import { errorStyles } from '../register';
 export default function RecommendedCocktail(props) {
   const [errors, setErrors] = useState([]);
   const [disable, setDisable] = useState(false);
+  // const [favouriteCocktail, setFavouriteCocktail] = useState(
+  //   props.urlInfoQuery,
+  // );
 
   function refreshPage() {
     window.location.reload();
   }
+
+  // get the user favourites
+
+  // useEffect(() => {
+  //   async function getUserFavourites() {
+  //     const response = await fetch(`../api/favourites/${props.user.id}`);
+  //     const favourites = await response.json();
+  //     setFavouriteCocktail(favourites);
+  //   }
+  //   getUserFavourites().catch(() => {
+  //     console.log('favourites request fails');
+  //   });
+  // }, [props]);
 
   async function addToFavouritesHandler() {
     const favouriteResponse = await fetch('../api/favourites', {
@@ -80,8 +96,8 @@ export default function RecommendedCocktail(props) {
           {props.urlInfoQueryBackup.method}
           {props.urlInfoQueryBackup.garnish}
           {props.urlInfoQueryBackup.category}
-          {console.log(props.favouritesCheckBackup)}
-          {props.favouritesCheckBackup ? (
+          {/* {console.log(props.favouritesCheckBackup)} */}
+          {!props.favouritesCheckBackup ? (
             <button id="add to favourites" disabled>
               IS ALREADY FAVOURITE
             </button>
@@ -142,9 +158,8 @@ export default function RecommendedCocktail(props) {
         {props.urlInfoQuery.method}
         {props.urlInfoQuery.garnish}
         {props.urlInfoQuery.category}
-
-        {console.log(props.favouritesCheck)}
-        {!props.favouritesCheck ? (
+        {/* {console.log(props.favouritesCheck)} */}
+        {props.favouritesCheck.cocktailId ? (
           <button
             id="add to favourites"
             disabled={disable}
