@@ -54,15 +54,15 @@ export default function Login(props: Props) {
       // if you want to use userProfile with username redirect to /users/username
       // await router.push(`/users/${loginResponseBody.user.id}`);
       await props.refreshUserProfile();
-      await router.push(`/`);
+      await router.push(`/users/${loginResponseBody.user.id}`);
     }
   }
 
   return (
     <div>
       <Head>
-        <title>Login</title>
-        <meta name="login" content="Login a new user" />
+        <title>login</title>
+        <meta name="description" content="login as existing user" />
       </Head>
 
       <main>

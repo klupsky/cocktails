@@ -1,8 +1,10 @@
-import { css } from '@emotion/react';
+// import { css } from '@emotion/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import Carousel from '../components/Carousel';
+import { getPreviewFromCollectionOfCocktails } from '../util/database';
 import { LoginResponseBody } from './api/login';
 import { errorStyles } from './register';
 
@@ -63,37 +65,25 @@ export default function Home(props: Props) {
   return (
     <div>
       <Head>
-        <title>Login</title>
-        <meta name="login" content="Login a new user" />
+        <title>do you fancy a cocktail?</title>
+        <meta name="description" content="a recommendation guide to cocktails" />
       </Head>
-      <h1>Login</h1>
-      <label>
-        username:{' '}
-        <input
-          value={username}
-          onChange={(event) => {
-            setUsername(event.currentTarget.value);
-          }}
-        />
-      </label>
-      <label>
-        password:{' '}
-        <input
-          type="password"
-          value={password}
-          onChange={(event) => {
-            setPassword(event.currentTarget.value);
-          }}
-        />
-      </label>
-      <button onClick={() => loginHandler()}>Login</button>
-      <Link href="/register">or register</Link>
-      {errors.map((error) => (
-        <div css={errorStyles} key={`error-${error.message}`}>
-          {error.message}
-        </div>
-      ))}
-      <main></main>
+      <main>
+        do you
+        <h1>fancy a cocktail?</h1>
+      </main>
+
+      <Carousel collectionPreview={props.collectionPreview} />
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const collectionPreview = await getPreviewFromCollectionOfCocktails();
+  // console.log(collectionCocktail);
+  return {
+    props: {
+      collectionPreview,
+    },
+  };
 }

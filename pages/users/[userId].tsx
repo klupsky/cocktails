@@ -82,33 +82,20 @@ export default function UserDetail(props: Props) {
     return (
       <>
         <Head>
-          <title>User not found</title>
-          <meta name="description" content="User not found" />
+          <title>user not found</title>
+          <meta name="description" content="user not found" />
         </Head>
-        <h1>404 - User not found</h1>
-        Better luck next time
+        <h1>404 - user not found</h1>
+        better luck next time
       </>
     );
   }
 
-  // else if (props.user.id !== props.userSession.id) {
-  //   return (
-  //     <>
-  //       <Head>
-  //         <title>User not found</title>
-  //         <meta name="description" content="User not found" />
-  //       </Head>
-  //       <h1>404 - User not found</h1>
-  //       no this is not allowed
-  //     </>
-  //   );
-  // }
-
   return (
     <div>
       <Head>
-        <title>{props.user.username}</title>
-        <meta name="description" content="About the app" />
+        <title>{props.user.username}'s cocktail selection</title>
+        <meta name="description" content="private user selection" />
       </Head>
 
       <main>

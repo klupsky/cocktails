@@ -19,13 +19,12 @@ export default function Cocktail(props) {
   return (
     <div>
       <Head>
-        <title>Cocktails</title>
-        <meta name="description" content="every hour is cocktail hour" />
+        <title>{props.collectionCocktail.name}</title>
+        <meta name="description" content="learn more about this cocktail" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        {' '}
         {props.collectionCocktail.id}
         {props.collectionCocktail.name}
         {props.collectionCocktail.level}

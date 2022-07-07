@@ -38,9 +38,9 @@ export default function Header(props) {
           </Link>
         */}
       </div>
-      {props.user && (
+      {/* {props.user && (
         <Link href="/users/private-profile/">{props.user.username}</Link>
-      )}
+      )} */}
       {props.user && (
         <Link href={`/users/${props.user.id}`}>your selection</Link>
       )}
@@ -49,7 +49,7 @@ export default function Header(props) {
       ) : (
         <>
           {/* <Link href="/register">Register</Link> */}
-          {/* <Link href="/login">Login</Link> */}
+          <Link href="/login">Login</Link>
         </>
       )}
     </header>

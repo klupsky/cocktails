@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   addUserFavourite,
-  checkFavourites,
   getAllFavourites,
   getUserByValidSessionToken,
 } from '../../../util/database';

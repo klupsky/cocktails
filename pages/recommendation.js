@@ -25,6 +25,19 @@ export default function Recommendation(props) {
     setLevelId(event.target.value);
   }
 
+  if (!props.user) {
+    return (
+      <>
+        <Head>
+          <title>user not found</title>
+          <meta name="description" content="user not found" />
+        </Head>
+        <h1>404 - user not found</h1>
+        better luck next time
+      </>
+    );
+  }
+
   return (
     <div>
       <Head>

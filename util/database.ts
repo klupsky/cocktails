@@ -446,8 +446,6 @@ export async function getSpirits() {
   return camelcaseKeys(spirits);
 }
 
-
-
 export async function checkFavourites(id: number, cocktailId: number) {
   const [favouritesCheck] = await sql`
     SELECT
@@ -464,4 +462,43 @@ export async function checkFavourites(id: number, cocktailId: number) {
   `;
 
   return camelcaseKeys(favouritesCheck);
+}
+
+export async function getPreviewFromCollectionOfCocktails() {
+  const previewCollection = await sql`
+
+    SELECT
+      cocktails.id AS id,
+      cocktails.name AS name,
+      levels.level AS level,
+      levels.id AS levelId,
+      flavours.id AS flavourId,
+      flavours.name AS flavour,
+      spirits.name AS spirit,
+      spirits.id AS spiritId,
+      cocktails.description AS description,
+      cocktails.glass AS glass,
+      cocktails.method AS method,
+      cocktails.garnish AS garnish,
+      categories.name AS category,
+      categories.id AS categoryId
+
+    FROM
+      cocktails,
+      flavours,
+      levels,
+      spirits,
+      categories
+
+     WHERE
+      cocktails.spirit_id = spirits.id AND
+      cocktails.flavour_id = flavours.id AND
+      cocktails.level_id = levels.id AND
+      cocktails.category_id = categories.id
+
+    ORDER BY
+      name ASC
+    LIMIT 6;
+  `;
+  return camelcaseKeys(previewCollection);
 }

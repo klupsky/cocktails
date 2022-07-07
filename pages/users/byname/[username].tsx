@@ -12,7 +12,7 @@ export default function UserDetail(props: Props) {
       <>
         <Head>
           <title>User not found</title>
-          <meta name="description" content="User not found" />
+          <meta name="description" content="user not found" />
         </Head>
         <h1>404 - User not found</h1>
         Better luck next time
@@ -24,7 +24,7 @@ export default function UserDetail(props: Props) {
     <div>
       <Head>
         <title>{props.user.username}</title>
-        <meta name="description" content="About the app" />
+        <meta name="description" content="about the user" />
       </Head>
 
       <main>

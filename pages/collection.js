@@ -16,9 +16,9 @@ export default function Collection(props) {
   return (
     <div>
       <Head>
-        <title>Cocktails</title>
+        <title>cocktail collection</title>
 
-        <meta name="description" content="every hour is cocktail hour" />
+        <meta name="description" content="full collection of cocktails" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

@@ -73,8 +73,8 @@ export default function Register(props: Props) {
   return (
     <div>
       <Head>
-        <title>Register</title>
-        <meta name="registration" content="Register a new user" />
+        <title>register</title>
+        <meta name="registration" content="register a new user" />
       </Head>
 
       <main>

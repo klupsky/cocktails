@@ -124,7 +124,7 @@ export default function RecommendedCocktail(props) {
   return (
     <div>
       <Head>
-        <title>Cocktails</title>
+        <title>cocktail recommendation</title>
         <meta name="description" content="your cocktail recommendation" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -172,7 +172,7 @@ export default function RecommendedCocktail(props) {
           data-test-id="generate-recommendation-2"
           type="button"
           onClick={() => {
-            window.location.reload().catch(() => {
+            refreshPage().catch(() => {
               console.log('reload failed');
             });
           }}
@@ -204,6 +204,15 @@ export async function getServerSideProps(context) {
     context.req.cookies.sessionToken,
   );
 
+  if (!user) {
+    return {
+      redirect: {
+        destination: `/login?returnTo=/`,
+        permanent: false,
+      },
+    };
+  }
+
   if (user && urlInfoQuery) {
     const favouritesCheck = await checkFavourites(
       user.id,
@@ -223,7 +232,7 @@ export async function getServerSideProps(context) {
       user.id,
       urlInfoQueryBackup.cocktailId,
     );
-    console.log(favouritesCheckBackup);
+
     return {
       props: {
         user: user,
@@ -233,11 +242,4 @@ export async function getServerSideProps(context) {
       },
     };
   }
-
-  return {
-    redirect: {
-      destination: `/login?returnTo=/`,
-      permanent: false,
-    },
-  };
 }

@@ -11,7 +11,7 @@ export default function UserDetail(props: Props) {
     <div>
       <Head>
         <title>{props.user.username}</title>
-        <meta name="description" content="About the app" />
+        <meta name="description" content="about the user" />
       </Head>
 
       <main>
