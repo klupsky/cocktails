@@ -1,80 +1,142 @@
+import { css } from '@emotion/react';
 // import { css } from '@emotion/react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
+// import { useRouter } from 'next/router';
+// import { useState } from 'react';
 import Carousel from '../components/Carousel';
 import { getPreviewFromCollectionOfCocktails } from '../util/database';
-import { LoginResponseBody } from './api/login';
-import { errorStyles } from './register';
 
-type Props = {
-  refreshUserProfile: () => Promise<void>;
-};
+// import { LoginResponseBody } from './api/login';
 
-export default function Home(props: Props) {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState<
-    {
-      message: string;
-    }[]
-  >([]);
-  const router = useRouter();
+// import { errorStyles } from './register';
 
-  async function loginHandler() {
-    const loginResponse = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    });
+// type Props = {
+//   refreshUserProfile: () => Promise<void>;
+// };
 
-    const loginResponseBody: LoginResponseBody = await loginResponse.json();
+const titleSection = css`
+  height: 100vh;
+  text-align: center;
+  .doYou {
+    margin-top: 8%;
+  }
+  h1 {
+    margin-top: 7%;
+    font-size: 4.3rem;
+    line-height: 3.5rem;
+    font-weight: 800;
 
-    // if we have error show an error message
-    if ('errors' in loginResponseBody) {
-      setErrors(loginResponseBody.errors);
-      return;
+    text-transform: uppercase;
+  }
+  // when smaller than 470
+  @media (max-width: 470px) {
+    .doYou {
+      margin-top: 28%;
     }
+    h1 {
+      margin-top: 10%;
+      font-size: 1.9rem;
+      line-height: 1.7rem;
+      font-weight: 800;
 
-    const returnTo = router.query.returnTo;
-
-    if (
-      returnTo &&
-      !Array.isArray(returnTo) &&
-      // Security: Validate returnTo parameter against valid path
-      // (because this is untrusted user input)
-      /^\/[a-zA-Z0-9-?=/]*$/.test(returnTo)
-    ) {
-      await props.refreshUserProfile();
-      await router.push(returnTo);
-    } else {
-      // redirect user to user profile
-      // if you want to use userProfile with username redirect to /users/username
-      // await router.push(`/users/${loginResponseBody.user.id}`);
-      await props.refreshUserProfile();
-      await router.push(`/`);
+      text-transform: uppercase;
     }
   }
+`;
+
+const intro = css`
+  background-color: #bbbaf9;
+  height: 100vh;
+
+  .doYou {
+    margin-top: 30%;
+  }
+  // when smaller than 470
+  @media (max-width: 470px) {
+    .doYou {
+    }
+  }
+`;
+
+const carousel = css`
+  background-color: #fffb89;
+  height: 100vh;
+`;
+
+export default function Home(props: Props) {
+  // const [username, setUsername] = useState('');
+  // const [password, setPassword] = useState('');
+  // const [errors, setErrors] = useState<
+  //   {
+  //     message: string;
+  //   }[]
+  // >([]);
+  // const router = useRouter();
+
+  // async function loginHandler() {
+  //   const loginResponse = await fetch('/api/login', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       username: username,
+  //       password: password,
+  //     }),
+  //   });
+
+  // const loginResponseBody: LoginResponseBody = await loginResponse.json();
+
+  // if we have error show an error message
+  // if ('errors' in loginResponseBody) {
+  //   setErrors(loginResponseBody.errors);
+  //   return;
+  // }
+
+  // const returnTo = router.query.returnTo;
+
+  // if (
+  //   returnTo &&
+  //   !Array.isArray(returnTo) &&
+  //   // Security: Validate returnTo parameter against valid path
+  //   // (because this is untrusted user input)
+  //   /^\/[a-zA-Z0-9-?=/]*$/.test(returnTo)
+  // ) {
+  //   await props.refreshUserProfile();
+  //   await router.push(returnTo);
+  // } else {
+  // redirect user to user profile
+  // if you want to use userProfile with username redirect to /users/username
+  // await router.push(`/users/${loginResponseBody.user.id}`);
+  //     await props.refreshUserProfile();
+  //     await router.push(`/`);
+  //   }
+  // }
 
   return (
-    <div>
+    <>
       <Head>
         <title>do you fancy a cocktail?</title>
-        <meta name="description" content="a recommendation guide to cocktails" />
+        <meta
+          name="description"
+          content="a recommendation guide to cocktails"
+        />
       </Head>
-      <main>
-        do you
-        <h1>fancy a cocktail?</h1>
-      </main>
 
-      <Carousel collectionPreview={props.collectionPreview} />
-    </div>
+      <main css={titleSection}>
+        <div class="doYou">do you</div>
+        <h1>
+          fancy a<br />
+          cocktail?
+        </h1>
+      </main>
+      <div css={intro}></div>
+
+      <div css={carousel}>
+        <Carousel collectionPreview={props.collectionPreview} />
+      </div>
+    </>
   );
 }
 

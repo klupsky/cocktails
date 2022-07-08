@@ -1,29 +1,21 @@
 import { css } from '@emotion/react';
 import Link from 'next/link';
 
-const headerStyles = css`
-  padding: 8px 14px;
-  background: #e1e1e1;
-  border-radius: 4px;
-  display: flex;
-  justify-content: space-between;
-  display: flex;
-  gap: 5px;
-
-  > div > a + a {
-    margin-left: 10px;
-  }
-
-  > div {
-    margin-right: auto;
-    margin-left: 10px;
-  }
+const header = css`
+  background-color: transparent;
+  height: 30%;
+  width: 100%;
+  font-size: 10px;
 `;
 
 export default function Header(props) {
   return (
-    <header css={headerStyles}>
-      🥂🍷🍸🍾🍹
+    <header css={header}>
+      <input type="checkbox" id="overlay-input" />
+      <label for="overlay-input" id="overlay-button">
+        <span></span>
+      </label>
+
       <div>
         <Link href="/">Home</Link>
         <Link href="/recommendation">Recommendation</Link>

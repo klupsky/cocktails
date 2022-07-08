@@ -29,17 +29,28 @@ export default function App({ Component, pageProps }) {
         styles={css`
           html,
           body {
-            padding: 0;
-            font-family: roc-grotesk, sans-serif;
-            font-weight: 500;
+            font-family: 'Roc Grotesk';
             font-style: normal;
-            letter-spacing: 0.5px;
-            background: #fafafa;
-            font-size: 15pt;
+            font-weight: 400;
+            font-size: 30px;
+            line-height: 40px;
+            letter-spacing: 0.07em;
+            background: #ffffff;
+            width: 100%;
+            align-items: center;
+            a {
+              text-decoration: none;
+              color: #000000;
+              text-transform: uppercase;
+            }
+            li {
+              list-style-type: none;
+            }
           }
 
           * {
             box-sizing: border-box;
+            margin: 0;
           }
         `}
       />
