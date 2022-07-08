@@ -1,11 +1,11 @@
 const spirits = [
-  { id: 1, name: 'Gin' },
-  { id: 2, name: 'Bourbon & Rye' },
-  { id: 3, name: 'Scotch & Whiskey' },
-  { id: 4, name: 'Rum' },
-  { id: 5, name: 'Tequila & Mezcal' },
-  { id: 6, name: 'Herbal' },
-  { id: 7, name: 'Vodka' },
+  { id: 1, name: 'gin' },
+  { id: 2, name: 'bourbon & rye' },
+  { id: 3, name: 'scotch & whiskey' },
+  { id: 4, name: 'rum' },
+  { id: 5, name: 'tequila & mezcal' },
+  { id: 6, name: 'herbal' },
+  { id: 7, name: 'vodka' },
 ];
 
 exports.up = async (sql) => {
