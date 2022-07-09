@@ -98,6 +98,7 @@ const navigation = css`
     z-index: 2;
     visibility: hidden;
     position: fixed;
+
     &.active {
       visibility: visible;
     }
@@ -131,41 +132,56 @@ export default function Header(props) {
       <div css={navigation}>
         <input type="checkbox" id="overlay-input" />
         <label htmlFor="overlay-input" id="overlay-button">
-          <span />
+          <span></span>
         </label>
 
         <div id="overlay">
           <ul>
             <li>
-              <Link href="/">Home</Link>
+              <a href="/">
+                <span>Home</span>
+              </a>
             </li>
             <li>
-              <Link href="/recommendation">find a cocktail</Link>
+              <a href="/recommendation">
+                <span>find a cocktail</span>
+              </a>
             </li>
+
             <li>
-              <Link href="/recommendation">Your selection</Link>
-            </li>
-            <li>
-              <Link href="/collection">full collection</Link>{' '}
+              <a href="/collection">
+                <span>full collection</span>
+              </a>
             </li>
 
             {props.user && (
               <li>
-                <Link href={`/users/${props.user.id}`}>your selection</Link>
+                <a href={`/users/${props.user.id}`}>
+                  <span>your selection</span>
+                </a>
               </li>
             )}
+
             {props.user ? (
-              <a href="/logout">Logout</a>
+              <a href="/logout">
+                <span>Logout</span>
+              </a>
             ) : (
               <>
                 {/* <Link href="/register">Register</Link> */}
                 <li>
-                  {' '}
-                  <Link href="/login">Login</Link> or{' '}
-                  <Link href="/register">Register</Link>
+                  <a href="/login">
+                    <span>Login</span>
+                  </a>{' '}
+                  or
+                  <a href="/register">
+                    <span> Register</span>
+                  </a>
                 </li>
                 <li>
-                  <Link href="/imprint">Imprint</Link>
+                  <a href="/imprint">
+                    <span>Imprint</span>
+                  </a>
                 </li>
               </>
             )}
