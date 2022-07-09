@@ -11,9 +11,25 @@ import { getPreviewFromCollectionOfCocktails } from '../util/database';
 
 // import { errorStyles } from './register';
 
-// type Props = {
-//   refreshUserProfile: () => Promise<void>;
-// };
+type Props = {
+  // refreshUserProfile: () => Promise<void>;
+  collectionPreview: {
+    id: number;
+    name: string;
+    level: number;
+    levelid: number;
+    flavourid: number;
+    flavour: string;
+    spirit: string;
+    spiritid: number;
+    description: string;
+    glass: string;
+    method: string;
+    garnish: string;
+    category: string;
+    categoryid: number;
+  };
+};
 
 const titleSection = css`
   height: 100vh;
@@ -30,16 +46,18 @@ const titleSection = css`
     text-transform: uppercase;
   }
   // when smaller than 470
-  @media (max-width: 470px) {
+  @media (max-width: 800px) {
+    height: 100vh;
+    width: 100vw;
+
     .doYou {
       margin-top: 28%;
+      font-size: 7vw;
     }
     h1 {
       margin-top: 10%;
-      font-size: 1.9rem;
-      line-height: 1.7rem;
-      font-weight: 800;
-
+      font-size: 15vw;
+      line-height: 90%;
       text-transform: uppercase;
     }
   }
@@ -125,13 +143,13 @@ export default function Home(props: Props) {
       </Head>
 
       <main css={titleSection}>
-        <div class="doYou">do you</div>
+        <div className="doYou">do you</div>
         <h1>
           fancy a<br />
           cocktail?
         </h1>
       </main>
-      <div css={intro}></div>
+      <div css={intro}>hey</div>
 
       <div css={carousel}>
         <Carousel collectionPreview={props.collectionPreview} />
@@ -142,7 +160,6 @@ export default function Home(props: Props) {
 
 export async function getServerSideProps() {
   const collectionPreview = await getPreviewFromCollectionOfCocktails();
-  // console.log(collectionCocktail);
   return {
     props: {
       collectionPreview,

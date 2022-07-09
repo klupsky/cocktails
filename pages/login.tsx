@@ -67,7 +67,7 @@ export default function Login(props: Props) {
 
       <main>
         <h1>Login</h1>
-        <label for="username">
+        <label htmlFor="username">
           username:{' '}
           <input
             type="text"
@@ -78,7 +78,7 @@ export default function Login(props: Props) {
             }}
           />
         </label>
-        <label for="password">
+        <label htmlFor="password">
           password:{' '}
           <input
             id="password"
