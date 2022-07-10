@@ -36,46 +36,32 @@ const titleSection = css`
   width: 100vw;
   text-align: center;
   .doYou {
-    margin-top: 8%;
+    text-transform: uppercase;
+    margin-top: 5%;
   }
   h1 {
-    margin-top: 7%;
-    /* font-size: 4.3rem;
-    line-height: 3.5rem;
-    font-weight: 800;
+    font-family: 'Messapia';
+    text-transform: uppercase;
+    font-size: 5rem;
+    line-height: 90%;
+    letter-spacing: 0em;
+    margin-top: 8%;
 
-    text-transform: uppercase; */
+    // when smaller than 1000
+    @media (max-width: 1000px) {
+      font-size: 3rem;
+    }
+
+    // when smaller than 600
+    @media (max-width: 600px) {
+      font-size: 1.6rem;
+    }
   }
-  // when smaller than 470
-  /* @media (max-width: 800px) { */
-  /* height: 100vh;
-    width: 100vw; */
-
-  /* .doYou { */
-  /* margin-top: 28%;
-      font-size: 7vw; */
-  /* }
-    h1 { */
-  /* margin-top: 10%;
-      font-size: 15vw;
-      line-height: 90%;
-      text-transform: uppercase; */
-  /* } */
-  /* } */
 `;
 
 const intro = css`
   background-color: #bbbaf9;
   height: 100vh;
-
-  .doYou {
-    margin-top: 30%;
-  }
-  // when smaller than 470
-  @media (max-width: 470px) {
-    .doYou {
-    }
-  }
 `;
 
 const carousel = css`

@@ -1,3 +1,4 @@
+import './index.css';
 import { css, Global } from '@emotion/react';
 import { useCallback, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
@@ -29,11 +30,9 @@ export default function App({ Component, pageProps }) {
         styles={css`
           html,
           body {
-            font-family: 'Syne';
-            font-style: normal;
-            font-weight: 500;
-            font-size: 30px;
-            line-height: 40px;
+            font-family: 'Apfel';
+            font-size: 25px;
+            line-height: 35px;
             letter-spacing: 0.07em;
             background: #ffffff;
             width: 100%;

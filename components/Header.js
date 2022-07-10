@@ -1,14 +1,29 @@
 import { css } from '@emotion/react';
-import Link from 'next/link';
 
 const header = css`
   background: transparent;
   margin: 0;
-
   width: 100vw;
+
+  font-family: 'Messapia';
+  text-transform: uppercase;
+  font-size: 1rem;
+  line-height: 90%;
+
   height: 4.8em;
-  animation: bugfix infinite 1s;
-  -webkit-animation: bugfix infinite 1s;
+`;
+
+const logo = css`
+  margin-top: 70px;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 90%;
+
+  // when smaller than 600
+  @media (max-width: 600px) {
+    font-size: 0.7rem;
+    line-height: 90%;
+  }
 `;
 
 const navigation = css`
@@ -41,8 +56,8 @@ const navigation = css`
     user-select: none;
     span {
       position: fixed;
-      top: 1.8rem;
-      margin: 24%;
+      top: 40%;
+      margin: 19%;
       height: 2px;
       width: 30px;
       background-color: black;
@@ -102,23 +117,33 @@ const navigation = css`
     &.active {
       visibility: visible;
     }
+
     ul {
-      display: flex;
-      justify-content: center;
+      margin-top: 45%;
       align-items: center;
-      flex-direction: column;
       text-align: center;
       height: 100vh;
-      padding-left: 0;
+      padding: 0;
       list-style-type: none;
       li {
-        padding: 1em;
+        font-family: 'Messapia';
+        text-transform: uppercase;
+        font-size: 2.8rem;
+        line-height: 90%;
+        letter-spacing: 0em;
+        margin-top: 1%;
+        // when smaller than 1000
+        @media (max-width: 1000px) {
+          font-size: 1.5rem;
+        }
+
+        // when smaller than 600
+        @media (max-width: 600px) {
+          font-size: 1rem;
+        }
+
         a {
-          color: white;
-          text-decoration: none;
-          font-size: 1.5em;
           &:hover {
-            color: #e75c3c;
           }
         }
       }
@@ -136,56 +161,103 @@ export default function Header(props) {
         </label>
 
         <div id="overlay">
-          <ul>
-            <li>
-              <a href="/">
-                <span>Home</span>
-              </a>
-            </li>
-            <li>
-              <a href="/recommendation">
-                <span>find a cocktail</span>
-              </a>
-            </li>
+          <div css={logo}>
+            <a href="/">
+              <span>
+                FANCY A <br />
+                COCKTAIL?
+              </span>
+            </a>
+          </div>
 
-            <li>
-              <a href="/collection">
-                <span>full collection</span>
-              </a>
-            </li>
-
-            {props.user && (
+          <div>
+            <ul>
               <li>
-                <a href={`/users/${props.user.id}`}>
-                  <span>your selection</span>
+                <a href="/recommendation">
+                  <span>find a cocktail</span>
                 </a>
               </li>
-            )}
 
-            {props.user ? (
-              <a href="/logout">
-                <span>Logout</span>
-              </a>
-            ) : (
-              <>
-                {/* <Link href="/register">Register</Link> */}
+              <li>
+                <a href="/collection">
+                  <span>full collection</span>
+                </a>
+              </li>
+
+              {props.user && (
                 <li>
-                  <a href="/login">
-                    <span>Login</span>
-                  </a>{' '}
-                  or
-                  <a href="/register">
-                    <span> Register</span>
+                  <a href={`/users/${props.user.id}`}>
+                    <span>your selection</span>
                   </a>
                 </li>
-                <li>
+              )}
+
+              {props.user ? (
+                <a href="/logout">
+                  <li>
+                    <span>Logout</span>
+                  </li>
+                </a>
+              ) : (
+                <div
+                  css={css`
+                    font-family: 'Apfel';
+                    font-size: 25px;
+                    line-height: 35px;
+                  `}
+                >
+                  {/* <Link href="/register">Register</Link> */}
+
+                  <li>
+                    <a href="/login">
+                      <span
+                        css={css`
+                          font-family: 'Apfel';
+                          font-size: 1rem;
+                          letter-spacing: 0.07em;
+                        `}
+                      >
+                        Login
+                      </span>
+                    </a>
+                    <span
+                      css={css`
+                        font-family: 'Apfel';
+                        font-size: 1rem;
+                        letter-spacing: 0.07em;
+                      `}
+                    >
+                      /
+                    </span>
+                    <a href="/register">
+                      <span
+                        css={css`
+                          font-family: 'Apfel';
+                          font-size: 1rem;
+                          letter-spacing: 0.07em;
+                        `}
+                      >
+                        Register
+                      </span>
+                    </a>
+                  </li>
                   <a href="/imprint">
-                    <span>Imprint</span>
+                    <li>
+                      <span
+                        css={css`
+                          font-family: 'Apfel';
+                          font-size: 1rem;
+                          letter-spacing: 0.07em;
+                        `}
+                      >
+                        Imprint
+                      </span>
+                    </li>
                   </a>
-                </li>
-              </>
-            )}
-          </ul>
+                </div>
+              )}
+            </ul>
+          </div>
         </div>
       </div>
     </header>
