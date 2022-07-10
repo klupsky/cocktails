@@ -70,8 +70,6 @@ export default function Login(props: Props) {
         <label htmlFor="username">
           username:{' '}
           <input
-            type="text"
-            id="username"
             value={username}
             onChange={(event) => {
               setUsername(event.currentTarget.value);
@@ -81,7 +79,6 @@ export default function Login(props: Props) {
         <label htmlFor="password">
           password:{' '}
           <input
-            id="password"
             type="password"
             value={password}
             onChange={(event) => {

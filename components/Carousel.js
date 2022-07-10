@@ -6,7 +6,7 @@ export default function Carousel(props) {
       {props.collectionPreview.map((preview) => {
         return (
           <div key={`cocktailName-${preview.id}`}>
-            <Link href={`../collection/${preview.id}`}>{preview.name}</Link>
+            <Link href={`/../collection/${preview.id}`}>{preview.name}</Link>
             {preview.id}
           </div>
         );

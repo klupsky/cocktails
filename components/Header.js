@@ -30,7 +30,7 @@ const navigation = css`
   }
 
   #overlay-button {
-    position: absolute;
+    position: fixed;
     right: 0em;
     top: 0em;
     height: 4.8em;
@@ -40,7 +40,7 @@ const navigation = css`
     cursor: pointer;
     user-select: none;
     span {
-      position: absolute;
+      position: fixed;
       top: 1.8rem;
       margin: 24%;
       height: 2px;

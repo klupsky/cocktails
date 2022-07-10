@@ -29,9 +29,9 @@ export default function App({ Component, pageProps }) {
         styles={css`
           html,
           body {
-            font-family: 'Roc Grotesk';
+            font-family: 'Syne';
             font-style: normal;
-            font-weight: 400;
+            font-weight: 500;
             font-size: 30px;
             line-height: 40px;
             letter-spacing: 0.07em;

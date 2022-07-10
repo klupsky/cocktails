@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Link from 'next/link';
+// import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
@@ -58,9 +58,8 @@ export default function Recommendation(props) {
             {props.flavours.map((flavour) => {
               return (
                 <span key={flavour.id}>
-                  <label for={flavour.name}>
+                  <label htmlFor={flavour.name}>
                     <input
-                      id={flavour.name}
                       type="radio"
                       name="flavour-option"
                       value={flavour.id}
@@ -82,9 +81,8 @@ export default function Recommendation(props) {
             {props.spirits.map((spirit) => {
               return (
                 <span key={spirit.id}>
-                  <label for={spirit.name}>
+                  <label htmlFor={spirit.name}>
                     <input
-                      id={spirit.name}
                       type="radio"
                       name="spirit-option"
                       value={spirit.id}
@@ -105,13 +103,8 @@ export default function Recommendation(props) {
             {props.levels.map((level) => {
               return (
                 <span key={level.id}>
-                  <label for={level.level}>
-                    <input
-                      type="radio"
-                      id={level.level}
-                      name="level-option"
-                      value={level.id}
-                    />
+                  <label htmlFor={level.level}>
+                    <input type="radio" name="level-option" value={level.id} />
                     {level.level}
                   </label>
                 </span>

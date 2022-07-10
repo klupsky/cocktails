@@ -4,7 +4,12 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <link rel="stylesheet" href="https://use.typekit.net/ikl0uvo.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&display=swap"
+          rel="stylesheet"
+        />
 
         <link rel="icon" href="/favicon.ico" />
       </Head>

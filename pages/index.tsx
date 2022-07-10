@@ -33,34 +33,35 @@ type Props = {
 
 const titleSection = css`
   height: 100vh;
+  width: 100vw;
   text-align: center;
   .doYou {
     margin-top: 8%;
   }
   h1 {
     margin-top: 7%;
-    font-size: 4.3rem;
+    /* font-size: 4.3rem;
     line-height: 3.5rem;
     font-weight: 800;
 
-    text-transform: uppercase;
+    text-transform: uppercase; */
   }
   // when smaller than 470
-  @media (max-width: 800px) {
-    height: 100vh;
-    width: 100vw;
+  /* @media (max-width: 800px) { */
+  /* height: 100vh;
+    width: 100vw; */
 
-    .doYou {
-      margin-top: 28%;
-      font-size: 7vw;
-    }
-    h1 {
-      margin-top: 10%;
+  /* .doYou { */
+  /* margin-top: 28%;
+      font-size: 7vw; */
+  /* }
+    h1 { */
+  /* margin-top: 10%;
       font-size: 15vw;
       line-height: 90%;
-      text-transform: uppercase;
-    }
-  }
+      text-transform: uppercase; */
+  /* } */
+  /* } */
 `;
 
 const intro = css`

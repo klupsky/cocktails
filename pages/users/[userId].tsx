@@ -13,19 +13,19 @@ type Props = {
   user: User;
   favouriteCocktails: {
     id: number;
-    userId: number | undefined;
-    cocktailId: number | undefined;
-    username: string | undefined;
-    name: string | undefined;
+    userId: number;
+    cocktailId: number;
+    username: string;
+    name: string;
   };
 };
 
 type Favourite = {
-  id: number | undefined;
-  name: string | undefined;
-  userId: number | undefined;
-  cocktailId: number | undefined;
-  username: string | undefined;
+  id: number;
+  name: string;
+  userId: number;
+  cocktailId: number;
+  username: string;
 };
 
 export default function UserDetail(props: Props) {
@@ -42,20 +42,20 @@ export default function UserDetail(props: Props) {
 
   // get the favourites
 
-  useEffect(() => {
-    async function getUserFavourites() {
-      const response = await fetch(`../api/favourites/${props.user.id}`);
-      const favourites = await response.json();
-      setFavouritesLists(favourites);
-    }
-    getUserFavourites().catch(() => {
-      console.log('favourites request fails');
-    });
-  }, [props]);
+  // useEffect(() => {
+  //   async function getUserFavourites() {
+  //     const response = await fetch(`../api/favourites/${props.user.id}`);
+  //     const favourites = await response.json();
+  //     setFavouritesLists(favourites);
+  //   }
+  //   getUserFavourites().catch(() => {
+  //     console.log('favourites request fails');
+  //   });
+  // }, [props]);
 
   // delete the favourite
 
-  async function deleteFavouriteHandler(favouriteUserId) {
+  async function deleteFavouriteHandler(favouriteUserId: any) {
     const response = await fetch(`../api/favourites/${favouriteUserId}`, {
       method: 'DELETE',
       headers: {
@@ -110,7 +110,7 @@ export default function UserDetail(props: Props) {
         {favouritesLists.map((favourite: Favourite) => {
           return (
             <div key={`cocktailName-${favourite.id}`}>
-              <Link href={`../collection/${favourite.cocktailId}`}>
+              <Link href={`/../collection/${favourite.cocktailId}`}>
                 {favourite.name}
               </Link>{' '}
               {favourite.userId} {favourite.cocktailId}

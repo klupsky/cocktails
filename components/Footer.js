@@ -3,13 +3,14 @@ import Marquee from 'react-fast-marquee';
 
 const footerStyles = css``;
 const cheers = css`
-  margin-top: 2.2rem;
-  margin-bottom: 2rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
   font-style: normal;
   font-weight: 800;
-  color: transparent;
-  font-size: 4.6rem;
-  -webkit-text-stroke: 2px black;
+  font-size: 140px;
+  line-height: 130px;
+  color: black;
+  /* -webkit-text-stroke: 2px black; */
 `;
 
 export default function Footer() {
