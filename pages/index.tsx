@@ -15,7 +15,7 @@ import { getPreviewFromCollectionOfCocktails } from '../util/database';
 // CSS
 
 const titleSection = css`
-  height: 85vh;
+  height: 80vh;
   width: 100vw;
   overflow: hidden;
 

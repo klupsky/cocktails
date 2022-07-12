@@ -217,10 +217,10 @@ export default function Register(props: Props) {
             <div css={loginBox}>
               <div css={form}>
                 {' '}
-                <div class="col-25">
+                <div className="col-25">
                   <label htmlFor="username">username:</label>
                 </div>
-                <div class="col-75">
+                <div className="col-75">
                   <input
                     id="username"
                     value={username}
@@ -229,10 +229,10 @@ export default function Register(props: Props) {
                     }}
                   />
                 </div>
-                <div class="col-25">
+                <div className="col-25">
                   <label htmlFor="email">email:</label>
                 </div>
-                <div class="col-75">
+                <div className="col-75">
                   <input
                     id="email"
                     type="email"
@@ -242,10 +242,10 @@ export default function Register(props: Props) {
                     }}
                   />
                 </div>
-                <div class="col-25">
+                <div className="col-25">
                   <label htmlFor="password">password:</label>
                 </div>{' '}
-                <div class="col-75">
+                <div className="col-75">
                   <input
                     id="password"
                     type="password"

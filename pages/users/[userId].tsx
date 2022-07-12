@@ -2,14 +2,14 @@ import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   getUserById,
   getUserByValidSessionToken,
   getUserFavourites,
   User,
 } from '../../util/database';
-import { logo } from './login';
+import { logo } from '../login';
 
 // TYPES
 

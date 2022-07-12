@@ -8,8 +8,70 @@ import {
   getRecommendationBasedOnUrlAndDatabaseBackup,
   getUserByValidSessionToken,
 } from '../../util/database';
+import { logo, section, text } from '../login';
 import { errorStyles } from '../register';
-import { logo } from './login';
+
+export const smallText = css`
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 3%;
+  margin-bottom: 10%;
+  font-size: 0.6rem;
+  line-height: 100%;
+`;
+
+const wrapper = css`
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 15%;
+  margin-top: 7%;
+
+  // when smaller than 600
+  @media (max-width: 600px) {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 10%;
+    margin-top: 13%;
+  }
+`;
+
+const title = css`
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  font-family: 'Messapia';
+  letter-spacing: 0px;
+  line-height: 100%;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 3rem;
+
+  // when smaller than 500
+  @media (max-width: 500px) {
+    margin-top: 0rem;
+    font-size: 0.6rem;
+  }
+`;
+
+const drinkGrid = css`
+  display: grid;
+  grid-template-columns: 50% 25% 25%;
+  text-align: left;
+  gap: 0;
+  border-bottom: 2px dotted #000;
+  border-top: 2px dotted #000;
+
+  .item1 {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+  }
+  .item2 {
+    grid-column: 2 / 2;
+  }
+  .item3 {
+    grid-column: 3 / 3;
+  }
+`;
 
 export default function RecommendedCocktail(props) {
   const [errors, setErrors] = useState([]);
@@ -78,54 +140,66 @@ export default function RecommendedCocktail(props) {
               </span>
             </a>
           </div>
-          <h1>
-            sorry {props.user.username}, we can't recommend any drink that
-            matches all of your criteria. instead, maybe try a{' '}
-          </h1>
-          {props.urlInfoQueryBackup.cocktailId}
-          {props.urlInfoQueryBackup.name}
-          {props.urlInfoQueryBackup.level}
-          {props.urlInfoQueryBackup.flavour}
-          {props.urlInfoQueryBackup.spirit}
-          {props.urlInfoQueryBackup.description}
-          {props.urlInfoQueryBackup.glass}
-          {props.urlInfoQueryBackup.method}
-          {props.urlInfoQueryBackup.garnish}
-          {props.urlInfoQueryBackup.category}
-          {!props.favouritesCheckBackup ? (
-            <button
-              id="add to favourites"
-              disabled={disable}
-              onClick={() => {
-                setDisable(true);
-                addToFavouritesHandlerBackup().catch(() => {
-                  console.log('adding favourite failed');
-                });
-              }}
-            >
-              ADD TO FAVOURITES
-            </button>
-          ) : (
-            <button id="add to favourites" disabled>
-              IS ALREADY FAVOURITE
-            </button>
-          )}
-          {errors.map((error) => (
-            <div css={errorStyles} key={`error-${error.message}`}>
-              {error.message}
+          <div css={section}>
+            <div css={wrapper}>
+              <div css={text}>
+                sorry {props.user.username}, there is no cocktail matching all
+                of your criteria!
+              </div>
+              <div css={smallText}>instead, maybe try a</div>
+              <div css={title}>{props.urlInfoQueryBackup.name}</div>
+
+              {/* {props.urlInfoQueryBackup.cocktailId} */}
+
+              <div css={drinkGrid}>
+                <div className="item1">
+                  {props.urlInfoQueryBackup.cocktailId}
+                </div>
+                <div className="item2">{props.urlInfoQueryBackup.level}</div>
+                <div className="item3">{props.urlInfoQueryBackup.spirit}</div>
+                {/* {props.urlInfoQueryBackup.flavour}
+                {props.urlInfoQueryBackup.description}
+                {props.urlInfoQueryBackup.glass}
+                {props.urlInfoQueryBackup.method}
+                {props.urlInfoQueryBackup.garnish}
+                {props.urlInfoQueryBackup.category} */}
+              </div>
+              {!props.favouritesCheckBackup ? (
+                <button
+                  id="add to favourites"
+                  disabled={disable}
+                  onClick={() => {
+                    setDisable(true);
+                    addToFavouritesHandlerBackup().catch(() => {
+                      console.log('adding favourite failed');
+                    });
+                  }}
+                >
+                  ADD TO FAVOURITES
+                </button>
+              ) : (
+                <button id="add to favourites" disabled>
+                  IS ALREADY FAVOURITE
+                </button>
+              )}
+              {errors.map((error) => (
+                <div css={errorStyles} key={`error-${error.message}`}>
+                  {error.message}
+                </div>
+              ))}
+              <br />
+              <button
+                data-test-id="generate-recommendation-2"
+                type="button"
+                onClick={refreshPage}
+              >
+                GIVE ME ANOTHER!
+              </button>
+              <Link href="/recommendation">
+                <button>GO BACK</button>
+              </Link>
             </div>
-          ))}
-          <br />
-          <button
-            data-test-id="generate-recommendation-2"
-            type="button"
-            onClick={refreshPage}
-          >
-            GIVE ME ANOTHER!{' '}
-          </button>
-          <Link href="/recommendation">
-            <button>GO BACK</button>
-          </Link>
+          </div>
         </main>
       </div>
     );
@@ -140,58 +214,61 @@ export default function RecommendedCocktail(props) {
       </Head>
 
       <main>
-        <h1>{props.user.username}, we recommend a</h1>
-        <br />
-        <br />
-        {props.urlInfoQuery.cocktailId}
-        {props.urlInfoQuery.name}
-        {props.urlInfoQuery.level}
-        {props.urlInfoQuery.flavour}
-        {props.urlInfoQuery.spirit}
-        {props.urlInfoQuery.description}
-        {props.urlInfoQuery.glass}
-        {props.urlInfoQuery.method}
-        {props.urlInfoQuery.garnish}
-        {props.urlInfoQuery.category}
-        {!props.favouritesCheck ? (
-          <button
-            id="add to favourites"
-            disabled={disable}
-            onClick={() => {
-              setDisable(true);
-              addToFavouritesHandler().catch(() => {
-                console.log('adding favourite failed');
-              });
-            }}
-          >
-            ADD TO FAVOURITES
-          </button>
-        ) : (
-          <button id="add to favourites" disabled>
-            IS ALREADY FAVOURITE
-          </button>
-        )}
+        <div css={section}>
+          <div css={wrapper}>
+            <div css={text}>{props.user.username}, you should order a</div>
 
-        {errors.map((error) => (
-          <div css={errorStyles} key={`error-${error.message}`}>
-            {error.message}
+            {props.urlInfoQuery.cocktailId}
+            {props.urlInfoQuery.name}
+            {props.urlInfoQuery.level}
+            {props.urlInfoQuery.flavour}
+            {props.urlInfoQuery.spirit}
+            {props.urlInfoQuery.description}
+            {props.urlInfoQuery.glass}
+            {props.urlInfoQuery.method}
+            {props.urlInfoQuery.garnish}
+            {props.urlInfoQuery.category}
+            {!props.favouritesCheck ? (
+              <button
+                id="add to favourites"
+                disabled={disable}
+                onClick={() => {
+                  setDisable(true);
+                  addToFavouritesHandler().catch(() => {
+                    console.log('adding favourite failed');
+                  });
+                }}
+              >
+                ADD TO FAVOURITES
+              </button>
+            ) : (
+              <button id="add to favourites" disabled>
+                IS ALREADY FAVOURITE
+              </button>
+            )}
+
+            {errors.map((error) => (
+              <div css={errorStyles} key={`error-${error.message}`}>
+                {error.message}
+              </div>
+            ))}
+            <br />
+            <button
+              data-test-id="generate-recommendation-2"
+              type="button"
+              onClick={() => {
+                refreshPage().catch(() => {
+                  console.log('reload failed');
+                });
+              }}
+            >
+              GIVE ME ANOTHER!{' '}
+            </button>
+            <Link href="/recommendation">
+              <button>GO BACK</button>
+            </Link>
           </div>
-        ))}
-        <br />
-        <button
-          data-test-id="generate-recommendation-2"
-          type="button"
-          onClick={() => {
-            refreshPage().catch(() => {
-              console.log('reload failed');
-            });
-          }}
-        >
-          GIVE ME ANOTHER!{' '}
-        </button>
-        <Link href="/recommendation">
-          <button>GO BACK</button>
-        </Link>
+        </div>
       </main>
     </div>
   );

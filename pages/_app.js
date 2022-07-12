@@ -4,8 +4,6 @@ import { useCallback, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 
 export default function App({ Component, pageProps }) {
-  const isBackgroundRed = true;
-
   // set the user cookie in order to pass it to the components / prop drill
   const [user, setUser] = useState();
 

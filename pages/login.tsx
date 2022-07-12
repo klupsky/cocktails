@@ -25,7 +25,7 @@ export const logo = css`
   }
 `;
 
-const loginSection = css`
+export const section = css`
   height: auto;
   width: 100vw;
   overflow: hidden;
@@ -36,11 +36,11 @@ const loginSection = css`
   margin: 0;
 `;
 
-const text = css`
+export const text = css`
   text-align: center;
 `;
 
-const smallText = css`
+export const smallText = css`
   text-align: center;
   text-transform: uppercase;
   margin-top: 3%;
@@ -49,7 +49,7 @@ const smallText = css`
   line-height: 100%;
 `;
 
-const wrapper = css`
+export const wrapper = css`
   margin-left: 25%;
   margin-right: 25%;
   margin-top: 7%;
@@ -230,16 +230,16 @@ export default function Login(props: Props) {
           </a>
         </div>
 
-        <div css={loginSection}>
+        <div css={section}>
           <div css={wrapper}>
             <div css={text}>please register in order to get full access!</div>
             <div css={smallText}>you are going to love it!</div>
             <div css={loginBox}>
               <div css={form}>
-                <div class="col-25">
+                <div className="col-25">
                   <label htmlFor="username">username:</label>
                 </div>
-                <div class="col-75">
+                <div className="col-75">
                   <input
                     id="username"
                     value={username}
@@ -248,10 +248,10 @@ export default function Login(props: Props) {
                     }}
                   />
                 </div>
-                <div class="col-25">
+                <div className="col-25">
                   <label htmlFor="password">password:</label>
                 </div>
-                <div class="col-75">
+                <div className="col-75">
                   <input
                     id="password"
                     type="password"
@@ -269,7 +269,7 @@ export default function Login(props: Props) {
                     Login
                   </button>
                 </div>
-                <div class="register">
+                <div className="register">
                   {' '}
                   <Link href="/register">or register</Link>
                 </div>

@@ -48,9 +48,10 @@ const smallText = css`
   font-size: 0.6rem;
   line-height: 100%;
   color: white;
-  // when smaller than 600
-  @media (max-width: 600px) {
-    margin-top: 60%;
+
+  // when smaller than 1000
+  @media (max-width: 1000px) {
+    margin-top: 200px;
     margin-bottom: 20%;
   }
 `;
@@ -63,9 +64,10 @@ const smallTextTwo = css`
   font-size: 0.6rem;
   line-height: 100%;
   color: white;
+  line-height: 1rem;
+
   // when smaller than 600
   @media (max-width: 600px) {
-    line-height: 1rem;
     margin-top: 40%;
     margin-bottom: 13%;
   }
@@ -112,17 +114,26 @@ export default function Imprint() {
             <div css={smallText}>imprint</div>
 
             <div css={text}>
-              created by katharina chalupsky <br />
+              created by <br />
+              katharina chalupsky <br />
               <br />© 2022
             </div>
 
             <div css={smallTextTwo}>
               thank you{' '}
-              <a href="http://www.upleveled.io" target="_blank">
+              <a
+                href="http://www.upleveled.io"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 upleveled
               </a>{' '}
               and{' '}
-              <a href="http://www.mirandabar.com/" target="_blank">
+              <a
+                href="http://www.mirandabar.com/"
+                target="_blank"
+                rel="noreferrer noopener"
+              >
                 miranda bar
               </a>{' '}
               for your ♥ and expertise!
