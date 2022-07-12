@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import {
@@ -44,13 +45,74 @@ const title = css`
   line-height: 100%;
   font-style: normal;
   font-weight: 700;
-  font-size: 3rem;
+  font-size: 2.8rem;
 
   // when smaller than 500
   @media (max-width: 500px) {
     margin-top: 0rem;
-    font-size: 0.6rem;
+    font-size: 2rem;
   }
+`;
+
+const headline = css`
+  text-transform: uppercase;
+  line-height: 100%;
+  margin-top: 0.5rem;
+  font-size: 0.4rem;
+  margin-left: 0.5rem;
+`;
+const word = css`
+  line-height: 100%;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+`;
+
+const description = css`
+  line-height: 100%;
+  margin-top: 3rem;
+  margin-bottom: 0.5rem;
+  margin-left: 0.5rem;
+`;
+
+const buttonBox = css`
+  margin-top: 0.5rem;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0.8rem;
+
+  button {
+    color: black;
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+    margin-top: 0.4rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Messapia';
+    letter-spacing: 0px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+  }
+`;
+
+const imageStyleSmall = css`
+  position: relative;
+  top: -0.4rem;
+  left: -0.5rem;
+
+  text-align: center;
+  margin: 0;
+`;
+
+const imageStyle = css`
+  text-align: center;
+  align-items: center;
+  margin-top: 10%;
+  margin-bottom: 5%;
 `;
 
 const drinkGrid = css`
@@ -63,13 +125,54 @@ const drinkGrid = css`
 
   .item1 {
     grid-column: 1 / 2;
-    grid-row: 1 / 3;
+    grid-row: 1 / 5;
   }
   .item2 {
     grid-column: 2 / 2;
+    border-left: 2px dotted #000;
   }
   .item3 {
     grid-column: 3 / 3;
+    border-left: 2px dotted #000;
+  }
+  .item4 {
+    grid-column: 2 / 2;
+    grid-row: 2 / 4;
+    border-left: 2px dotted #000;
+    border-top: 2px dotted #000;
+    border-bottom: 2px dotted #000;
+  }
+  .item5 {
+    grid-column: 3 / 3;
+    grid-row: 2;
+    border-top: 2px dotted #000;
+    border-bottom: 2px dotted #000;
+    border-left: 2px dotted #000;
+  }
+
+  .item9 {
+    grid-column: 3 / 3;
+    grid-row: 3;
+    border-bottom: 2px dotted #000;
+    border-left: 2px dotted #000;
+  }
+
+  .item6 {
+    grid-column: 2 / 4;
+    grid-row: 4;
+    border-left: 2px dotted #000;
+  }
+
+  .item7 {
+    grid-column: 1 / 2;
+    grid-row: 5;
+    border-top: 2px dotted #000;
+  }
+  .item8 {
+    grid-column: 2 / 4;
+    grid-row: 5;
+    border-top: 2px dotted #000;
+    border-left: 2px dotted #000;
   }
 `;
 
@@ -148,21 +251,78 @@ export default function RecommendedCocktail(props) {
               </div>
               <div css={smallText}>instead, maybe try a</div>
               <div css={title}>{props.urlInfoQueryBackup.name}</div>
-
               {/* {props.urlInfoQueryBackup.cocktailId} */}
-
-              <div css={drinkGrid}>
-                <div className="item1">
-                  {props.urlInfoQueryBackup.cocktailId}
-                </div>
-                <div className="item2">{props.urlInfoQueryBackup.level}</div>
-                <div className="item3">{props.urlInfoQueryBackup.spirit}</div>
-                {/* {props.urlInfoQueryBackup.flavour}
+              {/* {props.urlInfoQueryBackup.level} */}
+              {/* {props.urlInfoQueryBackup.flavour}
                 {props.urlInfoQueryBackup.description}
                 {props.urlInfoQueryBackup.glass}
                 {props.urlInfoQueryBackup.method}
                 {props.urlInfoQueryBackup.garnish}
                 {props.urlInfoQueryBackup.category} */}
+              <div css={drinkGrid}>
+                <div className="item1">
+                  <div css={imageStyle}>
+                    <Image
+                      src={`/../../images/cocktail/${props.urlInfoQueryBackup.cocktailId}.svg`}
+                      alt="{props.urlInfoQueryBackup.glass}"
+                      width="400px"
+                      height="400px"
+                    />
+                  </div>
+                </div>
+                <div className="item2">
+                  <div css={headline}>Category</div>
+                  <div css={word}>{props.urlInfoQueryBackup.category}</div>
+                </div>
+                <div className="item3">
+                  <div css={headline}>Spirit</div>
+                  <div css={word}>{props.urlInfoQueryBackup.spirit}</div>
+                </div>
+                <div className="item4">
+                  <div css={headline}>Glass</div>
+                  <div css={word}>{props.urlInfoQueryBackup.glass}</div>
+                  <div css={imageStyleSmall}>
+                    <Image
+                      src={`/../../images/glass/${props.urlInfoQueryBackup.glass}.svg`}
+                      alt="{props.urlInfoQueryBackup.glass}"
+                      width="150px"
+                      height="150px"
+                    />
+                  </div>
+                </div>
+                <div className="item5">
+                  <div css={headline}>Garnish</div>
+                  <div css={word}>{props.urlInfoQueryBackup.garnish}</div>
+                </div>
+                <div className="item9">
+                  <div css={headline}>Method</div>
+                  <div css={word}>{props.urlInfoQueryBackup.method}</div>
+                </div>
+                <div className="item6">
+                  <div css={description}>
+                    {props.urlInfoQueryBackup.description} blah blah blah blah
+                    blah blah blah blah blah blah blah blah blah
+                  </div>
+                </div>
+
+                <div className="item7">
+                  <div css={buttonBox}>
+                    <button
+                      data-test-id="generate-recommendation-2"
+                      type="button"
+                      onClick={refreshPage}
+                    >
+                      ANOTHER ONE!
+                    </button>
+                  </div>
+                </div>
+                <div className="item8">
+                  <div css={buttonBox}>
+                    <Link href="/recommendation">
+                      <button>GO BACK!</button>
+                    </Link>
+                  </div>
+                </div>
               </div>
               {!props.favouritesCheckBackup ? (
                 <button
@@ -181,23 +341,7 @@ export default function RecommendedCocktail(props) {
                 <button id="add to favourites" disabled>
                   IS ALREADY FAVOURITE
                 </button>
-              )}
-              {errors.map((error) => (
-                <div css={errorStyles} key={`error-${error.message}`}>
-                  {error.message}
-                </div>
-              ))}
-              <br />
-              <button
-                data-test-id="generate-recommendation-2"
-                type="button"
-                onClick={refreshPage}
-              >
-                GIVE ME ANOTHER!
-              </button>
-              <Link href="/recommendation">
-                <button>GO BACK</button>
-              </Link>
+              )}{' '}
             </div>
           </div>
         </main>
