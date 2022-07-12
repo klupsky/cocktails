@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -8,6 +9,9 @@ import {
   getUserFavourites,
   User,
 } from '../../util/database';
+import { logo } from './login';
+
+// TYPES
 
 type Props = {
   user: User;
@@ -99,6 +103,14 @@ export default function UserDetail(props: Props) {
       </Head>
 
       <main>
+        <div css={logo}>
+          <a href="/">
+            <span>
+              FANCY A <br />
+              COCKTAIL?
+            </span>
+          </a>
+        </div>
         <h1>
           User #{props.user.id} (username: {props.user.username})
         </h1>

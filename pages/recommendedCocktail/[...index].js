@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -8,6 +9,7 @@ import {
   getUserByValidSessionToken,
 } from '../../util/database';
 import { errorStyles } from '../register';
+import { logo } from './login';
 
 export default function RecommendedCocktail(props) {
   const [errors, setErrors] = useState([]);
@@ -68,6 +70,14 @@ export default function RecommendedCocktail(props) {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main>
+          <div css={logo}>
+            <a href="/">
+              <span>
+                FANCY A <br />
+                COCKTAIL?
+              </span>
+            </a>
+          </div>
           <h1>
             sorry {props.user.username}, we can't recommend any drink that
             matches all of your criteria. instead, maybe try a{' '}

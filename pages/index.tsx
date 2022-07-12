@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 // import { css } from '@emotion/react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Wave from 'react-wavify';
 // import { useRouter } from 'next/router';
 // import { useState } from 'react';
 import Carousel from '../components/Carousel';
@@ -10,6 +11,110 @@ import { getPreviewFromCollectionOfCocktails } from '../util/database';
 // import { LoginResponseBody } from './api/login';
 
 // import { errorStyles } from './register';
+
+// CSS
+
+const titleSection = css`
+  height: 85vh;
+  width: 100vw;
+  overflow: hidden;
+
+  text-align: center;
+  .doYou {
+    text-transform: uppercase;
+    margin-top: 3.5%;
+    // when smaller than 1000
+    @media (max-width: 1000px) {
+      margin-top: 10%;
+    }
+    // when smaller than 600
+    @media (max-width: 600px) {
+      margin-top: 17%;
+    }
+  }
+  h1 {
+    font-family: 'Messapia';
+    text-transform: uppercase;
+    font-size: 4.5rem;
+    line-height: 100%;
+    letter-spacing: 0em;
+    margin-top: 8%;
+
+    // when smaller than 1000
+    @media (max-width: 1000px) {
+      font-size: 3rem;
+    }
+
+    // when smaller than 600
+    @media (max-width: 600px) {
+      font-size: 1.7rem;
+      margin-top: 12%;
+    }
+  }
+`;
+
+const intro = css`
+  background-color: #bbbaf9;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+`;
+
+const wrapper = css`
+  margin: 25%;
+  // when smaller than 600
+  @media (max-width: 600px) {
+    margin: 10%;
+  }
+`;
+
+const text = css`
+  text-align: center;
+`;
+const smallText = css`
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  margin-bottom: 3rem;
+  font-size: 0.6rem;
+  line-height: 100%;
+`;
+
+const link = css`
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Messapia';
+  letter-spacing: 0px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.5rem;
+  border-top: 2px dotted #000;
+  border-bottom: 2px dotted #000;
+  padding: 4%;
+
+  // when smaller than 600
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+  }
+`;
+
+// CSS only on this page
+
+const wave = css`
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+`;
+
+const carousel = css`
+  background-color: #fffb89;
+  height: 100vh;
+`;
+
+// TYPES
 
 type Props = {
   // refreshUserProfile: () => Promise<void>;
@@ -30,44 +135,6 @@ type Props = {
     categoryid: number;
   };
 };
-
-const titleSection = css`
-  height: 100vh;
-  width: 100vw;
-  text-align: center;
-  .doYou {
-    text-transform: uppercase;
-    margin-top: 5%;
-  }
-  h1 {
-    font-family: 'Messapia';
-    text-transform: uppercase;
-    font-size: 5rem;
-    line-height: 90%;
-    letter-spacing: 0em;
-    margin-top: 8%;
-
-    // when smaller than 1000
-    @media (max-width: 1000px) {
-      font-size: 3rem;
-    }
-
-    // when smaller than 600
-    @media (max-width: 600px) {
-      font-size: 1.6rem;
-    }
-  }
-`;
-
-const intro = css`
-  background-color: #bbbaf9;
-  height: 100vh;
-`;
-
-const carousel = css`
-  background-color: #fffb89;
-  height: 100vh;
-`;
 
 export default function Home(props: Props) {
   // const [username, setUsername] = useState('');
@@ -135,8 +202,33 @@ export default function Home(props: Props) {
           fancy a<br />
           cocktail?
         </h1>
+        <div css={wave}>
+          <Wave
+            fill="#bbbaf9"
+            paused={false}
+            options={{
+              height: 40,
+              amplitude: 40,
+              speed: 0.4,
+              points: 2,
+            }}
+          />
+        </div>
       </main>
-      <div css={intro}>hey</div>
+
+      <div css={intro}>
+        <div css={wrapper}>
+          <div css={text}>
+            you're just chillin’ after a hard day in a bar, life is good and you
+            feel like a cocktail would add on to this perfect moment ...
+          </div>
+          <div css={smallText}>but which one is right for you?</div>
+
+          <div css={link}>
+            <Link href="/recommendation">find a cocktail</Link>
+          </div>
+        </div>
+      </div>
 
       <div css={carousel}>
         <Carousel collectionPreview={props.collectionPreview} />

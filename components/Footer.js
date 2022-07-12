@@ -1,16 +1,30 @@
 import { css } from '@emotion/react';
 import Marquee from 'react-fast-marquee';
 
-const footerStyles = css``;
+const footerStyles = css`
+  margin: 0;
+  padding: 0;
+`;
 const cheers = css`
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-style: normal;
-  font-weight: 800;
-  font-size: 140px;
-  line-height: 130px;
-  color: black;
-  /* -webkit-text-stroke: 2px black; */
+  padding: 8px;
+  background-color: white;
+  margin-top: 0;
+  font-family: 'Messapia';
+  text-transform: uppercase;
+  font-size: 4.5rem;
+  line-height: 100%;
+  letter-spacing: 0em;
+  /* -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black; */
+`;
+const cocktailHour = css`
+  padding: 3px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  line-height: 100%;
+  color: white;
+  background-color: #e75c3c;
+  letter-spacing: 0.07em;
 `;
 
 export default function Footer() {
@@ -18,6 +32,12 @@ export default function Footer() {
     <footer css={footerStyles}>
       <Marquee speed={250} gradient={false}>
         <span css={cheers}>! CHEERS! PROST! SALUTE! CIN CIN </span>
+      </Marquee>
+      <Marquee speed={150} gradient={false}>
+        <span css={cocktailHour}>
+          ! HAPPY HOUR! AFTER HOUR! EVERY HOUR! COCKTAIL HOUR! HAPPY HOUR! AFTER
+          HOUR! EVERY HOUR! COCKTAIL HOUR
+        </span>
       </Marquee>
     </footer>
   );

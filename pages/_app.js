@@ -4,6 +4,8 @@ import { useCallback, useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 
 export default function App({ Component, pageProps }) {
+  const isBackgroundRed = true;
+
   // set the user cookie in order to pass it to the components / prop drill
   const [user, setUser] = useState();
 
@@ -31,12 +33,15 @@ export default function App({ Component, pageProps }) {
           html,
           body {
             font-family: 'Apfel';
-            font-size: 25px;
-            line-height: 35px;
+            font-size: 23px;
+            line-height: 33px;
             letter-spacing: 0.07em;
-            background: #ffffff;
             width: 100%;
             align-items: center;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+
             a {
               text-decoration: none;
               color: #000000;
@@ -50,6 +55,7 @@ export default function App({ Component, pageProps }) {
           * {
             box-sizing: border-box;
             margin: 0;
+            padding: 0;
           }
         `}
       />

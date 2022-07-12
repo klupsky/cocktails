@@ -1,5 +1,7 @@
+import { css } from '@emotion/react';
 import Head from 'next/head';
 import { getSingleCocktailFromCollection } from '../../util/database';
+import { logo } from './login';
 
 export default function Cocktail(props) {
   if (props.collectionCocktail === null) {
@@ -25,6 +27,15 @@ export default function Cocktail(props) {
       </Head>
 
       <main>
+        <div css={logo}>
+          <a href="/">
+            <span>
+              FANCY A <br />
+              COCKTAIL?
+            </span>
+          </a>
+        </div>
+
         {props.collectionCocktail.id}
         {props.collectionCocktail.name}
         {props.collectionCocktail.level}

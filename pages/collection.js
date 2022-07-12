@@ -1,7 +1,9 @@
+import { css } from '@emotion/react';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import { getCategories, getFullCollectionOfCocktails } from '../util/database';
+import { logo } from './login';
 
 export default function Collection(props) {
   const [cocktailList, setCocktailList] = useState(props.collectionCocktail);
@@ -23,6 +25,14 @@ export default function Collection(props) {
       </Head>
 
       <main>
+        <div css={logo}>
+          <a href="/">
+            <span>
+              FANCY A <br />
+              COCKTAIL?
+            </span>
+          </a>
+        </div>
         {/* {cocktailCategory} */}
         <button onClick={() => setCocktailList(props.collectionCocktail)}>
           FULL COLLECTION

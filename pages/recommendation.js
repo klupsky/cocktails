@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import Head from 'next/head';
 // import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -8,6 +9,9 @@ import {
   getSpirits,
   getUserByValidSessionToken,
 } from '../util/database';
+import { logo } from './login';
+
+// CSS
 
 export default function Recommendation(props) {
   const [flavourId, setFlavourId] = useState('');
@@ -47,6 +51,15 @@ export default function Recommendation(props) {
       </Head>
 
       <main>
+        <div css={logo}>
+          <a href="/">
+            <span>
+              FANCY A <br />
+              COCKTAIL?
+            </span>
+          </a>
+        </div>
+
         <h1>get a recommendation {props.user.username}</h1>
         <div>
           <fieldset

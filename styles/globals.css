@@ -14,3 +14,10 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.backgroundBlack {
+  background: black;
+}
+.backgroundWhite {
+  background: white;
+}
