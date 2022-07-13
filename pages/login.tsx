@@ -52,12 +52,11 @@ export const smallText = css`
 export const wrapper = css`
   margin-left: 25%;
   margin-right: 25%;
-  margin-top: 7%;
+  margin-top: 70px;
   margin-bottom: 2%;
 
   // when smaller than 600
   @media (max-width: 600px) {
-    margin-top: 13%;
     margin-bottom: 10%;
     margin-left: 5%;
     margin-right: 5%;
@@ -129,7 +128,6 @@ const form = css`
 
   button {
     color: black;
-
     background: transparent;
     box-shadow: 0px 0px 0px transparent;
     border: 0px solid transparent;

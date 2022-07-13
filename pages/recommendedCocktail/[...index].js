@@ -9,36 +9,54 @@ import {
   getRecommendationBasedOnUrlAndDatabaseBackup,
   getUserByValidSessionToken,
 } from '../../util/database';
-import { logo, section, text } from '../login';
+import { text } from '../login';
 import { errorStyles } from '../register';
 
 export const smallText = css`
   text-align: center;
   text-transform: uppercase;
   margin-top: 3%;
-  margin-bottom: 10%;
   font-size: 0.6rem;
   line-height: 100%;
 `;
 
-const wrapper = css`
+export const wrapper = css`
   margin-left: 15%;
   margin-right: 15%;
-  margin-bottom: 15%;
-  margin-top: 7%;
+  margin-top: 200px;
+  margin-bottom: 10%;
+
+  // when smaller than 800
+  @media (max-width: 800px) {
+    margin-bottom: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+`;
+
+const logo = css`
+  text-align: center;
+  font-size: 1rem;
+  line-height: 100%;
+  font-family: 'Messapia';
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  position: relative;
+  top: -30px;
+  color: #000000;
+  z-index: 2;
 
   // when smaller than 600
   @media (max-width: 600px) {
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 10%;
-    margin-top: 13%;
+    font-size: 0.7rem;
+    line-height: 100%;
   }
 `;
 
 const title = css`
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
+  margin-top: 2rem;
   text-transform: uppercase;
   font-family: 'Messapia';
   letter-spacing: 0px;
@@ -47,10 +65,18 @@ const title = css`
   font-weight: 700;
   font-size: 2.8rem;
 
-  // when smaller than 500
-  @media (max-width: 500px) {
-    margin-top: 0rem;
+  // when smaller than 1000
+  @media (max-width: 1000px) {
     font-size: 2rem;
+    margin-top: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  // when smaller than 600
+  @media (max-width: 600px) {
+    font-size: 1.3rem;
+    margin-top: 2.2rem;
+    margin-bottom: 1.8rem;
   }
 `;
 
@@ -64,16 +90,51 @@ const headline = css`
 const word = css`
   line-height: 100%;
   margin-top: 0.3rem;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
 `;
 
+export const ellipse = css`
+  border-radius: 50%;
+  height: 2.2rem;
+  width: 7rem;
+  background-color: white;
+  font-size: 0.7rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 0;
+`;
+
+const ellipsePosition = css`
+  position: relative;
+  top: 3.9rem;
+  left: 1.5rem;
+  transform: rotate(8.9deg);
+  // when smaller than 1200
+  @media (max-width: 1200px) {
+    top: 3rem;
+    left: -1.5rem;
+    // when smaller than 600
+    @media (max-width: 600px) {
+      top: -29.5rem;
+      left: 0rem;
+    }
+  }
+`;
+
 const description = css`
   line-height: 100%;
-  margin-top: 3rem;
+  margin-top: 5rem;
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
+  // when smaller than 600
+  @media (max-width: 600px) {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const buttonBox = css`
@@ -96,14 +157,14 @@ const buttonBox = css`
     font-style: normal;
     font-weight: 700;
     font-size: 1rem;
+    // when smaller than 600
+    @media (max-width: 600px) {
+      font-size: 0.6rem;
+    }
   }
 `;
 
 const imageStyleSmall = css`
-  position: relative;
-  top: -0.4rem;
-  left: -0.5rem;
-
   text-align: center;
   margin: 0;
 `;
@@ -111,8 +172,20 @@ const imageStyleSmall = css`
 const imageStyle = css`
   text-align: center;
   align-items: center;
-  margin-top: 10%;
+  margin-top: 1%;
   margin-bottom: 5%;
+`;
+
+const addFavouriteStyle = css`
+  margin-top: 0.1rem;
+  button {
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+    margin-top: 0.4rem;
+    text-align: center;
+  }
 `;
 
 const drinkGrid = css`
@@ -123,17 +196,40 @@ const drinkGrid = css`
   border-bottom: 2px dotted #000;
   border-top: 2px dotted #000;
 
+  .item10 {
+    grid-column: 1 / 1;
+    grid-row: 1;
+  }
+
   .item1 {
     grid-column: 1 / 2;
-    grid-row: 1 / 5;
+    grid-row: 2 / 5;
+    // when smaller than 600px
+    @media (max-width: 600px) {
+      grid-column: 1 / 4;
+    }
   }
   .item2 {
     grid-column: 2 / 2;
     border-left: 2px dotted #000;
+    // when smaller than 600px
+    @media (max-width: 600px) {
+      grid-column: 1 / 2;
+      grid-row: 6;
+      border-left: none;
+      border-right: 2px dotted #000;
+    }
   }
   .item3 {
     grid-column: 3 / 3;
     border-left: 2px dotted #000;
+    // when smaller than 600px
+
+    @media (max-width: 600px) {
+      grid-column: 2 / 4;
+      grid-row: 6;
+      border-left: none;
+    }
   }
   .item4 {
     grid-column: 2 / 2;
@@ -141,6 +237,15 @@ const drinkGrid = css`
     border-left: 2px dotted #000;
     border-top: 2px dotted #000;
     border-bottom: 2px dotted #000;
+    // when smaller than 600px
+
+    @media (max-width: 600px) {
+      grid-column: 1 / 2;
+      grid-row: 7 / 9;
+      border-left: none;
+      border-right: 2px dotted #000;
+      border-bottom: none;
+    }
   }
   .item5 {
     grid-column: 3 / 3;
@@ -148,6 +253,13 @@ const drinkGrid = css`
     border-top: 2px dotted #000;
     border-bottom: 2px dotted #000;
     border-left: 2px dotted #000;
+    // when smaller than 600px
+
+    @media (max-width: 600px) {
+      grid-column: 2 / 4;
+      grid-row: 7;
+      border-left: none;
+    }
   }
 
   .item9 {
@@ -155,24 +267,53 @@ const drinkGrid = css`
     grid-row: 3;
     border-bottom: 2px dotted #000;
     border-left: 2px dotted #000;
+    // when smaller than 600px
+    @media (max-width: 600px) {
+      grid-column: 2 / 4;
+      grid-row: 8;
+      border-left: none;
+      border-bottom: none;
+    }
   }
 
   .item6 {
     grid-column: 2 / 4;
     grid-row: 4;
     border-left: 2px dotted #000;
+    // when smaller than 600px
+    @media (max-width: 600px) {
+      grid-column: 1 / 4;
+      grid-row: 5;
+      border-left: none;
+      border-top: 2px dotted #000;
+      border-bottom: 2px dotted #000;
+    }
   }
 
   .item7 {
     grid-column: 1 / 2;
     grid-row: 5;
     border-top: 2px dotted #000;
+    // when smaller than 600px
+
+    @media (max-width: 600px) {
+      grid-column: 1 / 2;
+      grid-row: 9;
+      border-right: 2px dotted #000;
+    }
   }
   .item8 {
     grid-column: 2 / 4;
     grid-row: 5;
     border-top: 2px dotted #000;
     border-left: 2px dotted #000;
+    // when smaller than 600px
+
+    @media (max-width: 600px) {
+      grid-column: 2 / 4;
+      grid-row: 9;
+      border-left: none;
+    }
   }
 `;
 
@@ -225,6 +366,8 @@ export default function RecommendedCocktail(props) {
     }
   }
 
+  // if there is no matching cocktail, return this backup version:
+
   if (props.urlInfoQuery === null) {
     return (
       <div>
@@ -243,7 +386,20 @@ export default function RecommendedCocktail(props) {
               </span>
             </a>
           </div>
-          <div css={section}>
+
+          <div
+            css={css`
+              width: 100vw;
+              overflow: hidden;
+              z-index: 1;
+              background-color: ${props.urlInfoQueryBackup.flavourcolour};
+              position: relative;
+              margin-top: -150px;
+              // when smaller than 600
+              @media (max-width: 600px) {
+              }
+            `}
+          >
             <div css={wrapper}>
               <div css={text}>
                 sorry {props.user.username}, there is no cocktail matching all
@@ -251,15 +407,56 @@ export default function RecommendedCocktail(props) {
               </div>
               <div css={smallText}>instead, maybe try a</div>
               <div css={title}>{props.urlInfoQueryBackup.name}</div>
-              {/* {props.urlInfoQueryBackup.cocktailId} */}
-              {/* {props.urlInfoQueryBackup.level} */}
-              {/* {props.urlInfoQueryBackup.flavour}
-                {props.urlInfoQueryBackup.description}
-                {props.urlInfoQueryBackup.glass}
-                {props.urlInfoQueryBackup.method}
-                {props.urlInfoQueryBackup.garnish}
-                {props.urlInfoQueryBackup.category} */}
               <div css={drinkGrid}>
+                <div className="item10">
+                  {!props.favouritesCheckBackup ? (
+                    <div css={addFavouriteStyle}>
+                      {disable === false ? (
+                        <button
+                          id="add to favourites"
+                          disabled={disable}
+                          onClick={() => {
+                            setDisable(true);
+                            addToFavouritesHandlerBackup().catch(() => {
+                              console.log('adding favourite failed');
+                            });
+                          }}
+                        >
+                          <Image
+                            src="/../../images/components/heart1.svg"
+                            width="35px"
+                            height="35px"
+                            alt="add to favourites"
+                          />
+                        </button>
+                      ) : (
+                        <button id="add to favourites" disabled>
+                          <Link href={`/users/${props.user.id}`}>
+                            <Image
+                              src="/../../images/components/heart2.svg"
+                              width="35px"
+                              height="35px"
+                              alt="add to favourites"
+                            />
+                          </Link>
+                        </button>
+                      )}
+                    </div>
+                  ) : (
+                    <div css={addFavouriteStyle}>
+                      <button id="add to favourites" disabled>
+                        <Link href={`/users/${props.user.id}`}>
+                          <Image
+                            src="/../../images/components/heart2.svg"
+                            width="35px"
+                            height="35px"
+                            alt="add to favourites"
+                          />
+                        </Link>
+                      </button>
+                    </div>
+                  )}
+                </div>
                 <div className="item1">
                   <div css={imageStyle}>
                     <Image
@@ -296,12 +493,29 @@ export default function RecommendedCocktail(props) {
                 </div>
                 <div className="item9">
                   <div css={headline}>Method</div>
-                  <div css={word}>{props.urlInfoQueryBackup.method}</div>
+
+                  <div css={word}>
+                    {props.urlInfoQueryBackup.method}
+
+                    <div css={ellipsePosition}>
+                      <div css={ellipse}>
+                        <div>
+                          {props.urlInfoQueryBackup.level === 1
+                            ? 'LOOOOOW'
+                            : props.urlInfoQueryBackup.level === 2
+                            ? 'NIIIIICE'
+                            : 'STROOOOONG'}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
                 <div className="item6">
                   <div css={description}>
-                    {props.urlInfoQueryBackup.description} blah blah blah blah
-                    blah blah blah blah blah blah blah blah blah
+                    {props.urlInfoQueryBackup.description}
+                    hey blah blah blah blah blah blah blah blah blah blah blah
+                    blah blah
                   </div>
                 </div>
 
@@ -324,30 +538,14 @@ export default function RecommendedCocktail(props) {
                   </div>
                 </div>
               </div>
-              {!props.favouritesCheckBackup ? (
-                <button
-                  id="add to favourites"
-                  disabled={disable}
-                  onClick={() => {
-                    setDisable(true);
-                    addToFavouritesHandlerBackup().catch(() => {
-                      console.log('adding favourite failed');
-                    });
-                  }}
-                >
-                  ADD TO FAVOURITES
-                </button>
-              ) : (
-                <button id="add to favourites" disabled>
-                  IS ALREADY FAVOURITE
-                </button>
-              )}{' '}
             </div>
           </div>
         </main>
       </div>
     );
   }
+
+  // if there is a matching cocktail, return this version:
 
   return (
     <div>
@@ -358,21 +556,171 @@ export default function RecommendedCocktail(props) {
       </Head>
 
       <main>
-        <div css={section}>
+        <div css={logo}>
+          <a href="/">
+            <span>
+              FANCY A <br />
+              COCKTAIL?
+            </span>
+          </a>
+        </div>
+        <div
+          css={css`
+            width: 100vw;
+            overflow: hidden;
+            z-index: 1;
+            background-color: ${props.urlInfoQuery.flavourcolour};
+            position: relative;
+            margin-top: -150px;
+            // when smaller than 600
+            @media (max-width: 600px) {
+            }
+          `}
+        >
           <div css={wrapper}>
             <div css={text}>{props.user.username}, you should order a</div>
+            <div css={title}>{props.urlInfoQuery.name}</div>
 
-            {props.urlInfoQuery.cocktailId}
+            <div css={drinkGrid}>
+              <div className="item10">
+                {!props.favouritesCheck ? (
+                  <div css={addFavouriteStyle}>
+                    {disable === false ? (
+                      <button
+                        id="add to favourites"
+                        disabled={disable}
+                        onClick={() => {
+                          setDisable(true);
+                          addToFavouritesHandler().catch(() => {
+                            console.log('adding favourite failed');
+                          });
+                        }}
+                      >
+                        <Image
+                          src="/../../images/components/heart1.svg"
+                          width="35px"
+                          height="35px"
+                          alt="add to favourites"
+                        />
+                      </button>
+                    ) : (
+                      <button id="add to favourites" disabled>
+                        <Link href={`/users/${props.user.id}`}>
+                          <Image
+                            src="/../../images/components/heart2.svg"
+                            width="35px"
+                            height="35px"
+                            alt="add to favourites"
+                          />
+                        </Link>
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <div css={addFavouriteStyle}>
+                    <button id="add to favourites" disabled>
+                      <Link href={`/users/${props.user.id}`}>
+                        <Image
+                          src="/../../images/components/heart2.svg"
+                          width="35px"
+                          height="35px"
+                          alt="add to favourites"
+                        />
+                      </Link>
+                    </button>
+                  </div>
+                )}
+              </div>
+              <div className="item1">
+                <div css={imageStyle}>
+                  <Image
+                    src={`/../../images/cocktail/${props.urlInfoQuery.cocktailId}.svg`}
+                    alt="{props.urlInfoQuery.glass}"
+                    width="400px"
+                    height="400px"
+                  />
+                </div>
+              </div>
+              <div className="item2">
+                <div css={headline}>Category</div>
+                <div css={word}>{props.urlInfoQuery.category}</div>
+              </div>
+              <div className="item3">
+                <div css={headline}>Spirit</div>
+                <div css={word}>{props.urlInfoQuery.spirit}</div>
+              </div>
+              <div className="item4">
+                <div css={headline}>Glass</div>
+                <div css={word}>{props.urlInfoQuery.glass}</div>
+                <div css={imageStyleSmall}>
+                  <Image
+                    src={`/../../images/glass/${props.urlInfoQuery.glass}.svg`}
+                    alt="{props.urlInfoQuery.glass}"
+                    width="150px"
+                    height="150px"
+                  />
+                </div>{' '}
+              </div>
+              <div className="item5">
+                <div css={headline}>Garnish</div>
+                <div css={word}>{props.urlInfoQuery.garnish}</div>
+              </div>
+              <div className="item9">
+                <div css={headline}>Method</div>
+                <div css={word}>
+                  {props.urlInfoQuery.method}
+
+                  <div css={ellipsePosition}>
+                    <div css={ellipse}>
+                      <div>
+                        {props.urlInfoQuery.level === 1
+                          ? 'LOOOOOW'
+                          : props.urlInfoQuery.level === 2
+                          ? 'NIIIIICE'
+                          : 'STROOOOONG'}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="item6">
+                <div css={description}>
+                  {props.urlInfoQuery.description}
+                  hey blah blah blah blah blah blah blah blah blah blah blah
+                  blah blah
+                </div>
+              </div>
+
+              <div className="item7">
+                <div css={buttonBox}>
+                  <button
+                    data-test-id="generate-recommendation-2"
+                    type="button"
+                    onClick={refreshPage}
+                  >
+                    ANOTHER ONE!
+                  </button>
+                </div>
+              </div>
+              <div className="item8">
+                <div css={buttonBox}>
+                  <Link href="/recommendation">
+                    <button>GO BACK!</button>
+                  </Link>
+
+                  {/* {props.urlInfoQuery.cocktailId}
             {props.urlInfoQuery.name}
             {props.urlInfoQuery.level}
             {props.urlInfoQuery.flavour}
+            {props.urlInfoQuery.flavourColour}
+
             {props.urlInfoQuery.spirit}
             {props.urlInfoQuery.description}
             {props.urlInfoQuery.glass}
             {props.urlInfoQuery.method}
             {props.urlInfoQuery.garnish}
-            {props.urlInfoQuery.category}
-            {!props.favouritesCheck ? (
+            {props.urlInfoQuery.category} */}
+                  {/* {!props.favouritesCheck ? (
               <button
                 id="add to favourites"
                 disabled={disable}
@@ -389,15 +737,15 @@ export default function RecommendedCocktail(props) {
               <button id="add to favourites" disabled>
                 IS ALREADY FAVOURITE
               </button>
-            )}
-
+            )} */}
+                  {/*
             {errors.map((error) => (
               <div css={errorStyles} key={`error-${error.message}`}>
                 {error.message}
               </div>
             ))}
-            <br />
-            <button
+            <br /> */}
+                  {/* <button
               data-test-id="generate-recommendation-2"
               type="button"
               onClick={() => {
@@ -407,10 +755,10 @@ export default function RecommendedCocktail(props) {
               }}
             >
               GIVE ME ANOTHER!{' '}
-            </button>
-            <Link href="/recommendation">
-              <button>GO BACK</button>
-            </Link>
+            </button> */}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>

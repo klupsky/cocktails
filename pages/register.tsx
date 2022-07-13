@@ -21,7 +21,7 @@ const loginSection = css`
 const wrapper = css`
   margin-left: 25%;
   margin-right: 25%;
-  margin-top: 7%;
+  margin-top: 70px;
   margin-bottom: 10%;
 
   // when smaller than 600
@@ -207,8 +207,12 @@ export default function Register(props: Props) {
 
       <main>
         <div css={logo}>
-          fancy a<br />
-          cocktail?
+          <a href="/">
+            <span>
+              FANCY A <br />
+              COCKTAIL?
+            </span>
+          </a>
         </div>
         <div css={loginSection}>
           <div css={wrapper}>

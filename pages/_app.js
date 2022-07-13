@@ -44,9 +44,19 @@ export default function App({ Component, pageProps }) {
               text-decoration: none;
               color: #000000;
               text-transform: uppercase;
+              cursor: pointer;
+            }
+            a:hover {
+              cursor: pointer;
+            }
+            button {
+              cursor: pointer;
             }
             li {
               list-style-type: none;
+            }
+            link {
+              cursor: pointer;
             }
           }
 

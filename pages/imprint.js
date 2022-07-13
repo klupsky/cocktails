@@ -4,7 +4,7 @@ import Head from 'next/head';
 const imprintStyle = css`
   width: 100vw;
   height: 85vh;
-  background-color: black;
+  background-color: white;
   color: #ffffff;
   overflow: hidden;
   z-index: 1;
@@ -51,7 +51,6 @@ const smallText = css`
 
   // when smaller than 1000
   @media (max-width: 1000px) {
-    margin-top: 200px;
     margin-bottom: 20%;
   }
 `;
@@ -59,8 +58,8 @@ const smallText = css`
 const smallTextTwo = css`
   text-align: center;
   text-transform: uppercase;
-  margin-bottom: 10%;
-  margin-top: 20%;
+  margin-bottom: 30%;
+  margin-top: 15%;
   font-size: 0.6rem;
   line-height: 100%;
   color: white;
@@ -83,12 +82,11 @@ const smallTextTwo = css`
 export const wrapper = css`
   margin-left: 25%;
   margin-right: 25%;
-  margin-top: 15%;
+  margin-top: 200px;
   margin-bottom: 10%;
 
   // when smaller than 600
   @media (max-width: 600px) {
-    margin-top: 13%;
     margin-bottom: 10%;
     margin-left: 5%;
     margin-right: 5%;

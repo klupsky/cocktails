@@ -1,9 +1,104 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { getCategories, getFullCollectionOfCocktails } from '../util/database';
-import { logo } from './login';
+import { logo, text } from './login';
+
+// CSS
+const section = css`
+  height: auto;
+  width: 100vw;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+`;
+
+export const smallText = css`
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: 3%;
+  margin-bottom: 4rem;
+  font-size: 0.6rem;
+  line-height: 100%;
+`;
+
+const wrapper = css`
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 100px;
+  margin-bottom: 10%;
+
+  // when smaller than 800
+  @media (max-width: 800px) {
+    margin-bottom: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+`;
+
+const buttonBox = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  line-height: 100%;
+  gap: 10px;
+  text-align: center;
+
+  button {
+    border-radius: 50%;
+    height: 2.2rem;
+    width: 7rem;
+    background-color: white;
+    border: 2px solid black;
+    font-size: 0.7rem;
+    display: relative;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+`;
+
+const cocktailNameStyle = css`
+  border-bottom: 2px dotted #000;
+  text-align: left;
+  padding: 0.7rem;
+  text-transform: uppercase;
+  font-family: 'Messapia';
+  letter-spacing: 0px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1.2rem;
+`;
+const cocktailCategoryStyle = css`
+  border-bottom: 2px dotted #000;
+  text-align: left;
+  padding: 0.7rem;
+
+  text-transform: uppercase;
+
+  font-size: 0.6rem;
+`;
+const arrow = css`
+  border-bottom: 2px dotted #000;
+  text-align: right;
+  padding: 0.7rem;
+`;
+
+const collectionBox = css`
+  display: grid;
+  grid-template-columns: 50% 25% 25%;
+`;
+
+const collectionBoxContainer = css`
+  border-top: 2px dotted #000;
+  margin-top: 2rem;
+`;
 
 export default function Collection(props) {
   const [cocktailList, setCocktailList] = useState(props.collectionCocktail);
@@ -33,37 +128,56 @@ export default function Collection(props) {
             </span>
           </a>
         </div>
-        {/* {cocktailCategory} */}
-        <button onClick={() => setCocktailList(props.collectionCocktail)}>
-          FULL COLLECTION
-        </button>
 
-        {props.categories.map((category) => {
-          return (
-            <button
-              key={category.name}
-              onClick={() => {
-                showCocktailCategory(category.name);
-              }}
-            >
-              {category.name.toUpperCase()}
-            </button>
-          );
-        })}
+        <div css={section}>
+          <div css={wrapper}>
+            <div css={text}>get inspired by the full collection</div>
+            <div css={smallText}>filter by category</div>
 
-        <h1>hey, this is the full collection:</h1>
-        <ul>
-          {cocktailList.map((cocktailName) => {
-            return (
-              <li key={`cocktailName-${cocktailName.id}`}>
-                <Link href={`/collection/${cocktailName.id}`}>
-                  {cocktailName.name}
-                </Link>
-                {cocktailName.category}
-              </li>
-            );
-          })}
-        </ul>
+            <div css={buttonBox}>
+              <button onClick={() => setCocktailList(props.collectionCocktail)}>
+                FULL COLLECTION
+              </button>
+              {props.categories.map((category) => {
+                return (
+                  <button
+                    key={category.name}
+                    onClick={() => {
+                      showCocktailCategory(category.name);
+                    }}
+                  >
+                    {category.name.toUpperCase()}
+                  </button>
+                );
+              })}
+            </div>
+            <div css={collectionBoxContainer}>
+              {cocktailList.map((cocktailName) => {
+                return (
+                  <div
+                    css={collectionBox}
+                    key={`cocktailName-${cocktailName.id}`}
+                  >
+                    <div css={cocktailNameStyle}>{cocktailName.name}</div>
+                    <div css={cocktailCategoryStyle}>
+                      {cocktailName.category}
+                    </div>
+                    <div css={arrow}>
+                      <Link href={`/collection/${cocktailName.id}`}>
+                        <Image
+                          src="/../images/components/→.svg"
+                          width="px"
+                          height="30px"
+                          alt="arrow"
+                        />
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   );

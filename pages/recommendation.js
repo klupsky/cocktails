@@ -44,8 +44,13 @@ const formStyle = css`
     font-weight: 700;
     font-size: 1.2rem;
 
-    // when smaller than 900
-    @media (max-width: 900px) {
+    // when smaller than 1000
+    @media (max-width: 1000px) {
+      margin-top: 0rem;
+      font-size: 0.9rem;
+    }
+    // when smaller than 600
+    @media (max-width: 600px) {
       margin-top: 0rem;
       font-size: 0.6rem;
     }
@@ -281,7 +286,12 @@ export default function Recommendation(props) {
                               name="level-option"
                               value={level.id}
                             />
-                            {level.level}
+
+                            {level.level === 1
+                              ? 'LOOOOOW'
+                              : level.level === 2
+                              ? 'NIIIIICE'
+                              : 'STROOOOONG'}
                           </label>
                         </span>
                       );
