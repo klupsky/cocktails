@@ -2,6 +2,8 @@ import cookie from 'cookie';
 import { GetServerSidePropsContext } from 'next';
 import { deleteSessionByToken } from '../../util/database';
 
+// FUNCTIONALITY STARTS HERE
+
 export default function About() {
   return null;
 }

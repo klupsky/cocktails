@@ -336,7 +336,7 @@ export async function getAllFavourites() {
   return camelcaseKeys(favouriteCocktailList);
 }
 
-export async function getUserFavourites(userId: number) {
+export async function getUserFavourites(userId: any) {
   const favouriteCocktails = await sql`
     SELECT
       favourites.id,
@@ -356,7 +356,8 @@ export async function getUserFavourites(userId: number) {
       favourites.cocktail_id = cocktails.id
 
   `;
-  return camelcaseKeys(favouriteCocktails);
+  console.log(favouriteCocktails);
+  return favouriteCocktails.map((cocktail) => camelcaseKeys(cocktail));
 }
 
 export async function addUserFavourite(userId: number, cocktailId: number) {

@@ -55,9 +55,7 @@ export default function App({ Component, pageProps }) {
             li {
               list-style-type: none;
             }
-            link {
-              cursor: pointer;
-            }
+
           }
 
           * {

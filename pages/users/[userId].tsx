@@ -11,6 +11,8 @@ import {
 } from '../../util/database';
 import { logo } from '../login';
 
+// CSS
+
 // TYPES
 
 type Props = {
@@ -21,7 +23,7 @@ type Props = {
     cocktailId: number;
     username: string;
     name: string;
-  };
+  }[];
 };
 
 type Favourite = {
@@ -31,6 +33,8 @@ type Favourite = {
   cocktailId: number;
   username: string;
 };
+
+// FUNCTIONALITY STARTS HERE
 
 export default function UserDetail(props: Props) {
   const [favouritesLists, setFavouritesLists] = useState(
@@ -160,8 +164,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const userSession = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
   );
-
   const favouriteCocktails = await getUserFavourites(context.query.userId);
+  // console.log(favouriteCocktails);
   if (!user) {
     context.res.statusCode = 404;
     return { props: {} };

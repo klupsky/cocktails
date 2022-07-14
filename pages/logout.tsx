@@ -6,6 +6,8 @@ export default function About() {
   return null;
 }
 
+// FUNCTIONALITY STARTS HERE
+
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const token = context.req.cookies.sessionToken;
 

@@ -52,7 +52,7 @@ const formStyle = css`
     // when smaller than 600
     @media (max-width: 600px) {
       margin-top: 0rem;
-      font-size: 0.6rem;
+      font-size: 0.7rem;
     }
   }
 `;

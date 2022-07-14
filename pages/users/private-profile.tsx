@@ -2,9 +2,13 @@ import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { getUserByValidSessionToken, User } from '../../util/database';
 
+// TYPES
+
 type Props = {
   user: User;
 };
+
+// FUNCTIONALITY STARTS HERE
 
 export default function UserDetail(props: Props) {
   return (

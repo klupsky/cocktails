@@ -1,6 +1,8 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
 
+// CSS
+
 const imprintStyle = css`
   width: 100vw;
   height: 85vh;
@@ -92,6 +94,8 @@ export const wrapper = css`
     margin-right: 5%;
   }
 `;
+
+// FUNCTIONALITY STARTS HERE
 
 export default function Imprint() {
   return (

@@ -10,7 +10,8 @@ import {
   getUserByValidSessionToken,
 } from '../../util/database';
 import { text } from '../login';
-import { errorStyles } from '../register';
+
+// CSS
 
 export const smallText = css`
   text-align: center;
@@ -112,7 +113,7 @@ const ellipsePosition = css`
   position: relative;
   top: 3.9rem;
   left: 1.5rem;
-  transform: rotate(8.9deg);
+  transform: rotate(15deg);
   // when smaller than 1200
   @media (max-width: 1200px) {
     top: 3rem;
@@ -317,8 +318,22 @@ const drinkGrid = css`
   }
 `;
 
+
+
+
+
+
+
+
+
+
+
+// FUNCTIONALITY STARTS HERE
+
+
+
 export default function RecommendedCocktail(props) {
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
   const [disable, setDisable] = useState(false);
 
   function refreshPage() {

@@ -139,9 +139,13 @@ export const errorStyles = css`
   text-transform: uppercase;
 `;
 
+// TYPES
 type Props = {
   refreshUserProfile: () => Promise<void>;
 };
+
+// FUNCTIONALITY STARTS HERE
+
 export default function Register(props: Props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

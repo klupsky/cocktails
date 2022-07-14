@@ -7,6 +7,7 @@ import { getCategories, getFullCollectionOfCocktails } from '../util/database';
 import { logo, text } from './login';
 
 // CSS
+
 const section = css`
   height: auto;
   width: 100vw;
@@ -74,15 +75,34 @@ const cocktailNameStyle = css`
   font-style: normal;
   font-weight: 700;
   font-size: 1.2rem;
+  // when smaller than 1000px
+  @media (max-width: 1000px) {
+    font-size: 0.9rem;
+  }
+  // when smaller than 600px
+  @media (max-width: 600px) {
+    font-size: 0.7rem;
+  }
 `;
 const cocktailCategoryStyle = css`
   border-bottom: 2px dotted #000;
   text-align: left;
   padding: 0.7rem;
-
   text-transform: uppercase;
-
   font-size: 0.6rem;
+
+  span {
+    position: relative;
+    top: 0.3rem;
+    // when smaller than 1000px
+    @media (max-width: 1000px) {
+      top: 0.15rem;
+    }
+    // when smaller than 600px
+    @media (max-width: 600px) {
+      top: 0.1rem;
+    }
+  }
 `;
 const arrow = css`
   border-bottom: 2px dotted #000;
@@ -97,8 +117,10 @@ const collectionBox = css`
 
 const collectionBoxContainer = css`
   border-top: 2px dotted #000;
-  margin-top: 2rem;
+  margin-top: 4rem;
 `;
+
+// FUNCTIONALITY STARTS HERE
 
 export default function Collection(props) {
   const [cocktailList, setCocktailList] = useState(props.collectionCocktail);
@@ -160,13 +182,13 @@ export default function Collection(props) {
                   >
                     <div css={cocktailNameStyle}>{cocktailName.name}</div>
                     <div css={cocktailCategoryStyle}>
-                      {cocktailName.category}
+                      <span> {cocktailName.category}</span>
                     </div>
                     <div css={arrow}>
                       <Link href={`/collection/${cocktailName.id}`}>
                         <Image
                           src="/../images/components/→.svg"
-                          width="px"
+                          width="30px"
                           height="30px"
                           alt="arrow"
                         />

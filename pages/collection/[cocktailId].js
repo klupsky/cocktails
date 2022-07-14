@@ -3,6 +3,10 @@ import Head from 'next/head';
 import { getSingleCocktailFromCollection } from '../../util/database';
 import { logo } from '../login';
 
+// CSS
+
+// FUNCTIONALITY STARTS HERE
+
 export default function Cocktail(props) {
   if (props.collectionCocktail === null) {
     return (

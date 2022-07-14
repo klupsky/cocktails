@@ -136,6 +136,8 @@ type Props = {
   };
 };
 
+// FUNCTIONALITY STARTS HERE
+
 export default function Home(props: Props) {
   // const [username, setUsername] = useState('');
   // const [password, setPassword] = useState('');
