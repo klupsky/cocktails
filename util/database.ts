@@ -305,12 +305,50 @@ export async function getFullCollectionOfCocktails() {
 export async function getSingleCocktailFromCollection(cocktailId: number) {
   const [collectionCocktail] = await sql`
     SELECT
-      *
+      cocktails.id,
+      cocktails.name,
+      cocktails.level_id,
+      cocktails.description,
+      cocktails.glass,
+      cocktails.method,
+      cocktails.garnish,
+      flavours.colour AS flavourcolour,
+      flavours.name AS flavourname,
+      spirits.name AS spirit,
+      categories.name AS category
+
     FROM
-      cocktails
+      cocktails,
+      flavours,
+      levels,
+      spirits,
+      categories
+
     WHERE
-      cocktails.id = ${cocktailId}
-  `;
+      cocktails.id = ${cocktailId} AND
+      cocktails.flavour_id = flavours.id AND
+      cocktails.level_id = levels.id AND
+      cocktails.spirit_id = spirits.id AND
+      cocktails.category_id = categories.id
+      `;
+  return camelcaseKeys(collectionCocktail);
+}
+
+export async function getNumberOfFavourites(cocktailId: number) {
+  const collectionCocktail = await sql`
+    SELECT
+      *
+
+    FROM
+      cocktails,
+      favourites
+
+    WHERE
+      cocktails.id = ${cocktailId} AND
+      favourites.cocktail_id = ${cocktailId}
+
+
+      `;
   return camelcaseKeys(collectionCocktail);
 }
 
@@ -343,20 +381,23 @@ export async function getUserFavourites(userId: any) {
       favourites.user_id,
       favourites.cocktail_id,
       users.username,
-      cocktails.name
+      cocktails.name,
+      flavours.colour AS flavourcolour
 
     FROM
       favourites,
       cocktails,
-      users
+      users,
+      flavours
 
     WHERE
       favourites.user_id = ${userId} AND
       users.id = favourites.user_id AND
-      favourites.cocktail_id = cocktails.id
+      favourites.cocktail_id = cocktails.id AND
+      cocktails.flavour_id = flavours.id
+
 
   `;
-  console.log(favouriteCocktails);
   return favouriteCocktails.map((cocktail) => camelcaseKeys(cocktail));
 }
 

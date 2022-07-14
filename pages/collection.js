@@ -108,6 +108,9 @@ const arrow = css`
   border-bottom: 2px dotted #000;
   text-align: right;
   padding: 0.7rem;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const collectionBox = css`

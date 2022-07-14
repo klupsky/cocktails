@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Link from 'next/link';
 
 // CSS
 
@@ -75,7 +76,6 @@ const smallTextTwo = css`
 
   a {
     color: white;
-
     text-decoration-line: underline;
     text-underline-position: under;
   }
@@ -92,6 +92,35 @@ export const wrapper = css`
     margin-bottom: 10%;
     margin-left: 5%;
     margin-right: 5%;
+  }
+`;
+
+export const ellipse = css`
+  border-radius: 50%;
+  height: 2.2rem;
+  width: 7rem;
+  color: black;
+  background-color: white;
+  font-size: 0.7rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 0;
+  text-transform: uppercase;
+  :hover {
+    cursor: pointer;
+  }
+`;
+const ellipsePosition = css`
+  position: relative;
+  transform: rotate(-15deg);
+  top: -3.5rem;
+
+  // when smaller than 1000
+  @media (max-width: 1000px) {
+    left: -0.5rem;
+    top: -2rem;
   }
 `;
 
@@ -114,13 +143,16 @@ export default function Imprint() {
         <div css={imprintStyle}>
           <div css={wrapper}>
             <div css={smallText}>imprint</div>
-
+            <Link href="mailto:katharina@chalupsky.eu">
+              <div css={ellipsePosition}>
+                <div css={ellipse}>contact</div>
+              </div>
+            </Link>
             <div css={text}>
               created by <br />
               katharina chalupsky <br />
               <br />© 2022
             </div>
-
             <div css={smallTextTwo}>
               thank you{' '}
               <a
@@ -129,8 +161,8 @@ export default function Imprint() {
                 rel="noreferrer noopener"
               >
                 upleveled
-              </a>{' '}
-              and{' '}
+              </a>
+              and
               <a
                 href="http://www.mirandabar.com/"
                 target="_blank"

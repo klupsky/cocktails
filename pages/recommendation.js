@@ -288,7 +288,7 @@ export default function Recommendation(props) {
                             />
 
                             {level.level === 1
-                              ? 'LOOOOOW'
+                              ? 'LIIIIIGHT'
                               : level.level === 2
                               ? 'NIIIIICE'
                               : 'STROOOOONG'}

@@ -127,7 +127,6 @@ const ellipsePosition = css`
 `;
 
 const description = css`
-  line-height: 100%;
   margin-top: 5rem;
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
@@ -318,19 +317,7 @@ const drinkGrid = css`
   }
 `;
 
-
-
-
-
-
-
-
-
-
-
 // FUNCTIONALITY STARTS HERE
-
-
 
 export default function RecommendedCocktail(props) {
   // const [errors, setErrors] = useState([]);
@@ -516,7 +503,7 @@ export default function RecommendedCocktail(props) {
                       <div css={ellipse}>
                         <div>
                           {props.urlInfoQueryBackup.level === 1
-                            ? 'LOOOOOW'
+                            ? 'LIIIIIGHT'
                             : props.urlInfoQueryBackup.level === 2
                             ? 'NIIIIICE'
                             : 'STROOOOONG'}
@@ -528,9 +515,7 @@ export default function RecommendedCocktail(props) {
 
                 <div className="item6">
                   <div css={description}>
-                    {props.urlInfoQueryBackup.description}
-                    hey blah blah blah blah blah blah blah blah blah blah blah
-                    blah blah
+                    {props.urlInfoQueryBackup.description.toLowerCase()}
                   </div>
                 </div>
 
@@ -689,7 +674,7 @@ export default function RecommendedCocktail(props) {
                     <div css={ellipse}>
                       <div>
                         {props.urlInfoQuery.level === 1
-                          ? 'LOOOOOW'
+                          ? 'LIIIIIGHT'
                           : props.urlInfoQuery.level === 2
                           ? 'NIIIIICE'
                           : 'STROOOOONG'}
@@ -700,9 +685,7 @@ export default function RecommendedCocktail(props) {
               </div>
               <div className="item6">
                 <div css={description}>
-                  {props.urlInfoQuery.description}
-                  hey blah blah blah blah blah blah blah blah blah blah blah
-                  blah blah
+                  {props.urlInfoQuery.description.toLowerCase()}
                 </div>
               </div>
 

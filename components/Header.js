@@ -18,8 +18,14 @@ const mainNavigation = css`
   font-size: 2rem;
   margin-top: 15%;
 
-  // when smaller than 800
-  @media (max-width: 800px) {
+  // when smaller than 1000
+  @media (max-width: 1000px) {
+    margin-top: 20%;
+    font-size: 1.5rem;
+  }
+
+  // when smaller than 600
+  @media (max-width: 600px) {
     margin-top: 35%;
     font-size: 1rem;
   }
@@ -31,6 +37,11 @@ const smallNavigation = css`
   margin-top: 11%;
   line-height: 140%;
   letter-spacing: 0.07em;
+
+  // when smaller than 1000
+  @media (max-width: 1000px) {
+    margin-top: 18%;
+  }
 
   // when smaller than 600
 
@@ -161,16 +172,6 @@ const navigation = css`
         line-height: 100%;
         letter-spacing: 0em;
         margin-top: 1%;
-
-        // when smaller than 1000
-        @media (max-width: 1000px) {
-          font-size: 1.5rem;
-        }
-
-        // when smaller than 600
-        @media (max-width: 600px) {
-          font-size: 1rem;
-        }
       }
     }
   }

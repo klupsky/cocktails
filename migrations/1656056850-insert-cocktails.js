@@ -5,7 +5,8 @@ const cocktails = [
     level_id: 3,
     flavour_id: 1,
     spirit_id: 1,
-    description: '',
+    description:
+      'Intended as a revitalizing measure after a boozy night out, which can sometimes backfire with the alcohol content.',
     glass: 'small goblet',
     method: 'shaken',
     garnish: 'straight',
@@ -17,10 +18,11 @@ const cocktails = [
     level_id: 3,
     flavour_id: 1,
     spirit_id: 1,
-    description: '',
+    description:
+      'The classic of the classics. There was no more discussion about a drink than this one, so there are as many versions as there are opinions. Here is the current contemporary interpretation.',
     glass: 'martini-glass',
-    method: 'stirred/shaken',
-    garnish: 'olive/lemon zest',
+    method: 'stirred | shaken',
+    garnish: 'olive | lemon zest',
     category_id: 1,
   },
 
@@ -30,7 +32,8 @@ const cocktails = [
     level_id: 2,
     flavour_id: 2,
     spirit_id: 1,
-    description: '',
+    description:
+      'Named after a French cannon notorious for its power during World War I. But this very pleasant and accessible drink is not to be feared that much - quite the opposite.',
     glass: 'longdrink-glass',
     method: 'shaken',
     garnish: 'kumquat slice',
@@ -43,7 +46,8 @@ const cocktails = [
     level_id: 3,
     flavour_id: 4,
     spirit_id: 1,
-    description: '',
+    description:
+      'A drink that has its origins in the British Navy and owes its popularity to a fictional character. Done right, you know right away why this is a sour.',
     glass: 'tumbler',
     method: 'shaken',
     garnish: 'lime zest',
@@ -56,7 +60,8 @@ const cocktails = [
     level_id: 1,
     flavour_id: 2,
     spirit_id: 1,
-    description: '',
+    description:
+      'A cocktail category in its own right, the demarcation of which has only been too much discussed. A dash of soda adds some life to a sour, making it more approachable and refreshing.',
     glass: 'longdrink-glass',
     method: 'shaken',
     garnish: 'straight',
@@ -68,10 +73,11 @@ const cocktails = [
     level_id: 3,
     flavour_id: 4,
     spirit_id: 1,
-    description: '',
+    description:
+      'Unbalanced at first glance, this harmonious drink convinces with its strength and intensity. True to its name, don`t enjoy too many of these if you still want to engage in conversation.',
     glass: 'small goblet',
     method: 'shaken',
-    garnish: 'straight, amarena cherry',
+    garnish: 'straight | amarena cherry',
     category_id: 1,
   },
   {
@@ -80,10 +86,11 @@ const cocktails = [
     level_id: 3,
     flavour_id: 1,
     spirit_id: 1,
-    description: '',
+    description:
+      'Considered by many connoisseurs to be the grandfather of classic martini cocktails. Before it became trendy to drink everything dry, this drink convinced with its balanced sweetness.',
     glass: 'martini-glass',
     method: 'stirred',
-    garnish: 'straight, lemon zest',
+    garnish: 'straight | lemon zest',
     category_id: 1,
   },
   {
@@ -92,7 +99,8 @@ const cocktails = [
     level_id: 3,
     flavour_id: 3,
     spirit_id: 1,
-    description: '',
+    description:
+      'The epitome of classic aperitif drinks. If Italy was a cocktail, it would be a Negroni!',
     glass: 'tumbler',
     method: 'stirred',
     garnish: 'lemon zest',
@@ -104,10 +112,11 @@ const cocktails = [
     level_id: 1,
     flavour_id: 2,
     spirit_id: 1,
-    description: '',
+    description:
+      'The alleged favorite drink of the British "Queen Mom". A welcome version of Gin & Tonics with its fresh cucumber and spicy pepper notes.',
     glass: 'longdrink-glass',
     method: 'built-in',
-    garnish: 'cucumber, black pepper',
+    garnish: 'cucumber | black pepper',
     category_id: 2,
   },
   {
@@ -116,7 +125,8 @@ const cocktails = [
     level_id: 3,
     flavour_id: 3,
     spirit_id: 1,
-    description: '',
+    description:
+      'The more modern and lighter version of the classic Negroni. With its herbal and floral notes, it is particularly enjoyable in warmer temperatures.',
     glass: 'tumbler',
     method: 'stirred',
     garnish: 'lemon zest',
@@ -128,10 +138,11 @@ const cocktails = [
     level_id: 3,
     flavour_id: 3,
     spirit_id: 2,
-    description: '',
+    description:
+      'Another version of the Negroni, created entirely independently of it. Slightly stronger and fuller than its relative.',
     glass: 'small goblet',
     method: 'stirred',
-    garnish: 'straight, lemon zest',
+    garnish: 'straight | lemon zest',
     category_id: 1,
   },
   {
@@ -140,10 +151,11 @@ const cocktails = [
     level_id: 3,
     flavour_id: 1,
     spirit_id: 2,
-    description: '',
+    description:
+      'Named after a Brooklyn neighborhood, it`s a twist on the classic Brooklyn cocktail.',
     glass: 'small goblet',
     method: 'stirred',
-    garnish: 'straight, lemon zest',
+    garnish: 'straight | lemon zest',
     category_id: 1,
   },
   {
@@ -152,7 +164,8 @@ const cocktails = [
     level_id: 1,
     flavour_id: 2,
     spirit_id: 2,
-    description: '',
+    description:
+      'A really ancient drink that owes its name to the accompanying long and beautiful lemon zest, which resembles a horse`s neck.',
     glass: 'longdrink-glass',
     method: 'built-in',
     garnish: 'lemon zest',
@@ -164,7 +177,8 @@ const cocktails = [
     level_id: 3,
     flavour_id: 1,
     spirit_id: 2,
-    description: '',
+    description:
+      'It`s safe to say that the moment spirits and vermouth were first mixed, Manhattan and martinis were born.',
     glass: 'martini-glass',
     method: 'stirred',
     garnish: 'amarena cherry',
@@ -176,9 +190,10 @@ const cocktails = [
     level_id: 3,
     flavour_id: 1,
     spirit_id: 2,
-    description: '',
+    description:
+      'What at first glance seems like a fancy way to make whiskey easier and more enjoyable has a story that cannot be summed up in a few words. There have been fights and even exchanges of fire over the correct method of preparation.',
     glass: 'tumbler',
-    method: 'built-in/stirred',
+    method: 'built-in | stirred',
     garnish: 'amarena cherry, orange zest',
     category_id: 1,
   },
@@ -188,7 +203,8 @@ const cocktails = [
     level_id: 2,
     flavour_id: 4,
     spirit_id: 2,
-    description: '',
+    description:
+      'The most popular representative of its kind and definitely a benchmark drink to measure the quality of a bar.',
     glass: 'tumbler',
     method: 'shaken',
     garnish: 'amarena cherry, orange slice',
@@ -200,7 +216,8 @@ const cocktails = [
     level_id: 2,
     flavour_id: 4,
     spirit_id: 3,
-    description: '',
+    description:
+      'A modern classic of the New York bar renaissance, a Sour with smoky, malty but also spicy-hot notes is raised to new heights here.',
     glass: 'tumbler',
     method: 'shaken',
     garnish: 'sugar-coated ginger slice',
@@ -212,10 +229,11 @@ const cocktails = [
     level_id: 1,
     flavour_id: 2,
     spirit_id: 4,
-    description: '',
+    description:
+      'The national drink of Bermuda and one of the few drinks that is also a registered trademark.',
     glass: 'tumbler',
     method: 'built-in',
-    garnish: 'mint, lime slice',
+    garnish: 'mint | lime slice',
     category_id: 2,
   },
   {
@@ -224,10 +242,11 @@ const cocktails = [
     level_id: 2,
     flavour_id: 2,
     spirit_id: 4,
-    description: '',
+    description:
+      'The royal version of a mojito. A neo-classic from the early 2000s and how else could it be - New York.',
     glass: 'coupe',
     method: 'shaken',
-    garnish: 'straight, mint',
+    garnish: 'straight | mint',
     category_id: 1,
   },
   {
@@ -236,7 +255,8 @@ const cocktails = [
     level_id: 2,
     flavour_id: 4,
     spirit_id: 5,
-    description: '',
+    description:
+      'The supposedly best-selling cocktail in the world is not only famous, but also notorious. As many myths and legends surround the best-known representative of its category as there are different preparation methods and sizes.',
     glass: 'tumbler',
     method: 'shaken',
     garnish: 'lime and orange slices',
@@ -248,10 +268,11 @@ const cocktails = [
     level_id: 3,
     flavour_id: 1,
     spirit_id: 5,
-    description: '',
+    description:
+      'This drink dates back to Cuba`s golden age, when Prohobition made it a Mecca for American drinking tourists.',
     glass: 'small goblet',
     method: 'stirred',
-    garnish: 'straight, orange zest',
+    garnish: 'straight | orange zest',
     category_id: 3,
   },
   {
@@ -260,10 +281,11 @@ const cocktails = [
     level_id: 1,
     flavour_id: 2,
     spirit_id: 5,
-    description: '',
+    description:
+      'An incredibly refreshing and popular drink from Mexico. Not just a bartender favorite anymore.',
     glass: 'longdrink-glass',
     method: 'built-in',
-    garnish: 'grapefruit slice, salt rim',
+    garnish: 'grapefruit slice | salt rim',
     category_id: 2,
   },
   {
@@ -275,7 +297,7 @@ const cocktails = [
     description: '',
     glass: 'longdrink-glass',
     method: 'built-in',
-    garnish: 'mint, cucumber, lemon and orange slices',
+    garnish: 'mint | cucumber | lemon and orange slices',
     category_id: 2,
   },
   {
@@ -299,7 +321,7 @@ const cocktails = [
     description: '',
     glass: 'coupe',
     method: 'shaken',
-    garnish: 'straight, mint, coffeebeans',
+    garnish: 'straight | mint | coffeebeans',
     category_id: 1,
   },
   {
@@ -311,7 +333,7 @@ const cocktails = [
     description: '',
     glass: 'mule-cup',
     method: 'built-in',
-    garnish: 'mint, cucumber',
+    garnish: 'mint | cucumber',
     category_id: 1,
   },
 ];
