@@ -200,9 +200,12 @@ const drinkGrid = css`
 
 const favouritesStyle = css`
   margin-top: 0.4rem;
-  span {
+  display: flex;
+  .numberStyle {
     font-size: 0.9rem;
     line-height: 100%;
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
   }
 `;
 
@@ -330,8 +333,10 @@ export default function Cocktail(props) {
                     width="35px"
                     height="35px"
                     alt="add to favourites"
-                  />{' '}
-                  <span>{props.numberOfFavourites.length}</span>
+                  />
+                  <div className="numberStyle">
+                    {props.numberOfFavourites.length}
+                  </div>
                 </div>
               </div>
               <div className="item1">

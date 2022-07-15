@@ -49,18 +49,50 @@ const wrapper = css`
 `;
 
 const boxStyle = css`
-  gap: 30px;
+  gap: 1.6rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  // when smaller than 600px
+  @media (max-width: 600px) {
+    grid-template-columns: 100%;
+  }
 `;
 const removeStyle = css`
   width: 100%;
   text-align: left;
+
+  button {
+    margin-top: 0.6rem;
+    color: black;
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+    display: flex;
+  }
+
+  .removeImageStyle {
+    margin-top: 0.7rem;
+  }
+
+  .removeTitleStyle {
+    font-size: 0.5rem;
+    margin-top: 1.1rem;
+
+    line-height: 100%;
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
 `;
 
 const title = css`
   text-align: center;
-  margin-bottom: 2.5rem;
-  margin-top: 2rem;
-  padding: 5%;
+  margin-bottom: 0.5rem;
+  margin-top: 1.7rem;
+  padding-bottom: 5%;
+  padding-top: 5%;
+  height: 4rem;
   text-transform: uppercase;
   font-family: 'Messapia';
   letter-spacing: 0px;
@@ -73,10 +105,7 @@ const title = css`
   // when smaller than 1000px
   @media (max-width: 1000px) {
     font-size: 0.9rem;
-  }
-  // when smaller than 600px
-  @media (max-width: 600px) {
-    font-size: 0.7rem;
+    height: 3.3rem;
   }
 `;
 
@@ -84,7 +113,7 @@ const favouriteImageStyle = css`
   margin-top: 1%;
   margin-bottom: 0%;
   position: relative;
-  top: 1.5rem;
+  top: 0.7rem;
 `;
 
 // TYPES
@@ -119,6 +148,7 @@ export default function UserDetail(props: Props) {
   const [favouriteUserId, setFavouriteUserId] = useState<
     Favourite['userId'] | ''
   >('');
+  console.log(favouriteUserId);
   // const [favouriteCocktailId, setFavouriteCocktailId] = useState<
   //   Favourite['cocktailId'] | ''
   // >('');
@@ -204,7 +234,15 @@ export default function UserDetail(props: Props) {
                             });
                           }}
                         >
-                          REMOVE
+                          <div className="removeImageStyle">
+                            <Image
+                              src="/../../images/components/heart2.svg"
+                              width="25px"
+                              height="25px"
+                              alt="remove favourites"
+                            />
+                          </div>
+                          <div className="removeTitleStyle">remove</div>
                         </button>
                       </div>
 
