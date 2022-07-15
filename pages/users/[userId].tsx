@@ -52,7 +52,7 @@ const boxStyle = css`
   gap: 30px;
 `;
 const removeStyle = css`
-  width: 100%,
+  width: 100%;
   text-align: left;
 `;
 
@@ -97,6 +97,7 @@ type Props = {
     cocktailId: number;
     username: string;
     name: string;
+    flavourcolour: string;
   }[];
 };
 
@@ -106,6 +107,7 @@ type Favourite = {
   userId: number;
   cocktailId: number;
   username: string;
+  flavourcolour: string;
 };
 
 // FUNCTIONALITY STARTS HERE
@@ -117,12 +119,12 @@ export default function UserDetail(props: Props) {
   const [favouriteUserId, setFavouriteUserId] = useState<
     Favourite['userId'] | ''
   >('');
-  const [favouriteCocktailId, setFavouriteCocktailId] = useState<
-    Favourite['cocktailId'] | ''
-  >('');
+  // const [favouriteCocktailId, setFavouriteCocktailId] = useState<
+  //   Favourite['cocktailId'] | ''
+  // >('');
   const [favouriteId, setFavouriteId] = useState<Favourite['id'] | ''>('');
 
-  async function deleteFavouriteHandler(favouriteUserId: any) {
+  async function deleteFavouriteHandler(favouriteUserId: number) {
     const response = await fetch(`../api/favourites/${favouriteUserId}`, {
       method: 'DELETE',
       headers: {
@@ -138,7 +140,7 @@ export default function UserDetail(props: Props) {
     // copy state
     // update copy of the state
     const newState = favouritesLists.filter(
-      (favourite: Favourite) => favourite.id !== deletedFavourite.id,
+      (favourite) => favourite.id !== deletedFavourite.id,
     );
     // use setState func
 
@@ -180,7 +182,7 @@ export default function UserDetail(props: Props) {
             <div css={smallText}>you're drunk and in love</div>
 
             <div css={boxStyle}>
-              {favouritesLists.map((favourite: Favourite) => {
+              {favouritesLists.map((favourite) => {
                 return (
                   <div key={`cocktailName-${favourite.id}`}>
                     <div
@@ -195,7 +197,7 @@ export default function UserDetail(props: Props) {
                         <button
                           onClick={() => {
                             setFavouriteUserId(favourite.userId);
-                            setFavouriteCocktailId(favourite.cocktailId);
+                            // setFavouriteCocktailId(favourite.cocktailId);
                             setFavouriteId(favourite.id);
                             deleteFavouriteHandler(favourite.id).catch(() => {
                               console.log('delete favourite request fails');
