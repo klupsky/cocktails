@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 // import { css } from '@emotion/react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import Wave from 'react-wavify';
 // import { useRouter } from 'next/router';
@@ -18,7 +19,6 @@ const titleSection = css`
   height: 80vh;
   width: 100vw;
   overflow: hidden;
-
   text-align: center;
   .doYou {
     text-transform: uppercase;
@@ -55,7 +55,7 @@ const titleSection = css`
 
 const intro = css`
   background-color: #bbbaf9;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,6 +67,91 @@ const wrapper = css`
   // when smaller than 600
   @media (max-width: 600px) {
     margin: 10%;
+  }
+
+  .cherryStyle {
+    position: relative;
+    transform: rotate(-15deg);
+    text-align: right;
+    top: -10rem;
+
+    // when smaller than 1000
+    @media (max-width: 1000px) {
+      top: -7rem;
+    }
+
+    // when smaller than 600
+    @media (max-width: 600px) {
+      top: -7rem;
+    }
+
+    .swing {
+      -webkit-transform-origin: top center;
+      -ms-transform-origin: top center;
+      transform-origin: top center;
+      -webkit-animation-name: swing;
+      animation-name: swing;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+    }
+    -webkit-transform-origin: top center;
+    -ms-transform-origin: top center;
+    transform-origin: top center;
+    -webkit-animation-name: swing;
+    animation-name: swing;
+    -webkit-animation-duration: 15s;
+    animation-duration: 15s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+  }
+
+  @-webkit-keyframes swing {
+    20% {
+      -webkit-transform: rotate3d(0, 0, 1, 10deg);
+      transform: rotate3d(0, 0, 1, 10deg);
+    }
+    40% {
+      -webkit-transform: rotate3d(0, 0, 1, -10deg);
+      transform: rotate3d(0, 0, 1, -10deg);
+    }
+    60% {
+      -webkit-transform: rotate3d(0, 0, 1, 8deg);
+      transform: rotate3d(0, 0, 1, 8deg);
+    }
+    80% {
+      -webkit-transform: rotate3d(0, 0, 1, -10deg);
+      transform: rotate3d(0, 0, 1, -10deg);
+    }
+    /* 100% {
+      -webkit-transform: rotate3d(0, 0, 1, 8deg);
+      transform: rotate3d(0, 0, 1, 8deg);
+    } */
+  }
+
+  @keyframes swing {
+    20% {
+      -webkit-transform: rotate3d(0, 0, 1, 10deg);
+      transform: rotate3d(0, 0, 1, 10deg);
+    }
+    40% {
+      -webkit-transform: rotate3d(0, 0, 1, -10deg);
+      transform: rotate3d(0, 0, 1, -10deg);
+    }
+    60% {
+      -webkit-transform: rotate3d(0, 0, 1, 8deg);
+      transform: rotate3d(0, 0, 1, 8deg);
+    }
+    80% {
+      -webkit-transform: rotate3d(0, 0, 1, -10deg);
+      transform: rotate3d(0, 0, 1, -10deg);
+    }
+    /* 100% {
+      -webkit-transform: rotate3d(0, 0, 1, 8deg);
+      transform: rotate3d(0, 0, 1, 8deg);
+    } */
   }
 `;
 
@@ -97,6 +182,7 @@ const link = css`
   // when smaller than 600
   @media (max-width: 600px) {
     font-size: 0.9rem;
+    margin-bottom: 4rem;
   }
 `;
 
@@ -112,6 +198,49 @@ const wave = css`
 const carousel = css`
   background-color: #fffb89;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .carouselInsideStyle {
+    text-align: center;
+    :hover {
+      cursor: pointer;
+    }
+
+    .cocktailNameStyle {
+      margin-bottom: 2rem;
+      margin-top: 0.5rem;
+    }
+  }
+`;
+
+export const ellipse = css`
+  border-radius: 50%;
+  height: 2.2rem;
+  width: 7rem;
+  color: black;
+  background-color: white;
+  font-size: 0.7rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 0;
+  text-transform: uppercase;
+
+`;
+const ellipsePosition = css`
+  position: relative;
+  transform: rotate(-15deg);
+  top: -7.5rem;
+  left: -2rem;
+
+  // when smaller than 1000
+  @media (max-width: 1000px) {
+    left: -0.5rem;
+    top: -5rem;
+  }
 `;
 
 // TYPES
@@ -197,7 +326,6 @@ export default function Home(props: Props) {
           content="a recommendation guide to cocktails"
         />
       </Head>
-
       <main css={titleSection}>
         <div className="doYou">do you</div>
         <h1>
@@ -217,11 +345,25 @@ export default function Home(props: Props) {
           />
         </div>
       </main>
-
       <div css={intro}>
         <div css={wrapper}>
+          <div className="cherryStyle">
+            <Image
+              src="/../images/components/cherry.svg"
+              alt="{preview.name}"
+              width="160px"
+              height="160px"
+            />
+          </div>
+
+          <div css={ellipsePosition}>
+            <div css={ellipse}>
+              <div>sure you do!</div>
+            </div>{' '}
+          </div>
+
           <div css={text}>
-            you're just chillin’ after a hard day in a bar, life is good and you
+            you are chillin’ after a hard day in a bar, life is good and you
             feel like a cocktail would add on to this perfect moment ...
           </div>
           <div css={smallText}>but which one is right for you?</div>
@@ -231,9 +373,34 @@ export default function Home(props: Props) {
           </div>
         </div>
       </div>
-
+      {/* {console.log(props.collectionPreview)} */}
       <div css={carousel}>
-        <Carousel collectionPreview={props.collectionPreview} />
+        <Carousel>
+          {props.collectionPreview.map((preview: any) => {
+            return (
+              <div
+                className="carouselInsideStyle"
+                key={`cocktailName-${preview.id}`}
+              >
+                <div>
+                  <Link href={`/../collection/${preview.id}`}>
+                    <Image
+                      src={`/../images/cocktail/${preview.id}.svg`}
+                      alt="{preview.name}"
+                      width="300px"
+                      height="300px"
+                    />
+                  </Link>
+                </div>
+                <div className="cocktailNameStyle">
+                  <Link href={`/../collection/${preview.id}`}>
+                    {preview.name}
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
+        </Carousel>
       </div>
     </>
   );

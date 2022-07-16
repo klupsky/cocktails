@@ -26,7 +26,8 @@ const formStyle = css`
     border-top: 0px solid transparent;
     text-shadow: 0px 0px 0px transparent;
     border-bottom: 2px dotted #000;
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1.5rem;
   }
 
   button {
@@ -57,61 +58,97 @@ const formStyle = css`
   }
 `;
 
-const inputFlavour = css`
+const inputSpirit = css`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  text-transform: uppercase;
-  font-size: 0.6rem;
-  line-height: 100%;
   gap: 8px;
+  flex-wrap: wrap;
 
-  label > input[type='radio'] {
-    display: none;
+  justify-content: space-between;
+  // when smaller than 700
+  @media (max-width: 700px) {
+    justify-content: center;
   }
 
-  label > input[type='radio'] {
+  input[type='radio'] {
+    opacity: 0;
+    position: absolute;
+    background-clip: content-box;
+    height: 1.7rem;
+    width: 7rem;
+  }
+
+  label {
     display: inline-block;
-    vertical-align: bottom;
-    margin-right: 0.3rem;
-    border-radius: 50%;
-    border-color: black;
-    border: 2px solid;
+    background-color: transparent;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 10px;
+    height: 1.7rem;
+    width: 7rem;
+
+    text-align: center;
+  }
+
+  label:hover {
     cursor: pointer;
-    height: 1.2rem;
-    width: 1.2rem;
+  }
+
+  input[type='radio']:checked + label {
+    background-color: black;
+    color: white;
+    border: 2px solid black;
   }
 `;
 
-const inputSpirit = css`
-  display: grid;
-  grid-template-columns: auto auto auto;
-  text-transform: uppercase;
-  font-size: 0.6rem;
+const flavourInputs = css`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  flex-wrap: wrap;
   line-height: 100%;
-  text-align: left;
   gap: 8px;
 
-  // when smaller than 900
-  @media (max-width: 900px) {
-    grid-template-columns: auto auto;
+  // when smaller than 700
+  @media (max-width: 700px) {
+    justify-content: center;
   }
 
-  label > input[type='radio'] {
-    display: none;
+  input[type='radio'] {
+    opacity: 0;
+    position: absolute;
+
+    border: 2px solid #000000;
+    background-clip: content-box;
+    padding: 3px;
+
+    height: 4rem;
+    width: 5rem;
   }
 
-  label > input[type='radio'] {
+  label {
     display: inline-block;
-    vertical-align: bottom;
-    margin-right: 0.3rem;
-    border-radius: 50%;
-    border-color: black;
-    border: 2px solid;
+    background-color: transparent;
+    padding-top: 27%;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 10%;
+    height: 4rem;
+    width: 5rem;
+
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
+
+  label:hover {
     cursor: pointer;
-    height: 1.2rem;
-    width: 1.2rem;
+  }
+
+  input[type='radio']:checked + label {
+    background-color: black;
+    color: white;
+    border: 2px solid black;
   }
 `;
 
@@ -120,25 +157,48 @@ const inputLevel = css`
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  text-transform: uppercase;
-  font-size: 0.6rem;
   line-height: 100%;
   gap: 8px;
 
-  label > input[type='radio'] {
-    display: none;
+  // when smaller than 700
+  @media (max-width: 700px) {
+    justify-content: center;
   }
 
-  label > input[type='radio'] {
+  input[type='radio'] {
+    opacity: 0;
+    position: absolute;
+
+    border: 2px solid #000000;
+    background-clip: content-box;
+    padding: 3px;
+
+    height: 2.2rem;
+    width: 7rem;
+  }
+
+  label {
     display: inline-block;
-    vertical-align: bottom;
-    margin-right: 0.3rem;
+    background-color: transparent;
+    padding-top: 7%;
+    font-size: 16px;
+    border: 2px solid black;
     border-radius: 50%;
-    border-color: black;
-    border: 2px solid;
-    cursor: pointer;
-    height: 1.2rem;
-    width: 1.2rem;
+
+    height: 2.2rem;
+    width: 7rem;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
+
+  label:hover {
+    background-color: white;
+  }
+
+  input[type='radio']:checked + label {
+    background-color: black;
+    color: white;
+    border: 2px solid black;
   }
 `;
 
@@ -150,7 +210,12 @@ const category = css`
   font-style: normal;
   font-weight: 700;
   font-size: 0.7rem;
-  margin-bottom: 5%;
+  margin-bottom: 3%;
+
+  // when smaller than 700
+  @media (max-width: 700px) {
+    text-align: center;
+  }
 `;
 
 export default function Recommendation(props) {
@@ -221,20 +286,18 @@ export default function Recommendation(props) {
                   <div id="flavour" css={category}>
                     flavour
                   </div>
-
-                  <div css={inputFlavour}>
+                  <div css={flavourInputs}>
                     {props.flavours.map((flavour) => {
                       return (
                         <span key={flavour.id}>
-                          <label htmlFor={flavour.name}>
-                            <input
-                              type="radio"
-                              className="flavour"
-                              name="flavour-option"
-                              value={flavour.id}
-                            />
-                            {flavour.name}
-                          </label>
+                          <input
+                            type="radio"
+                            id="flavourRadio"
+                            name="flavour"
+                            value={flavour.id}
+                          />
+
+                          <label htmlFor={flavour.name}> {flavour.name}</label>
                         </span>
                       );
                     })}
@@ -254,14 +317,10 @@ export default function Recommendation(props) {
                     {props.spirits.map((spirit) => {
                       return (
                         <span key={spirit.id}>
-                          <label htmlFor={spirit.name}>
-                            <input
-                              type="radio"
-                              name="spirit-option"
-                              value={spirit.id}
-                            />
-                            {spirit.name}
-                          </label>
+                          <input type="radio" name="spirit" value={spirit.id} />
+                          <label htmlFor={spirit.name}>{spirit.name}</label>
+
+                          <span className="mark"></span>
                         </span>
                       );
                     })}
@@ -280,13 +339,12 @@ export default function Recommendation(props) {
                     {props.levels.map((level) => {
                       return (
                         <span key={level.id}>
+                          <input
+                            type="radio"
+                            name="levelRadio"
+                            value={level.id}
+                          />
                           <label htmlFor={level.level}>
-                            <input
-                              type="radio"
-                              name="level-option"
-                              value={level.id}
-                            />
-
                             {level.level === 1
                               ? 'LIIIIIGHT'
                               : level.level === 2

@@ -10,7 +10,6 @@ import {
   getUserByValidSessionToken,
 } from '../../util/database';
 import { text } from '../login';
-import { errorStyles } from '../register';
 
 // CSS
 
@@ -706,12 +705,6 @@ export default function RecommendedCocktail(props) {
                   <Link href="/recommendation">
                     <button>GO BACK!</button>
                   </Link>
-
-                  {errors.map((error) => (
-                    <div css={errorStyles} key={`error-${error.message}`}>
-                      {error.message}
-                    </div>
-                  ))}
 
                   {/* {props.urlInfoQuery.cocktailId}
             {props.urlInfoQuery.name}

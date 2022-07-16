@@ -15,7 +15,7 @@ import { logo, text } from '../login';
 // CSS
 
 const section = css`
-  height: auto;
+  min-height: 65vh;
   width: 100vw;
   overflow: hidden;
   text-align: center;
@@ -31,7 +31,11 @@ export const smallText = css`
   margin-top: 3%;
   margin-bottom: 4rem;
   font-size: 0.6rem;
-  line-height: 100%;
+  line-height: 130%;
+  a {
+    text-decoration-line: underline;
+    text-underline-position: under;
+  }
 `;
 
 const wrapper = css`
@@ -208,8 +212,12 @@ export default function UserDetail(props: Props) {
         </div>
         <div css={section}>
           <div css={wrapper}>
-            <div css={text}>{props.user.username}, this is your selection</div>
-            <div css={smallText}>you're drunk and in love</div>
+            <div css={text}>
+              cheers, it's nice to see you back here {props.user.username}!
+            </div>
+            <div css={smallText}>
+              this is the place for your selection of cocktails
+            </div>
 
             <div css={boxStyle}>
               {favouritesLists.map((favourite) => {

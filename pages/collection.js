@@ -156,7 +156,9 @@ export default function Collection(props) {
 
         <div css={section}>
           <div css={wrapper}>
-            <div css={text}>get inspired by the full collection</div>
+            <div css={text}>
+              browse through the full collection and get some inspiration
+            </div>
             <div css={smallText}>filter by category</div>
 
             <div css={buttonBox}>

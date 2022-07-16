@@ -235,6 +235,7 @@ export default function Register(props: Props) {
                     onChange={(event) => {
                       setUsername(event.currentTarget.value);
                     }}
+                    required
                   />
                 </div>
                 <div className="col-25">
@@ -248,6 +249,7 @@ export default function Register(props: Props) {
                     onChange={(event) => {
                       setEmail(event.currentTarget.value);
                     }}
+                    required
                   />
                 </div>
                 <div className="col-25">
@@ -261,6 +263,7 @@ export default function Register(props: Props) {
                     onChange={(event) => {
                       setPassword(event.currentTarget.value);
                     }}
+                    required
                   />
                 </div>
                 <button onClick={() => registerHandler()}>Register</button>

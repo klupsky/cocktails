@@ -294,7 +294,8 @@ const cocktails = [
     level_id: 1,
     flavour_id: 2,
     spirit_id: 6,
-    description: '',
+    description:
+      'Originally invented by James Pimm as a refreshing accompaniment to his oysters at his London bar. This drink became a popular companion throughout the day and evening to this day.',
     glass: 'longdrink-glass',
     method: 'built-in',
     garnish: 'mint | cucumber | lemon and orange slices',
@@ -306,7 +307,8 @@ const cocktails = [
     level_id: 2,
     flavour_id: 4,
     spirit_id: 6,
-    description: '',
+    description:
+      'With its typical foam crown and full mouthfeel, it is the epitome of a cocktail with protein. Probably the most popular of its kind.',
     glass: 'coupe',
     method: 'shaken',
     garnish: 'straight',
@@ -318,7 +320,8 @@ const cocktails = [
     level_id: 2,
     flavour_id: 3,
     spirit_id: 7,
-    description: '',
+    description:
+      'Probably the most famous coffee cocktail. According to legend, a model once asked for a drink at a famous New York bar with the following requirements: "Wake me up, then fuck me up."',
     glass: 'coupe',
     method: 'shaken',
     garnish: 'straight | mint | coffeebeans',
@@ -330,7 +333,8 @@ const cocktails = [
     level_id: 1,
     flavour_id: 2,
     spirit_id: 7,
-    description: '',
+    description:
+      'A marketing gimmick and stroke of genius. Started as an attempt to popularize vodka in the US and because they were stuck with tons of spicy ginger lemonade they mixed it with and served iit n a copper mug to sell it better. The success that continues to this day exceeds the wildest expectations of the inventors!',
     glass: 'mule-cup',
     method: 'built-in',
     garnish: 'mint | cucumber',

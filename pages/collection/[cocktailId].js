@@ -323,7 +323,7 @@ export default function Cocktail(props) {
           `}
         >
           <div css={wrapper}>
-            <div css={text}>read a little more about the</div>
+            <div css={text}>this cocktail is a</div>
             <div css={title}>{props.collectionCocktail.name}</div>
             <div css={drinkGrid}>
               <div className="item10">
