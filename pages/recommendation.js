@@ -90,7 +90,7 @@ const inputSpirit = css`
     text-align: center;
   }
 
-  label:hover {
+  input:hover {
     cursor: pointer;
   }
 
@@ -141,7 +141,7 @@ const flavourInputs = css`
     font-size: 0.7rem;
   }
 
-  label:hover {
+  input:hover {
     cursor: pointer;
   }
 
@@ -191,8 +191,8 @@ const inputLevel = css`
     font-size: 0.7rem;
   }
 
-  label:hover {
-    background-color: white;
+  input:hover {
+    cursor: pointer;
   }
 
   input[type='radio']:checked + label {
