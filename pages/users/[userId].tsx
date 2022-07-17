@@ -39,11 +39,15 @@ export const smallText = css`
 `;
 
 const wrapper = css`
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 20%;
+  margin-right: 20%;
   margin-top: 100px;
   margin-bottom: 10%;
 
+  @media (max-width: 1500px) {
+    margin-left: 15%;
+    margin-right: 15%;
+  }
   // when smaller than 800
   @media (max-width: 800px) {
     margin-bottom: 10%;
@@ -181,18 +185,18 @@ export default function UserDetail(props: Props) {
     setFavouritesLists(newState);
   }
 
-  if (!props.user) {
-    return (
-      <>
-        <Head>
-          <title>user not found</title>
-          <meta name="description" content="user not found" />
-        </Head>
-        <h1>404 - user not found</h1>
-        better luck next time
-      </>
-    );
-  }
+  // if (!props.user) {
+  //   return (
+  //     <>
+  //       <Head>
+  //         <title>user not found</title>
+  //         <meta name="description" content="user not found" />
+  //       </Head>
+  //       <h1>404 - user not found</h1>
+  //       better luck next time
+  //     </>
+  //   );
+  // }
 
   return (
     <div>
@@ -203,12 +207,12 @@ export default function UserDetail(props: Props) {
 
       <main>
         <div css={logo}>
-          <a href="/">
+          <Link href="/" css={logo}>
             <span>
               FANCY A <br />
               COCKTAIL?
             </span>
-          </a>
+          </Link>
         </div>
         <div css={section}>
           <div css={wrapper}>

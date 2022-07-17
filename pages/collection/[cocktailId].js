@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   getNumberOfFavourites,
   getSingleCocktailFromCollection,
@@ -21,6 +22,13 @@ const logo = css`
   color: #000000;
   z-index: 2;
 
+  a {
+    color: black;
+  }
+  :hover {
+    cursor: pointer;
+  }
+
   // when smaller than 600
   @media (max-width: 600px) {
     font-size: 0.7rem;
@@ -29,10 +37,15 @@ const logo = css`
 `;
 
 export const wrapper = css`
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 20%;
+  margin-right: 20%;
   margin-top: 200px;
   margin-bottom: 10%;
+
+  @media (max-width: 1500px) {
+    margin-left: 15%;
+    margin-right: 15%;
+  }
 
   // when smaller than 800
   @media (max-width: 800px) {
@@ -304,12 +317,12 @@ export default function Cocktail(props) {
 
       <main>
         <div css={logo}>
-          <a href="/">
+          <Link href="/" css={logo}>
             <span>
               FANCY A <br />
               COCKTAIL?
             </span>
-          </a>
+          </Link>
         </div>
 
         <div
@@ -420,8 +433,8 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      collectionCocktail: collectionCocktail || null,
-      numberOfFavourites: numberOfFavourites || null,
+      collectionCocktail: collectionCocktail,
+      numberOfFavourites: numberOfFavourites,
     },
   };
 }

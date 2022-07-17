@@ -31,6 +31,12 @@ const logoWhite = css`
   top: -30px;
   color: #ffffff;
   z-index: 2;
+  a {
+    color: white;
+  }
+  :hover {
+    cursor: pointer;
+  }
 
   // when smaller than 600
   @media (max-width: 600px) {
@@ -136,10 +142,14 @@ export default function Imprint() {
 
       <main>
         <div css={logoWhite}>
-          fancy a<br />
-          cocktail?
+          <Link href="/" css={logoWhite}>
+            <span>
+              FANCY A <br />
+              COCKTAIL?
+            </span>
+          </Link>
+          <br />
         </div>
-
         <div css={imprintStyle}>
           <div css={wrapper}>
             <div css={smallText}>imprint</div>

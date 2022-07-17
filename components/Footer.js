@@ -36,7 +36,8 @@ export default function Footer() {
       <Marquee speed={150} gradient={false}>
         <span css={cocktailHour}>
           ! HAPPY HOUR! AFTER HOUR! EVERY HOUR! COCKTAIL HOUR! HAPPY HOUR! AFTER
-          HOUR! EVERY HOUR! COCKTAIL HOUR
+          HOUR! EVERY HOUR! COCKTAIL HOUR! HAPPY HOUR! AFTER HOUR! EVERY HOUR!
+          COCKTAIL HOUR! HAPPY HOUR! AFTER HOUR! EVERY HOUR! COCKTAIL HOUR
         </span>
       </Marquee>
     </footer>

@@ -22,10 +22,15 @@ export const smallText = css`
 `;
 
 export const wrapper = css`
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 20%;
+  margin-right: 20%;
   margin-top: 200px;
   margin-bottom: 10%;
+
+  @media (max-width: 1500px) {
+    margin-left: 15%;
+    margin-right: 15%;
+  }
 
   // when smaller than 800
   @media (max-width: 800px) {
@@ -94,6 +99,17 @@ const word = css`
   font-size: 0.7rem;
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
+`;
+
+const errorStyles = css`
+  color: #e75c3c;
+  margin-top: 3%;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 100%;
+  font-family: 'Messapia';
+  letter-spacing: 0px;
+  text-transform: uppercase;
 `;
 
 export const ellipse = css`
@@ -381,7 +397,7 @@ export default function RecommendedCocktail(props) {
         </Head>
         <main>
           <div css={logo}>
-            <a href="/">
+            <a href=".">
               <span>
                 FANCY A <br />
                 COCKTAIL?
@@ -557,7 +573,7 @@ export default function RecommendedCocktail(props) {
 
       <main>
         <div css={logo}>
-          <a href="/">
+          <a href=".">
             <span>
               FANCY A <br />
               COCKTAIL?
@@ -705,6 +721,11 @@ export default function RecommendedCocktail(props) {
                   <Link href="/recommendation">
                     <button>GO BACK!</button>
                   </Link>
+                  {errors.map((error) => (
+                    <div css={errorStyles} key={`error-${error.message}`}>
+                      {error.message}
+                    </div>
+                  ))}
 
                   {/* {props.urlInfoQuery.cocktailId}
             {props.urlInfoQuery.name}

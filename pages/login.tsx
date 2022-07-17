@@ -17,6 +17,12 @@ export const logo = css`
   text-transform: uppercase;
   position: relative;
   top: -30px;
+  a {
+    color: black;
+  }
+  :hover {
+    cursor: pointer;
+  }
 
   // when smaller than 600
   @media (max-width: 600px) {
@@ -50,10 +56,15 @@ export const smallText = css`
 `;
 
 export const wrapper = css`
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: 20%;
+  margin-right: 20%;
   margin-top: 70px;
   margin-bottom: 2%;
+
+  @media (max-width: 1500px) {
+    margin-left: 25%;
+    margin-right: 25%;
+  }
 
   // when smaller than 600
   @media (max-width: 600px) {
@@ -220,12 +231,12 @@ export default function Login(props: Props) {
 
       <main>
         <div css={logo}>
-          <a href="/">
+          <Link href="/" css={logo}>
             <span>
               FANCY A <br />
               COCKTAIL?
             </span>
-          </a>
+          </Link>
         </div>
 
         <div css={section}>

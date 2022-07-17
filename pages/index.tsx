@@ -16,10 +16,13 @@ import { getPreviewFromCollectionOfCocktails } from '../util/database';
 // CSS
 
 const titleSection = css`
-  height: 80vh;
+  height: 85vh;
   width: 100vw;
   overflow: hidden;
   text-align: center;
+  @media (max-width: 1000px) {
+    height: 80vh;
+  }
   .doYou {
     text-transform: uppercase;
     margin-top: 3.5%;
@@ -40,13 +43,19 @@ const titleSection = css`
     letter-spacing: 0em;
     margin-top: 8%;
 
+    // when bigger than 15000
+    @media (min-width: 1500px) {
+      font-size: 7rem;
+      margin-top: 7%;
+    }
+
     // when smaller than 1000
     @media (max-width: 1000px) {
       font-size: 3rem;
     }
 
     // when smaller than 600
-    @media (max-width: 600px) {
+    @media (max-width: 570px) {
       font-size: 1.7rem;
       margin-top: 12%;
     }
@@ -63,7 +72,12 @@ const intro = css`
 `;
 
 const wrapper = css`
-  margin: 25%;
+  margin: 32%;
+
+  @media (max-width: 1500px) {
+    margin: 25%;
+  }
+
   // when smaller than 600
   @media (max-width: 600px) {
     margin: 10%;
@@ -73,7 +87,11 @@ const wrapper = css`
     position: relative;
     transform: rotate(-15deg);
     text-align: right;
-    top: -10rem;
+    top: -13.5rem;
+
+    @media (max-width: 1400px) {
+      top: -10rem;
+    }
 
     // when smaller than 1000
     @media (max-width: 1000px) {
@@ -228,7 +246,6 @@ export const ellipse = css`
   justify-content: center;
   border: 0;
   text-transform: uppercase;
-
 `;
 const ellipsePosition = css`
   position: relative;
@@ -328,16 +345,13 @@ export default function Home(props: Props) {
       </Head>
       <main css={titleSection}>
         <div className="doYou">do you</div>
-        <h1>
-          fancy a<br />
-          cocktail?
-        </h1>
+        <h1>fancy a cocktail?</h1>
         <div css={wave}>
           <Wave
             fill="#bbbaf9"
             paused={false}
             options={{
-              height: 40,
+              height: 50,
               amplitude: 40,
               speed: 0.4,
               points: 2,
@@ -368,7 +382,7 @@ export default function Home(props: Props) {
           </div>
           <div css={smallText}>but which one is right for you?</div>
 
-          <div css={link}>
+          <div css={link} data-test-id="login">
             <Link href="/recommendation">find a cocktail</Link>
           </div>
         </div>

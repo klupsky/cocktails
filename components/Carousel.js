@@ -4,8 +4,13 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const wrapper = css`
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: 32%;
+  margin-right: 32%;
+
+  @media (max-width: 1500px) {
+    margin-left: 25%;
+    margin-right: 25%;
+  }
 
   // when smaller than 600
   @media (max-width: 600px) {
@@ -148,7 +153,7 @@ export default function Carousel(props) {
             )}
           </div>
         </div>
-        <div css={link}>
+        <div css={link} data-test-id="fullcollection">
           <Link href="/collection">full collection</Link>
         </div>
       </div>

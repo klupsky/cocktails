@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-// import Link from 'next/link';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
@@ -63,13 +63,16 @@ const inputSpirit = css`
   flex-direction: row;
   gap: 8px;
   flex-wrap: wrap;
-
   justify-content: space-between;
   // when smaller than 700
   @media (max-width: 700px) {
     justify-content: center;
   }
-
+  // when bigger than 1500
+  @media (min-width: 1500px) {
+    justify-content: center;
+    gap: 0.5rem;
+  }
   input[type='radio'] {
     opacity: 0;
     position: absolute;
@@ -80,14 +83,19 @@ const inputSpirit = css`
 
   label {
     display: inline-block;
+    text-transform: uppercase;
+    line-height: 100%;
     background-color: transparent;
     font-size: 16px;
     border: 2px solid black;
     border-radius: 10px;
-    height: 1.7rem;
+    height: 1.3rem;
+    padding: 5px;
     width: 7rem;
-
     text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 12rem;
   }
 
   input:hover {
@@ -105,10 +113,15 @@ const flavourInputs = css`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
   flex-wrap: wrap;
   line-height: 100%;
   gap: 8px;
+
+  // when bigger than 1500
+  @media (min-width: 1500px) {
+    justify-content: center;
+    gap: 2rem;
+  }
 
   // when smaller than 700
   @media (max-width: 700px) {
@@ -164,6 +177,11 @@ const inputLevel = css`
   @media (max-width: 700px) {
     justify-content: center;
   }
+  // when bigger than 1500
+  @media (min-width: 1500px) {
+    justify-content: center;
+    gap: 2rem;
+  }
 
   input[type='radio'] {
     opacity: 0;
@@ -216,6 +234,11 @@ const category = css`
   @media (max-width: 700px) {
     text-align: center;
   }
+
+  // when bigger than 1500
+  @media (min-width: 1500px) {
+    text-align: center;
+  }
 `;
 
 export default function Recommendation(props) {
@@ -262,12 +285,12 @@ export default function Recommendation(props) {
 
       <main>
         <div css={logo}>
-          <a href="/">
+          <Link css={logo} href="/">
             <span>
               FANCY A <br />
               COCKTAIL?
             </span>
-          </a>
+          </Link>
         </div>
         <div css={section}>
           <div css={wrapper}>
@@ -320,7 +343,7 @@ export default function Recommendation(props) {
                           <input type="radio" name="spirit" value={spirit.id} />
                           <label htmlFor={spirit.name}>{spirit.name}</label>
 
-                          <span className="mark"></span>
+                          <span className="mark" />
                         </span>
                       );
                     })}

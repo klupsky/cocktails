@@ -38,9 +38,9 @@ export default async function handler(
 
     const userFavourites = await getUserFavourites(favouritesId);
 
-    if (!userFavourites) {
-      return res.status(400).json({ error: 'userId must be a valid id' });
-    }
+    // if (!userFavourites) {
+    //   return res.status(400).json({ error: 'userId must be a valid id' });
+    // }
 
     return res.status(200).json(userFavourites);
   }
@@ -78,9 +78,9 @@ export default async function handler(
     );
 
     // TODO: add a fail case when id is not a valid favouriteId
-    if (!deletedFavourite) {
-      return res.status(400).json({ error: 'userId must be a valid id' });
-    }
+    // if (!deletedFavourite) {
+    //   return res.status(400).json({ error: 'userId must be a valid id' });
+    // }
 
     return res.status(200).json(deletedFavourite);
   }

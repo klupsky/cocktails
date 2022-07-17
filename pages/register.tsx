@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { RegisterResponseBody } from './api/register';
@@ -19,10 +20,15 @@ const loginSection = css`
 `;
 
 const wrapper = css`
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: 32%;
+  margin-right: 32%;
   margin-top: 70px;
   margin-bottom: 10%;
+
+  @media (max-width: 1500px) {
+    margin-left: 25%;
+    margin-right: 25%;
+  }
 
   // when smaller than 600
   @media (max-width: 600px) {
@@ -211,12 +217,12 @@ export default function Register(props: Props) {
 
       <main>
         <div css={logo}>
-          <a href="/">
+          <Link href="/" css={logo}>
             <span>
               FANCY A <br />
               COCKTAIL?
             </span>
-          </a>
+          </Link>
         </div>
         <div css={loginSection}>
           <div css={wrapper}>
