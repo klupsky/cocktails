@@ -167,9 +167,6 @@ export default function Collection(props) {
             <div css={smallText}>filter by category</div>
 
             <div css={buttonBox}>
-              <button onClick={() => setCocktailList(props.collectionCocktail)}>
-                FULL COLLECTION
-              </button>
               {props.categories.map((category) => {
                 return (
                   <button
@@ -182,6 +179,9 @@ export default function Collection(props) {
                   </button>
                 );
               })}
+              <button onClick={() => setCocktailList(props.collectionCocktail)}>
+                FULL COLLECTION
+              </button>
             </div>
             <div css={collectionBoxContainer}>
               {cocktailList.map((cocktailName) => {

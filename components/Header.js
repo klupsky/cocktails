@@ -56,9 +56,6 @@ const logo = css`
   text-align: center;
   font-size: 1rem;
   line-height: 100%;
-  a {
-    color: black;
-  }
 
   // when smaller than 600
   @media (max-width: 600px) {
@@ -191,18 +188,21 @@ export default function Header(props) {
 
         <div id="overlay">
           <div css={logo}>
-            <a href="." css={logo}>
-              FANCY A
-              <br />
-              COCKTAIL?
+            <a href="/">
+              <span>
+                FANCY A <br />
+                COCKTAIL?
+              </span>
             </a>
           </div>
 
           <div css={mainNavigation}>
-            <a href="recommendation">find a cocktail</a>
+            <a href="/recommendation" data-test-id="recommendation">
+              find a cocktail
+            </a>
             <br />
 
-            <a href="collection">full collection</a>
+            <a href="/collection">full collection</a>
             <br />
             {props.user && (
               <a href={`/users/${props.user.id}`}>your selection</a>
@@ -211,16 +211,16 @@ export default function Header(props) {
           </div>
           {props.user ? (
             <div css={smallNavigation}>
-              <a href="logout">Logout</a>
+              <a href="/logout">Logout</a>
               <br />
-              <a href="imprint">Imprint</a>
+              <a href="/imprint">Imprint</a>
             </div>
           ) : (
             <div css={smallNavigation}>
               {/* <Link href="/register">Register</Link> */}
-              <a href="login">Login</a> | <a href="register">Register</a>
+              <a href="/login">Login</a> | <a href="/register">Register</a>
               <br />
-              <a data-test-id="imprint" href="imprint">
+              <a href="/imprint" data-test-id="imprint">
                 Imprint
               </a>
             </div>

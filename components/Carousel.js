@@ -91,9 +91,10 @@ const link = css`
   border-bottom: 2px dotted #000;
   padding: 4%;
 
-  // when smaller than 600
-  @media (max-width: 600px) {
+  // when smaller than 700
+  @media (max-width: 700px) {
     font-size: 0.9rem;
+    line-height: 100%;
   }
 `;
 

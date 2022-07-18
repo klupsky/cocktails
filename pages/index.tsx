@@ -16,7 +16,7 @@ import { getPreviewFromCollectionOfCocktails } from '../util/database';
 // CSS
 
 const titleSection = css`
-  height: 85vh;
+  height: 80vh;
   width: 100vw;
   overflow: hidden;
   text-align: center;
@@ -87,10 +87,10 @@ const wrapper = css`
     position: relative;
     transform: rotate(-15deg);
     text-align: right;
-    top: -13.5rem;
+    top: -7.5rem;
 
     @media (max-width: 1400px) {
-      top: -10rem;
+      top: -rem;
     }
 
     // when smaller than 1000
@@ -197,8 +197,8 @@ const link = css`
   border-bottom: 2px dotted #000;
   padding: 4%;
 
-  // when smaller than 600
-  @media (max-width: 600px) {
+  // when smaller than 700
+  @media (max-width: 700px) {
     font-size: 0.9rem;
     margin-bottom: 4rem;
   }
@@ -390,6 +390,7 @@ export default function Home(props: Props) {
       {/* {console.log(props.collectionPreview)} */}
       <div css={carousel}>
         <Carousel>
+          {/* {console.log(props.collectionPreview)} */}
           {props.collectionPreview.map((preview: any) => {
             return (
               <div

@@ -397,12 +397,12 @@ export default function RecommendedCocktail(props) {
         </Head>
         <main>
           <div css={logo}>
-            <a href=".">
+            <Link href="/">
               <span>
                 FANCY A <br />
                 COCKTAIL?
               </span>
-            </a>
+            </Link>
           </div>
 
           <div
@@ -573,12 +573,12 @@ export default function RecommendedCocktail(props) {
 
       <main>
         <div css={logo}>
-          <a href=".">
+          <Link href="/">
             <span>
               FANCY A <br />
               COCKTAIL?
             </span>
-          </a>
+          </Link>
         </div>
         <div
           css={css`
@@ -786,17 +786,6 @@ export default function RecommendedCocktail(props) {
 }
 
 export async function getServerSideProps(context) {
-  // get the ids that were set in recommendation.js out of the url and pass them to the database query
-  const urlInfoQuery = await getRecommendationBasedOnUrlAndDatabase(
-    context.query.flavour,
-    context.query.spirit,
-    context.query.level,
-  );
-
-  const urlInfoQueryBackup = await getRecommendationBasedOnUrlAndDatabaseBackup(
-    context.query.spirit,
-  );
-
   // get the token from the cookies
   const user = await getUserByValidSessionToken(
     context.req.cookies.sessionToken,
@@ -811,7 +800,17 @@ export async function getServerSideProps(context) {
     };
   }
 
-  if (user && urlInfoQuery) {
+  // get the ids that were set in recommendation.js out of the url and pass them to the database query
+  const urlInfoQuery = await getRecommendationBasedOnUrlAndDatabase(
+    context.query.flavour,
+    context.query.spirit,
+    context.query.level,
+  );
+
+  const urlInfoQueryBackup = await getRecommendationBasedOnUrlAndDatabaseBackup(
+    context.query.spirit,
+  );
+  if (urlInfoQuery) {
     const favouritesCheck = await checkFavourites(
       user.id,
       urlInfoQuery.cocktailId,

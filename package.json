@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "migrate": "dotenv -- ley",
+    "heroku-postbuild": "yarn migrate up && yarn build",
     "lint": "next lint"
   },
   "dependencies": {
@@ -18,6 +19,7 @@
     "js-cookie": "^3.0.1",
     "ley": "^0.7.1",
     "next": "12.1.6",
+    "pg-connection-string": "^2.5.0",
     "postgres": "^3.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -70,5 +72,8 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "@typescript-eslint/utils": "5.30.0",
     "eslint-plugin-jsx-a11y": "6.6.0"
-  }
+  },
+  "cacheDirectories": [
+    ".next/cache"
+  ]
 }
