@@ -171,8 +171,8 @@ export default function Imprint() {
                 rel="noreferrer noopener"
               >
                 upleveled
-              </a>
-              and
+              </a>{' '}
+              and{' '}
               <a
                 href="http://www.mirandabar.com/"
                 target="_blank"

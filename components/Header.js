@@ -197,12 +197,12 @@ export default function Header(props) {
           </div>
 
           <div css={mainNavigation}>
-            <a href="/recommendation" data-test-id="recommendation">
+            <a href="recommendation" data-test-id="recommendation">
               find a cocktail
             </a>
             <br />
 
-            <a href="/collection">full collection</a>
+            <a href="collection">full collection</a>
             <br />
             {props.user && (
               <a href={`/users/${props.user.id}`}>your selection</a>
@@ -213,14 +213,14 @@ export default function Header(props) {
             <div css={smallNavigation}>
               <a href="/logout">Logout</a>
               <br />
-              <a href="/imprint">Imprint</a>
+              <a href="imprint">Imprint</a>
             </div>
           ) : (
             <div css={smallNavigation}>
               {/* <Link href="/register">Register</Link> */}
-              <a href="/login">Login</a> | <a href="/register">Register</a>
+              <a href="login">Login</a> | <a href="register">Register</a>
               <br />
-              <a href="/imprint" data-test-id="imprint">
+              <a href="imprint" data-test-id="imprint">
                 Imprint
               </a>
             </div>

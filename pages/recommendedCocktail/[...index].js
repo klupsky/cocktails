@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
   checkFavourites,
@@ -339,9 +340,7 @@ export default function RecommendedCocktail(props) {
   const [errors, setErrors] = useState([]);
   const [disable, setDisable] = useState(false);
 
-  function refreshPage() {
-    window.location.reload();
-  }
+  const router = useRouter();
 
   // get the user favourites
 
@@ -389,7 +388,6 @@ export default function RecommendedCocktail(props) {
   if (props.urlInfoQuery === null) {
     return (
       <div>
-        {' '}
         <Head>
           <title>Cocktails</title>
           <meta name="description" content="your cocktail recommendation" />
@@ -540,7 +538,13 @@ export default function RecommendedCocktail(props) {
                     <button
                       data-test-id="generate-recommendation-2"
                       type="button"
-                      onClick={refreshPage}
+                      onClick={() => {
+                        router
+                          .push(
+                            `/recommendedCocktail/recommendation?flavour=${props.urlInfoQueryBackup.flavourid}&spirit=${props.urlInfoQueryBackup.spiritid}&level=${props.urlInfoQueryBackup.levelid}`,
+                          )
+                          .catch(console.log('error'));
+                      }}
                     >
                       ANOTHER ONE!
                     </button>
@@ -710,7 +714,13 @@ export default function RecommendedCocktail(props) {
                   <button
                     data-test-id="generate-recommendation-2"
                     type="button"
-                    onClick={refreshPage}
+                    onClick={() => {
+                      router
+                        .push(
+                          `/recommendedCocktail/recommendation?flavour=${props.urlInfoQuery.flavourid}&spirit=${props.urlInfoQuery.spiritid}&level=${props.urlInfoQuery.levelid}`,
+                        )
+                        .catch(console.log('error'));
+                    }}
                   >
                     ANOTHER ONE!
                   </button>
@@ -810,21 +820,9 @@ export async function getServerSideProps(context) {
   const urlInfoQueryBackup = await getRecommendationBasedOnUrlAndDatabaseBackup(
     context.query.spirit,
   );
-  if (urlInfoQuery) {
-    const favouritesCheck = await checkFavourites(
-      user.id,
-      urlInfoQuery.cocktailId,
-    );
 
-    return {
-      props: {
-        user: user,
-        urlInfoQuery: urlInfoQuery || null,
-        urlInfoQueryBackup: urlInfoQueryBackup || null,
-        favouritesCheck: favouritesCheck || null,
-      },
-    };
-  } else {
+  // console.log(urlInfoQuery);
+  if (!urlInfoQuery) {
     const favouritesCheckBackup = await checkFavourites(
       user.id,
       urlInfoQueryBackup.cocktailId,
@@ -834,8 +832,23 @@ export async function getServerSideProps(context) {
       props: {
         user: user,
         urlInfoQuery: urlInfoQuery || null,
+        urlInfoQueryBackup: urlInfoQueryBackup,
+        favouritesCheckBackup: favouritesCheckBackup,
+      },
+    };
+  } else {
+    const favouritesCheck = await checkFavourites(
+      user.id,
+      urlInfoQuery.cocktailId,
+    );
+
+    return {
+      props: {
+        user: user,
+        urlInfoQuery: urlInfoQuery,
+
         urlInfoQueryBackup: urlInfoQueryBackup || null,
-        favouritesCheckBackup: favouritesCheckBackup || null,
+        favouritesCheck: favouritesCheck,
       },
     };
   }

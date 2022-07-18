@@ -398,7 +398,7 @@ export default function Recommendation(props) {
                       .catch(console.log('error'));
                     setFlavourId('');
                     setLevelId('');
-                    setLevelId('');
+                    setSpiritId('');
                   }}
                 >
                   GET A RECOMMENDATION

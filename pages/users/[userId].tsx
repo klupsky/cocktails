@@ -150,6 +150,8 @@ type Favourite = {
 // FUNCTIONALITY STARTS HERE
 
 export default function UserDetail(props: Props) {
+  const [favouriteId, setFavouriteId] = useState<Favourite['id'] | ''>('');
+
   const [favouritesLists, setFavouritesLists] = useState(
     props.favouriteCocktails,
   );
@@ -160,7 +162,6 @@ export default function UserDetail(props: Props) {
   // const [favouriteCocktailId, setFavouriteCocktailId] = useState<
   //   Favourite['cocktailId'] | ''
   // >('');
-  const [favouriteId, setFavouriteId] = useState<Favourite['id'] | ''>('');
 
   async function deleteFavouriteHandler(favouriteUserId: number) {
     const response = await fetch(`../api/favourites/${favouriteUserId}`, {
