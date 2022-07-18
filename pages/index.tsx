@@ -264,6 +264,7 @@ const ellipsePosition = css`
 
 type Props = {
   // refreshUserProfile: () => Promise<void>;
+
   collectionPreview: {
     id: number;
     name: string;
@@ -279,7 +280,7 @@ type Props = {
     garnish: string;
     category: string;
     categoryid: number;
-  };
+  }[];
 };
 
 // FUNCTIONALITY STARTS HERE
@@ -390,7 +391,7 @@ export default function Home(props: Props) {
       {/* {console.log(props.collectionPreview)} */}
       <div css={carousel}>
         <Carousel>
-          {/* {console.log(props.collectionPreview)} */}
+          {console.log(props.collectionPreview)}
           {props.collectionPreview.map((preview: any) => {
             return (
               <div
@@ -425,7 +426,7 @@ export async function getServerSideProps() {
   const collectionPreview = await getPreviewFromCollectionOfCocktails();
   return {
     props: {
-      collectionPreview,
+      collectionPreview: collectionPreview,
     },
   };
 }

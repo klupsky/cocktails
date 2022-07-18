@@ -395,7 +395,6 @@ export async function getUserFavourites(userId: any) {
       favourites.cocktail_id = cocktails.id AND
       cocktails.flavour_id = flavours.id
 
-
   `;
   return favouriteCocktails.map((cocktail) => camelcaseKeys(cocktail));
 }
@@ -543,5 +542,5 @@ export async function getPreviewFromCollectionOfCocktails() {
       name ASC
     LIMIT 6;
   `;
-  return camelcaseKeys(previewCollection);
+  return previewCollection.map((preview) => camelcaseKeys(preview));
 }
