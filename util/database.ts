@@ -173,6 +173,23 @@ export async function deleteExpiredSessions() {
   return sessions.map((session) => camelcaseKeys(session));
 }
 
+type Cocktail = {
+  name: string;
+  cocktailId: number;
+  level: number;
+  levelId: number;
+  flavourId: number;
+  flavour: string;
+  flavourcolour: string;
+  spirit: string;
+  spiritId: number;
+  description: string;
+  glass: string;
+  garnish: string;
+  category: string;
+  categoryId: number;
+};
+
 export async function getRecommendationBasedOnUrlAndDatabase(
   flavour: number | string,
   spirit: number | string,
@@ -180,7 +197,7 @@ export async function getRecommendationBasedOnUrlAndDatabase(
 ) {
   // console.log(flavour, spirit, level);
 
-  const [joinedRecommendation] = await sql`
+  const [joinedRecommendation] = await sql<[Cocktail | undefined]>`
     SELECT
       cocktails.id AS cocktail_id,
       cocktails.name AS name,
@@ -217,7 +234,8 @@ export async function getRecommendationBasedOnUrlAndDatabase(
     ORDER BY RANDOM()
 
   `;
-  return camelcaseKeys(joinedRecommendation);
+
+  return joinedRecommendation && camelcaseKeys(joinedRecommendation);
 }
 
 export async function getRecommendationBasedOnUrlAndDatabaseBackup(
@@ -225,7 +243,7 @@ export async function getRecommendationBasedOnUrlAndDatabaseBackup(
 ) {
   // console.log(flavour, spirit, level);
 
-  const [joinedRecommendation] = await sql`
+  const [joinedRecommendation] = await sql<[Cocktail | undefined]>`
     SELECT
       cocktails.id AS cocktail_id,
       cocktails.name AS name,
@@ -260,7 +278,7 @@ export async function getRecommendationBasedOnUrlAndDatabaseBackup(
     ORDER BY RANDOM()
 
   `;
-  return camelcaseKeys(joinedRecommendation);
+  return joinedRecommendation && camelcaseKeys(joinedRecommendation);
 }
 
 export async function getFullCollectionOfCocktails() {
@@ -415,13 +433,15 @@ export async function addUserFavourite(userId: number, cocktailId: number) {
 }
 
 export async function deleteUserFavourite(userId: number, id: number) {
+  console.log(userId, id);
+
   const [deletedFavouriteCocktail] = await sql`
     DELETE FROM
       favourites
 
     WHERE
-      favourites.id = ${userId} AND
-      favourites.user_id = ${id}
+      favourites.id = ${id} AND
+      favourites.user_id = ${userId}
 
     RETURNING
     *

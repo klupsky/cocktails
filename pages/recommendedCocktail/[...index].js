@@ -831,9 +831,9 @@ export async function getServerSideProps(context) {
     return {
       props: {
         user: user,
-        urlInfoQuery: urlInfoQuery || null,
+        urlInfoQuery: null,
         urlInfoQueryBackup: urlInfoQueryBackup,
-        favouritesCheckBackup: favouritesCheckBackup,
+        favouritesCheckBackup: favouritesCheckBackup || null,
       },
     };
   } else {
@@ -846,8 +846,7 @@ export async function getServerSideProps(context) {
       props: {
         user: user,
         urlInfoQuery: urlInfoQuery,
-
-        urlInfoQueryBackup: urlInfoQueryBackup || null,
+        urlInfoQueryBackup: null,
         favouritesCheck: favouritesCheck,
       },
     };

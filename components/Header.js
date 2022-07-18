@@ -1,5 +1,9 @@
 import { css } from '@emotion/react';
 
+function Anchor({ children, ...restProps }) {
+  // using a instead of Link since we want to force a full refresh
+  return <a {...restProps}>{children}</a>;
+}
 const header = css`
   background: transparent;
   margin: 0;
@@ -188,41 +192,42 @@ export default function Header(props) {
 
         <div id="overlay">
           <div css={logo}>
-            <a href="/">
+            <Anchor href="/">
               <span>
                 FANCY A <br />
                 COCKTAIL?
               </span>
-            </a>
+            </Anchor>
           </div>
 
           <div css={mainNavigation}>
-            <a href="recommendation" data-test-id="recommendation">
+            <Anchor href="/recommendation" data-test-id="recommendation">
               find a cocktail
-            </a>
+            </Anchor>
             <br />
 
-            <a href="collection">full collection</a>
+            <Anchor href="/collection">full collection</Anchor>
             <br />
             {props.user && (
-              <a href={`/users/${props.user.id}`}>your selection</a>
+              <Anchor href={`/users/${props.user.id}`}>your selection</Anchor>
             )}
             <br />
           </div>
           {props.user ? (
             <div css={smallNavigation}>
-              <a href="/logout">Logout</a>
+              <Anchor href="/logout">Logout</Anchor>
               <br />
-              <a href="imprint">Imprint</a>
+              <Anchor href="/imprint">imprint</Anchor>
             </div>
           ) : (
             <div css={smallNavigation}>
               {/* <Link href="/register">Register</Link> */}
-              <a href="login">Login</a> | <a href="register">Register</a>
+              <Anchor href="/login">Login</Anchor> |{' '}
+              <Anchor href="register">Register</Anchor>
               <br />
-              <a href="imprint" data-test-id="imprint">
+              <Anchor href="/imprint" data-test-id="imprint">
                 Imprint
-              </a>
+              </Anchor>
             </div>
           )}
         </div>

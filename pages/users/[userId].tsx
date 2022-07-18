@@ -138,40 +138,42 @@ type Props = {
   }[];
 };
 
-type Favourite = {
-  id: number;
-  name: string;
-  userId: number;
-  cocktailId: number;
-  username: string;
-  flavourcolour: string;
-};
+// type Favourite = {
+//   id: number;
+//   name: string;
+//   userId: number;
+//   cocktailId: number;
+//   username: string;
+//   flavourcolour: string;
+// };
 
 // FUNCTIONALITY STARTS HERE
 
 export default function UserDetail(props: Props) {
-  const [favouriteId, setFavouriteId] = useState<Favourite['id'] | ''>('');
+  // const [favouriteId, setFavouriteId] = useState<Favourite['id'] | ''>('');
 
   const [favouritesLists, setFavouritesLists] = useState(
     props.favouriteCocktails,
   );
-  const [favouriteUserId, setFavouriteUserId] = useState<
-    Favourite['userId'] | ''
-  >('');
-  console.log(favouriteUserId);
+  // const [favouriteUserId, setFavouriteUserId] = useState<
+  //   Favourite['userId'] | ''
+  // >('');
+  // console.log(favouriteUserId);
   // const [favouriteCocktailId, setFavouriteCocktailId] = useState<
   //   Favourite['cocktailId'] | ''
   // >('');
 
-  async function deleteFavouriteHandler(favouriteUserId: number) {
+  async function deleteFavouriteHandler(
+    cocktailId: number,
+    favouriteUserId: number,
+  ) {
     const response = await fetch(`../api/favourites/${favouriteUserId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        userId: favouriteUserId,
-        id: favouriteId,
+        id: cocktailId,
       }),
     });
     const deletedFavourite = await response.json();
@@ -202,7 +204,7 @@ export default function UserDetail(props: Props) {
   return (
     <div>
       <Head>
-        <title>{props.user.username}'s cocktail selection</title>
+        <title>{`${props.user.username}'s cocktail selection`}</title>
         <meta name="description" content="private user selection" />
       </Head>
 
@@ -239,10 +241,13 @@ export default function UserDetail(props: Props) {
                       <div css={removeStyle}>
                         <button
                           onClick={() => {
-                            setFavouriteUserId(favourite.userId);
+                            // setFavouriteUserId(favourite.userId);
                             // setFavouriteCocktailId(favourite.cocktailId);
-                            setFavouriteId(favourite.id);
-                            deleteFavouriteHandler(favourite.id).catch(() => {
+                            // setFavouriteId(favourite.id);
+                            deleteFavouriteHandler(
+                              favourite.id,
+                              favourite.userId,
+                            ).catch(() => {
                               console.log('delete favourite request fails');
                             });
                           }}
