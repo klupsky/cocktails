@@ -14,7 +14,7 @@ import { logo, section, smallText, text, wrapper } from './login';
 // CSS
 
 const formStyle = css`
-  margin-bottom: 15%;
+  margin-bottom: 10%;
   border-bottom: 2px dotted #000;
   border-top: 2px dotted #000;
 
@@ -57,7 +57,16 @@ const formStyle = css`
     }
   }
 `;
-
+const errorStyles = css`
+  color: #e75c3c;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 100%;
+  font-family: 'Messapia';
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  margin-bottom: 10%;
+`;
 const inputSpirit = css`
   display: flex;
   flex-direction: row;
@@ -245,6 +254,7 @@ export default function Recommendation(props) {
   const [flavourId, setFlavourId] = useState('');
   const [spiritId, setSpiritId] = useState('');
   const [levelId, setLevelId] = useState('');
+  const [errors, setErrors] = useState('');
   const router = useRouter();
 
   function handleFlavourChange(event) {
@@ -298,7 +308,6 @@ export default function Recommendation(props) {
               hey {props.user.username}, what kind of cocktail do you feel like?
             </div>
             <div css={smallText}>select one preference of each category!</div>
-
             <div css={formStyle}>
               <div>
                 <fieldset
@@ -382,7 +391,12 @@ export default function Recommendation(props) {
               </div>
               <br />
               {!flavourId | !spiritId | !levelId ? (
-                <button id="disabled recommendation" disabled>
+                <button
+                  id="disabled recommendation"
+                  onClick={() => {
+                    setErrors('please pick one of each categories first');
+                  }}
+                >
                   GET A RECOMMENDATION
                 </button>
               ) : (
@@ -405,6 +419,7 @@ export default function Recommendation(props) {
                 </button>
               )}
             </div>
+            <div css={errorStyles}> {errors}</div>
           </div>
         </div>
       </main>

@@ -11,8 +11,6 @@ import { getPreviewFromCollectionOfCocktails } from '../util/database';
 
 // import { LoginResponseBody } from './api/login';
 
-// import { errorStyles } from './register';
-
 // CSS
 
 const titleSection = css`
@@ -391,12 +389,12 @@ export default function Home(props: Props) {
       {/* {console.log(props.collectionPreview)} */}
       <div css={carousel}>
         <Carousel>
-          {console.log(props.collectionPreview)}
+          {/* {console.log(props.collectionPreview)} */}
           {props.collectionPreview.map((preview) => {
             return (
               <div
                 className="carouselInsideStyle"
-                key={`cocktailName-${preview.id}`}
+                key={`cocktailid-${preview.id}`}
               >
                 <div>
                   <Link href={`/../collection/${preview.id}`}>
