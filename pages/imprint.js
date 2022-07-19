@@ -76,7 +76,7 @@ const smallTextTwo = css`
 
   // when smaller than 600
   @media (max-width: 600px) {
-    margin-top: 40%;
+    margin-top: 30%;
     margin-bottom: 13%;
   }
 

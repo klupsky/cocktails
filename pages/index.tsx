@@ -14,13 +14,15 @@ import { getPreviewFromCollectionOfCocktails } from '../util/database';
 // CSS
 
 const titleSection = css`
-  height: 80vh;
+  height: 600px;
   width: 100vw;
   overflow: hidden;
   text-align: center;
+
   @media (max-width: 1000px) {
-    height: 70vh;
+    height: 500px;
   }
+
   .doYou {
     text-transform: uppercase;
     margin-top: 3.5%;
@@ -58,6 +60,18 @@ const titleSection = css`
       margin-top: 12%;
     }
   }
+
+  .wave {
+    position: absolute;
+    width: 100%;
+    top: 600px;
+    left: 0;
+
+    // when smaller than 1000
+    @media (max-width: 1000px) {
+      top: 500px;
+    }
+  }
 `;
 
 const intro = css`
@@ -88,7 +102,7 @@ const wrapper = css`
     top: -7.5rem;
 
     @media (max-width: 1400px) {
-      top: -rem;
+      top: -10rem;
     }
 
     // when smaller than 1000
@@ -203,13 +217,6 @@ const link = css`
 `;
 
 // CSS only on this page
-
-const wave = css`
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-`;
 
 const carousel = css`
   background-color: #fffb89;
@@ -345,13 +352,13 @@ export default function Home(props: Props) {
       <main css={titleSection}>
         <div className="doYou">do you</div>
         <h1>fancy a cocktail?</h1>
-        <div css={wave}>
+        <div className="wave">
           <Wave
             fill="#bbbaf9"
             paused={false}
             options={{
-              height: 50,
-              amplitude: 40,
+              height: 15,
+              amplitude: 30,
               speed: 0.4,
               points: 2,
             }}

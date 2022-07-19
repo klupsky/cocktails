@@ -26,6 +26,9 @@ export const smallText = css`
   margin-bottom: 4rem;
   font-size: 0.6rem;
   line-height: 100%;
+  a {
+    color: black;
+  }
 `;
 
 const wrapper = css`
@@ -89,7 +92,7 @@ const cocktailNameStyle = css`
   }
   // when smaller than 600px
   @media (max-width: 600px) {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
     line-height: 100%;
   }
 `;
@@ -101,15 +104,16 @@ const cocktailCategoryStyle = css`
   font-size: 0.6rem;
 
   span {
-    position: relative;
-    top: 0.3rem;
     // when smaller than 1000px
     @media (max-width: 1000px) {
-      top: 0.15rem;
+      font-size: 0.6rem;
+      line-height: 10px;
     }
     // when smaller than 600px
     @media (max-width: 600px) {
-      top: 0.1rem;
+      font-size: 0.4rem;
+      position: relative;
+      top: -0.4rem;
     }
   }
 `;

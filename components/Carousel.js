@@ -71,11 +71,20 @@ const carouselStyle = css`
   }
 
   .left-arrow {
-    left: 24px;
+    left: 22px;
+
+    // when smaller than 700
+    @media (max-width: 700px) {
+      left: 0px;
+    }
   }
 
   .right-arrow {
     right: 24px;
+    // when smaller than 700
+    @media (max-width: 700px) {
+      right: 0px;
+    }
   }
 `;
 
