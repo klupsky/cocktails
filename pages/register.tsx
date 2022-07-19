@@ -105,6 +105,10 @@ const form = css`
       line-height: var(--typeBaseLineHeight);
       display: inline-block;
       text-align: start;
+
+      @media (max-width: 900px) {
+        width: 75%;
+      }
       // when smaller than 600
       @media (max-width: 600px) {
         width: 90%;

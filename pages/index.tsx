@@ -23,6 +23,11 @@ const titleSection = css`
     height: 500px;
   }
 
+  // when bigger than 15000
+  @media (min-width: 1500px) {
+    height: 900px;
+  }
+
   .doYou {
     text-transform: uppercase;
     margin-top: 3.5%;
@@ -71,16 +76,29 @@ const titleSection = css`
     @media (max-width: 1000px) {
       top: 500px;
     }
+
+    // when bigger than 15000
+    @media (min-width: 1500px) {
+      top: 900px;
+    }
   }
 `;
 
 const intro = css`
   background-color: #bbbaf9;
-  height: 90vh;
+  height: 800px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0;
+  @media (max-width: 1000px) {
+    height: 700px;
+  }
+
+  // when bigger than 15000
+  @media (min-width: 1500px) {
+    height: 1100px;
+  }
 `;
 
 const wrapper = css`
@@ -96,23 +114,32 @@ const wrapper = css`
   }
 
   .cherryStyle {
-    position: relative;
     transform: rotate(-15deg);
     text-align: right;
-    top: -7.5rem;
-
+    position: relative;
+    top: -280px;
+    // when smaller than 1400
     @media (max-width: 1400px) {
-      top: -10rem;
+      position: relative;
+      top: -270px;
     }
 
     // when smaller than 1000
     @media (max-width: 1000px) {
-      top: -7rem;
+      position: relative;
+      top: -190px;
     }
 
     // when smaller than 600
     @media (max-width: 600px) {
-      top: -7rem;
+      position: relative;
+      top: -150px;
+    }
+
+    // when bigger than 15000
+    @media (min-width: 1500px) {
+      position: relative;
+      top: -420px;
     }
 
     .swing {
@@ -220,10 +247,18 @@ const link = css`
 
 const carousel = css`
   background-color: #fffb89;
-  height: 100vh;
+  height: 800px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media (max-width: 1000px) {
+    height: 700px;
+  }
+
+  // when bigger than 15000
+  @media (min-width: 1500px) {
+    height: 1100px;
+  }
 
   .carouselInsideStyle {
     text-align: center;
