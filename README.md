@@ -25,19 +25,19 @@ the design, illustrations and css-styling were created and executed by myself.
 
 ### Landing page
 
-<img src="./public/screenshots/screenshot1.png" width="70%">
+<img src="./public/images/screenshots/screenshot1.png" width="70%">
 
 ### Recommendation
 
-<img src="./public/screenshots/screenshot2.png" width="70%">
+<img src="./public/images/screenshots/screenshot2.png" width="70%">
 
 ### Selection
 
-<img src="./public/screenshots/screenshot3.png" width="70%">
+<img src="./public/images/screenshots/screenshot3.png" width="70%">
 
 ### Collection
 
-<img src="./public/screenshots/screenshot4.png" width="70%">
+<img src="./public/images/screenshots/screenshot4.png" width="70%">
 
 ## Setup guide
 
