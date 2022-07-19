@@ -132,7 +132,7 @@ const form = css`
       // when smaller than 600
 
       @media (max-width: 600px) {
-        width: 90%;
+        width: 80%;
       }
     }
   }
