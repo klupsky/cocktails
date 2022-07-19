@@ -507,9 +507,12 @@ export async function getSpirits() {
   `;
   return camelcaseKeys(spirits);
 }
+type FavouriteCocktail = {
+  id: number;
+};
 
 export async function checkFavourites(id: number, cocktailId: number) {
-  const [favouritesCheck] = await sql`
+  const [favouritesCheck] = await sql<[FavouriteCocktail | undefined]>`
     SELECT
       favourites.id
 
@@ -519,11 +522,8 @@ export async function checkFavourites(id: number, cocktailId: number) {
     WHERE
       favourites.user_Id = ${id} AND
       favourites.cocktail_Id = ${cocktailId}
-
-
   `;
-
-  return camelcaseKeys(favouritesCheck);
+  return favouritesCheck && camelcaseKeys(favouritesCheck);
 }
 
 export async function getPreviewFromCollectionOfCocktails() {

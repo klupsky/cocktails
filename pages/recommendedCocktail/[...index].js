@@ -452,7 +452,7 @@ export default function RecommendedCocktail(props) {
                               src="/../../images/components/heart2.svg"
                               width="35px"
                               height="35px"
-                              alt="add to favourites"
+                              alt="go to favourites"
                             />
                           </Link>
                         </button>
@@ -466,7 +466,7 @@ export default function RecommendedCocktail(props) {
                             src="/../../images/components/heart2.svg"
                             width="35px"
                             height="35px"
-                            alt="add to favourites"
+                            alt="go to favourites"
                           />
                         </Link>
                       </button>
@@ -630,7 +630,7 @@ export default function RecommendedCocktail(props) {
                             src="/../../images/components/heart2.svg"
                             width="35px"
                             height="35px"
-                            alt="add to favourites"
+                            alt="go to favourites"
                           />
                         </Link>
                       </button>
@@ -644,7 +644,7 @@ export default function RecommendedCocktail(props) {
                           src="/../../images/components/heart2.svg"
                           width="35px"
                           height="35px"
-                          alt="add to favourites"
+                          alt="go to favourites"
                         />
                       </Link>
                     </button>
@@ -847,7 +847,7 @@ export async function getServerSideProps(context) {
         user: user,
         urlInfoQuery: urlInfoQuery,
         urlInfoQueryBackup: null,
-        favouritesCheck: favouritesCheck,
+        favouritesCheck: favouritesCheck || null,
       },
     };
   }
