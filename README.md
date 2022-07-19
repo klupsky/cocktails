@@ -1,10 +1,10 @@
 # Fancy a cocktail?
 
-sure you do! and in order to help you find the right cocktail for you, i created this web application.
+sure you do! and in order to help you find the right one, i created this web application!
 
-you will certainly find inspiration browsing the full collection, where you can also filter different categories.
+you will certainly find inspiration browsing the full collection, where you can also filter different categories and learn more about all of the cocktails.
 
-on top of this, after user authorization you will be able to get a recommendation based on your personal taste, due to multiple matching algorithms. and you can add your favourite cocktails to your selection in order to remember them.
+on top of this, after user authorization you will be able to get a recommendation based on your personal taste, due to multiple matching algorithms. in addition, you can add your favourite ones to your selection in order to remember and go back to them.
 
 deployed version on heroku: https://fancycocktail.herokuapp.com
 
