@@ -33,7 +33,7 @@ const cocktails = [
     flavour_id: 2,
     spirit_id: 1,
     description:
-      'Named after a French cannon notorious for its power during World War I. But this very pleasant and accessible drink is not to be feared that much - quite the opposite.',
+      'Named after a French cannon notorious for its power during World War 1. But this very pleasant and accessible drink is not to be feared that much - quite the opposite.',
     glass: 'longdrink-glass',
     method: 'shaken',
     garnish: 'kumquat slice',
@@ -194,7 +194,7 @@ const cocktails = [
       'What at first glance seems like a fancy way to make whiskey easier and more enjoyable has a story that cannot be summed up in a few words. There have been fights and even exchanges of fire over the correct method of preparation.',
     glass: 'tumbler',
     method: 'built-in | stirred',
-    garnish: 'amarena cherry, orange zest',
+    garnish: 'amarena cherry | orange zest',
     category_id: 1,
   },
   {
@@ -207,7 +207,7 @@ const cocktails = [
       'The most popular representative of its kind and definitely a benchmark drink to measure the quality of a bar.',
     glass: 'tumbler',
     method: 'shaken',
-    garnish: 'amarena cherry, orange slice',
+    garnish: 'amarena cherry | orange slice',
     category_id: 1,
   },
   {
@@ -231,7 +231,7 @@ const cocktails = [
     spirit_id: 4,
     description:
       'The national drink of Bermuda and one of the few drinks that is also a registered trademark.',
-    glass: 'tumbler',
+    glass: 'longdrink-glass',
     method: 'built-in',
     garnish: 'mint | lime slice',
     category_id: 2,
@@ -334,7 +334,7 @@ const cocktails = [
     flavour_id: 2,
     spirit_id: 7,
     description:
-      'A marketing gimmick and stroke of genius. Started as an attempt to popularize vodka in the US and because they were stuck with tons of spicy ginger lemonade they mixed it with and served iit n a copper mug to sell it better. The success that continues to this day exceeds the wildest expectations of the inventors!',
+      'A marketing gimmick and stroke of genius. Started as an attempt to popularize vodka in the US and because they were stuck with tons of spicy ginger lemonade they mixed it with and served it in a copper mug to sell it better. The success that continues to this day exceeds the wildest expectations of the inventors!',
     glass: 'mule-cup',
     method: 'built-in',
     garnish: 'mint | cucumber',
