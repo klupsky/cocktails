@@ -433,8 +433,6 @@ export async function addUserFavourite(userId: number, cocktailId: number) {
 }
 
 export async function deleteUserFavourite(userId: number, id: number) {
-  console.log(userId, id);
-
   const [deletedFavouriteCocktail] = await sql`
     DELETE FROM
       favourites
@@ -526,23 +524,25 @@ export async function checkFavourites(id: number, cocktailId: number) {
   return favouritesCheck && camelcaseKeys(favouritesCheck);
 }
 
+type PreviewCocktail = {
+  id: number;
+  name: string;
+  level: number;
+  levelid: number;
+  flavourid: number;
+  spiritid: number;
+  categoryid: number;
+};
+
 export async function getPreviewFromCollectionOfCocktails() {
-  const previewCollection = await sql`
+  const previewCollection = await sql<[PreviewCocktail]>`
 
     SELECT
       cocktails.id AS id,
       cocktails.name AS name,
-      levels.level AS level,
       levels.id AS levelId,
       flavours.id AS flavourId,
-      flavours.name AS flavour,
-      spirits.name AS spirit,
       spirits.id AS spiritId,
-      cocktails.description AS description,
-      cocktails.glass AS glass,
-      cocktails.method AS method,
-      cocktails.garnish AS garnish,
-      categories.name AS category,
       categories.id AS categoryId
 
     FROM
@@ -562,5 +562,7 @@ export async function getPreviewFromCollectionOfCocktails() {
       name ASC
     LIMIT 6;
   `;
-  return previewCollection.map((preview) => camelcaseKeys(preview));
+  return previewCollection.map((previewCocktail) =>
+    camelcaseKeys(previewCocktail),
+  );
 }

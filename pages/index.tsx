@@ -392,7 +392,7 @@ export default function Home(props: Props) {
       <div css={carousel}>
         <Carousel>
           {console.log(props.collectionPreview)}
-          {props.collectionPreview.map((preview: any) => {
+          {props.collectionPreview.map((preview) => {
             return (
               <div
                 className="carouselInsideStyle"
