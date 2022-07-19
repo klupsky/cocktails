@@ -74,10 +74,11 @@ const inputSpirit = css`
   flex-wrap: wrap;
   justify-content: space-between;
 
-  a {color: black;
-}
-  // when smaller than 700
-  @media (max-width: 700px) {
+  a {
+    color: black;
+  }
+  // when smaller than 1200
+  @media (max-width: 1200px) {
     justify-content: center;
   }
   // when bigger than 1500
@@ -128,16 +129,17 @@ const flavourInputs = css`
   flex-wrap: wrap;
   line-height: 100%;
   gap: 8px;
-  a {color: black;
-}
+  a {
+    color: black;
+  }
   // when bigger than 1500
   @media (min-width: 1500px) {
     justify-content: center;
     gap: 2rem;
   }
 
-  // when smaller than 700
-  @media (max-width: 700px) {
+  // when smaller than 1200
+  @media (max-width: 1200px) {
     justify-content: center;
   }
 
@@ -185,11 +187,12 @@ const inputLevel = css`
   flex-wrap: wrap;
   line-height: 100%;
   gap: 8px;
-  a {color: black;
-}
+  a {
+    color: black;
+  }
 
-  // when smaller than 700
-  @media (max-width: 700px) {
+  // when smaller than 1200
+  @media (max-width: 1200px) {
     justify-content: center;
   }
   // when bigger than 1500
@@ -245,8 +248,8 @@ const category = css`
   font-size: 0.7rem;
   margin-bottom: 3%;
 
-  // when smaller than 700
-  @media (max-width: 700px) {
+  // when smaller than 1200
+  @media (max-width: 1200px) {
     text-align: center;
   }
 

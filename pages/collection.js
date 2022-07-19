@@ -70,6 +70,10 @@ const buttonBox = css`
     text-align: center;
     justify-content: center;
     flex-wrap: wrap;
+    color: black;
+    a {
+      color: black;
+    }
   }
 `;
 
@@ -89,10 +93,11 @@ const cocktailNameStyle = css`
   @media (max-width: 1000px) {
     font-size: 0.9rem;
     line-height: 100%;
+    padding: 0.5rem;
   }
   // when smaller than 600px
   @media (max-width: 600px) {
-    font-size: 0.5rem;
+    font-size: 0.7rem;
     line-height: 100%;
   }
 `;
@@ -102,18 +107,28 @@ const cocktailCategoryStyle = css`
   padding: 0.7rem;
   text-transform: uppercase;
   font-size: 0.6rem;
+  line-height: 100%;
+
+  // when smaller than 1000px
+  @media (max-width: 1000px) {
+    padding: 0.5rem;
+  }
 
   span {
+    position: relative;
+    top: 0.5rem;
     // when smaller than 1000px
     @media (max-width: 1000px) {
       font-size: 0.6rem;
-      line-height: 10px;
+      position: relative;
+
+      top: 0.3rem;
     }
     // when smaller than 600px
     @media (max-width: 600px) {
       font-size: 0.4rem;
       position: relative;
-      top: -0.4rem;
+      top: 0.06rem;
     }
   }
 `;
@@ -124,11 +139,20 @@ const arrow = css`
   :hover {
     cursor: pointer;
   }
+  // when smaller than 1000px
+  @media (max-width: 1000px) {
+    padding: 0.5rem;
+  }
 `;
 
 const collectionBox = css`
   display: grid;
   grid-template-columns: 50% 25% 25%;
+
+  // when smaller than 800
+  @media (max-width: 800px) {
+    grid-template-columns: 62% 13% 25%;
+  }
 `;
 
 const collectionBoxContainer = css`
