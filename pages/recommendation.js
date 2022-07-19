@@ -73,6 +73,9 @@ const inputSpirit = css`
   gap: 8px;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  a {color: black;
+}
   // when smaller than 700
   @media (max-width: 700px) {
     justify-content: center;
@@ -125,7 +128,8 @@ const flavourInputs = css`
   flex-wrap: wrap;
   line-height: 100%;
   gap: 8px;
-
+  a {color: black;
+}
   // when bigger than 1500
   @media (min-width: 1500px) {
     justify-content: center;
@@ -181,6 +185,8 @@ const inputLevel = css`
   flex-wrap: wrap;
   line-height: 100%;
   gap: 8px;
+  a {color: black;
+}
 
   // when smaller than 700
   @media (max-width: 700px) {

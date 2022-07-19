@@ -19,7 +19,7 @@ const titleSection = css`
   overflow: hidden;
   text-align: center;
   @media (max-width: 1000px) {
-    height: 80vh;
+    height: 70vh;
   }
   .doYou {
     text-transform: uppercase;

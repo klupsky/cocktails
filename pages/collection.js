@@ -80,13 +80,17 @@ const cocktailNameStyle = css`
   font-style: normal;
   font-weight: 700;
   font-size: 1.2rem;
+  line-height: 100%;
+
   // when smaller than 1000px
   @media (max-width: 1000px) {
     font-size: 0.9rem;
+    line-height: 100%;
   }
   // when smaller than 600px
   @media (max-width: 600px) {
     font-size: 0.7rem;
+    line-height: 100%;
   }
 `;
 const cocktailCategoryStyle = css`
