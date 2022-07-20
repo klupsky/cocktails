@@ -1,11 +1,10 @@
 import { css, keyframes } from '@emotion/react';
-import { HttpQueryError } from 'apollo-server-core';
 import Link from 'next/link';
 import { useState } from 'react';
 
 const slidein = keyframes`
   0% {
-    left: 100%;
+    left: 110%;
   }
 
   100% {
@@ -19,7 +18,7 @@ const slideout = keyframes`
   }
 
   100% {
-    left: 100%;
+    left: 100rem%;
   }
 `;
 
@@ -41,12 +40,19 @@ const navigationOpen = css`
 const navigationClosed = css`
   z-index: 10;
   position: absolute;
-  left: -100%;
+  right: -101%;
   background-color: #e75c3c;
   height: 100vh;
   width: 100vw;
   overflow-x: hidden; /* Disable horizontal scroll */
   animation: ${slideout} 1s;
+
+  // when smaller than 600
+  @media (max-width: 570px) {
+    height: 100vh;
+    width: 100vw;
+    right: -101%;
+  }
 `;
 
 const mainNavigation = css`
