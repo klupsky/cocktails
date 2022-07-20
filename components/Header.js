@@ -1,19 +1,52 @@
-import { css } from '@emotion/react';
+import { css, keyframes } from '@emotion/react';
+import { HttpQueryError } from 'apollo-server-core';
 import Link from 'next/link';
 import { useState } from 'react';
 
-function Anchor({ children, ...restProps }) {
-  // using a instead of Link since we want to force a full refresh
-  return <a {...restProps}>{children}</a>;
-}
+const slidein = keyframes`
+  0% {
+    left: 100vw;
+  }
+
+  100% {
+    left: 0px;
+  }
+`;
+
+const slideout = keyframes`
+  0% {
+    left: 0px;
+  }
+
+  100% {
+    left: 100vw;
+  }
+`;
+
+const containter = css`
+  padding: 0;
+`;
 
 const navigationOpen = css`
   z-index: 10;
   position: relative;
   position: fixed;
-  background: #e75c3c;
+  background-color: #e75c3c;
   height: 100vh;
   width: 100vw;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  animation: ${slidein} 1s;
+`;
+
+const navigationClosed = css`
+  z-index: 10;
+  position: absolute;
+  left: -100%;
+  background-color: #e75c3c;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  animation: ${slideout} 1s;
 `;
 
 const mainNavigation = css`
@@ -66,6 +99,7 @@ const mainNavigation = css`
 
 const logo = css`
   text-align: center;
+  transition: all 500ms ease-in-out;
 
   // when smaller than 600
   @media (max-width: 600px) {
@@ -171,7 +205,7 @@ const openclose = css`
 
   span {
     top: 0px;
-    left: 0.4rem;
+    left: 0.45rem;
     margin: 0px;
     height: 2px;
     width: 30px;
@@ -228,17 +262,27 @@ export default function Header(props) {
     console.log('is this onclick doing anything?');
   }
   return (
-    <div>
+    <div css={containter}>
+      {navbarOpen ? (
+        <div css={openclose}>
+          <div className="close">
+            <button onClick={handleToggle}>
+              <span />
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div css={openclose}>
+          <div className="open">
+            <button data-test-id="menu" onClick={handleToggle}>
+              <span />
+            </button>
+          </div>
+        </div>
+      )}
+
       {navbarOpen ? (
         <div css={navigationOpen}>
-          <div css={openclose}>
-            <div className="close">
-              <button onClick={handleToggle}>
-                <span />
-              </button>
-            </div>
-          </div>
-
           <div css={logo}>
             <button onClick={() => closeMenu()}>
               <Link href="/">
@@ -270,7 +314,9 @@ export default function Header(props) {
           </div>
           {props.user ? (
             <div css={smallNavigation}>
-              <Anchor href="/logout">Logout</Anchor>
+              <button onClick={() => closeMenu()}></button>
+
+              <Link href="/logout">Logout</Link>
               <br />
               <button onClick={() => closeMenu()}>
                 <Link href="/imprint">imprint</Link>{' '}
@@ -294,12 +340,62 @@ export default function Header(props) {
           )}
         </div>
       ) : (
-        <div css={openclose}>
-          <div className="open">
-            <button data-test-id="menu" onClick={handleToggle}>
-              <span />
+        <div css={navigationClosed}>
+          <div css={logo}>
+            <button onClick={() => closeMenu()}>
+              <Link href="/">
+                <span>
+                  FANCY A <br />
+                  COCKTAIL?
+                </span>
+              </Link>
             </button>
           </div>
+
+          <div css={mainNavigation}>
+            <button onClick={() => closeMenu()} data-test-id="recommendation">
+              <Link href="/recommendation">find a cocktail</Link>
+            </button>
+
+            <br />
+            <button onClick={() => closeMenu()}>
+              <Link href="/collection">full collection</Link>{' '}
+            </button>
+
+            <br />
+            {props.user && (
+              <button onClick={() => closeMenu()}>
+                <Link href={`/users/${props.user.id}`}>your selection</Link>{' '}
+              </button>
+            )}
+            <br />
+          </div>
+          {props.user ? (
+            <div css={smallNavigation}>
+              <button onClick={() => closeMenu()}></button>
+
+              <Link href="/logout">Logout</Link>
+              <br />
+              <button onClick={() => closeMenu()}>
+                <Link href="/imprint">imprint</Link>{' '}
+              </button>
+            </div>
+          ) : (
+            <div css={smallNavigation}>
+              {/* <Link href="/register">Register</Link> */}
+              <button onClick={() => closeMenu()}>
+                <Link href="/login">Login</Link>&nbsp;|&nbsp;
+              </button>
+              <button onClick={() => closeMenu()}>
+                {' '}
+                <Link href="register">Register</Link>{' '}
+              </button>
+              <br />
+              <button onClick={() => closeMenu()} data-test-id="imprint">
+                <Link href="/imprint">Imprint</Link>
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
