@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const imprintStyle = css`
   width: 100vw;
-  height: 85vh;
+  height: 100vh;
   background-color: white;
   color: #ffffff;
   overflow: hidden;
@@ -28,7 +28,9 @@ const logoWhite = css`
   letter-spacing: 0px;
   text-transform: uppercase;
   position: relative;
-  top: -30px;
+  top: 70px;
+  margin-bottom: 110px;
+
   color: #ffffff;
   z-index: 2;
   a {

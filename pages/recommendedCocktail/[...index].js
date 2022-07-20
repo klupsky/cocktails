@@ -49,7 +49,8 @@ const logo = css`
   letter-spacing: 0px;
   text-transform: uppercase;
   position: relative;
-  top: -30px;
+  top: 70px;
+  margin-bottom: 110px;
   color: #000000;
   z-index: 2;
 
@@ -158,7 +159,7 @@ const buttonBox = css`
   margin-top: 0.5rem;
   align-items: center;
   text-align: center;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
 
   button {
     color: black;
@@ -410,7 +411,7 @@ export default function RecommendedCocktail(props) {
               z-index: 1;
               background-color: ${props.urlInfoQueryBackup.flavourcolour};
               position: relative;
-              margin-top: -150px;
+              margin-top: -170px;
               // when smaller than 600
               @media (max-width: 600px) {
               }

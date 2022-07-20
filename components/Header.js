@@ -1,46 +1,104 @@
 import { css } from '@emotion/react';
+import Link from 'next/link';
+import { useState } from 'react';
 
 function Anchor({ children, ...restProps }) {
   // using a instead of Link since we want to force a full refresh
   return <a {...restProps}>{children}</a>;
 }
-const header = css`
-  background: transparent;
-  margin: 0;
+
+const navigationOpen = css`
+  z-index: 10;
+  position: relative;
+  position: fixed;
+  background: #e75c3c;
+  height: 100vh;
   width: 100vw;
-  font-family: 'Messapia';
-  letter-spacing: 0px;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  line-height: 10%;
-  height: 4.8em;
 `;
 
 const mainNavigation = css`
   text-align: center;
   line-height: 130%;
-  font-size: 2rem;
   margin-top: 15%;
+  padding: 0;
 
+  button {
+    color: black;
+    font-size: 2rem;
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+    align-items: center;
+    text-align: center;
+    font-family: 'Messapia';
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    font-size: 2.8rem;
+    letter-spacing: 0em;
+    margin-top: 0;
+    // when smaller than 1000
+    @media (max-width: 1000px) {
+      font-size: 1.5rem;
+    }
+
+    // when smaller than 600
+    @media (max-width: 600px) {
+      font-size: 1rem;
+    }
+
+    a {
+      color: black;
+    }
+    :hover {
+      cursor: pointer;
+    }
+  }
   // when smaller than 1000
   @media (max-width: 1000px) {
     margin-top: 20%;
-    font-size: 1.5rem;
   }
-
   // when smaller than 600
   @media (max-width: 600px) {
     margin-top: 35%;
+  }
+`;
+
+const logo = css`
+  text-align: center;
+
+  // when smaller than 600
+  @media (max-width: 600px) {
+    font-size: 0.7rem;
+    line-height: 100%;
+  }
+
+  button {
+    color: black;
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
     font-size: 1rem;
+    line-height: 100%;
+    font-family: 'Messapia';
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    position: relative;
+    top: 67px;
+
+    a {
+      color: black;
+    }
+    :hover {
+      cursor: pointer;
+    }
   }
 `;
 
 const smallNavigation = css`
   text-align: center;
-  font-family: 'Apfel';
   margin-top: 11%;
-  line-height: 140%;
-  letter-spacing: 0.07em;
 
   // when smaller than 1000
   @media (max-width: 1000px) {
@@ -50,166 +108,165 @@ const smallNavigation = css`
   // when smaller than 600
 
   @media (max-width: 600px) {
-    font-size: 1rem;
     margin-top: 50%;
   }
+
+  button {
+    color: black;
+    font-size: 1rem;
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+    align-items: center;
+    text-align: center;
+
+    text-transform: uppercase;
+    font-family: 'Apfel';
+    line-height: 140%;
+    letter-spacing: 0.07em;
+    margin-top: 0;
+
+    // when smaller than 600
+    @media (max-width: 600px) {
+      font-size: 1rem;
+    }
+
+    a {
+      color: black;
+    }
+    :hover {
+      cursor: pointer;
+    }
+  }
 `;
 
-const logo = css`
-  margin-top: 70px;
-  text-align: center;
-  font-size: 1rem;
-  line-height: 100%;
+const openclose = css`
+  z-index: 11;
+  position: fixed;
+  text-align: right;
+  background: transparent;
+  margin: 0;
+  width: 100vw;
+  font-family: 'Messapia';
+  letter-spacing: 0px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  line-height: 10%;
 
-  // when smaller than 600
-  @media (max-width: 600px) {
-    font-size: 0.7rem;
-    line-height: 100%;
-  }
-`;
-
-const navigation = css`
-  @keyframes bugfix {
-    from {
-      padding: 0;
-    }
-    to {
-      padding: 0;
-    }
-  }
-  @-webkit-keyframes bugfix {
-    from {
-      padding: 0;
-    }
-    to {
-      padding: 0;
-    }
-  }
-
-  #overlay-button {
-    position: fixed;
-    right: 0em;
-    top: 0em;
-    height: 5em;
-    width: 2.2em;
+  button {
+    background: transparent;
+    box-shadow: 0px 0px 0px transparent;
+    border: 0px solid transparent;
+    text-shadow: 0px 0px 0px transparent;
+    align-items: center;
+    text-align: center;
+    height: 5rem;
+    width: 2.2rem;
     background: #e75c3c;
-    z-index: 5;
     cursor: pointer;
-    user-select: none;
-    span {
-      position: fixed;
-      top: 40%;
-      margin: 18%;
+    position: relative;
+    z-index: 10;
+  }
+
+  span {
+    top: 0px;
+    left: 0.4rem;
+    margin: 0px;
+    height: 2px;
+    width: 30px;
+    background-color: black;
+    position: relative;
+    display: block;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    z-index: 12;
+
+    &:before {
+      top: -8px;
+      visibility: visible;
+    }
+    &:after {
+      top: 8px;
+    }
+    &:before,
+    &:after {
       height: 2px;
       width: 30px;
       background-color: black;
-      position: relative;
+      position: absolute;
       display: block;
-      transition: all 0.2s ease-in-out;
+      content: '';
+    }
+  }
+
+  .close {
+    position: relative;
+    z-index: 13;
+
+    span {
+      background: transparent;
+
       &:before {
-        top: -8px;
-        visibility: visible;
+        transform: rotate(45deg) translate(5px, 5px);
       }
       &:after {
-        top: 8px;
-      }
-      &:before,
-      &:after {
-        height: 2px;
-        width: 30px;
-        background-color: black;
-        position: absolute;
-        content: '';
-        transition: all 0.2s ease-in-out;
-      }
-    }
-  }
-
-  input[type='checkbox'] {
-    display: none;
-
-    &:checked ~ #overlay {
-      visibility: visible;
-    }
-
-    &:checked ~ #overlay-button {
-      &:hover span,
-      span {
-        background: transparent;
-      }
-      span {
-        &:before {
-          transform: rotate(45deg) translate(5px, 5px);
-        }
-        &:after {
-          transform: rotate(-45deg) translate(6px, -6px);
-        }
-      }
-    }
-  }
-
-  #overlay {
-    height: 100vh;
-    width: 100vw;
-    background: #e75c3c;
-    z-index: 4;
-    visibility: hidden;
-    position: fixed;
-
-    &.active {
-      visibility: visible;
-    }
-
-    ul {
-      align-items: center;
-      text-align: center;
-      height: 100vh;
-      padding: 0;
-      list-style-type: none;
-
-      li {
-        font-family: 'Messapia';
-        letter-spacing: 0px;
-
-        text-transform: uppercase;
-        font-size: 2.8rem;
-        line-height: 100%;
-        letter-spacing: 0em;
-        margin-top: 1%;
+        transform: rotate(-45deg) translate(6px, -6px);
       }
     }
   }
 `;
 
 export default function Header(props) {
+  const [navbarOpen, setNavbarOpen] = useState(false);
+  const handleToggle = () => {
+    setNavbarOpen(!navbarOpen);
+  };
+  // function to close nav bar onClick of links
+  function closeMenu() {
+    setNavbarOpen(false);
+    console.log('is this onclick doing anything?');
+  }
   return (
-    <header css={header}>
-      <div css={navigation}>
-        <input type="checkbox" id="overlay-input" />
-        <label htmlFor="overlay-input" id="overlay-button">
-          <span data-test-id="menu" />
-        </label>
+    <div>
+      {navbarOpen ? (
+        <div css={navigationOpen}>
+          <div css={openclose}>
+            <div className="close">
+              <button onClick={handleToggle}>
+                <span />
+              </button>
+            </div>
+          </div>
 
-        <div id="overlay">
           <div css={logo}>
-            <Anchor href="/">
-              <span>
-                FANCY A <br />
-                COCKTAIL?
-              </span>
-            </Anchor>
+            <button onClick={() => closeMenu()}>
+              <Link href="/">
+                <span>
+                  FANCY A <br />
+                  COCKTAIL?
+                </span>
+              </Link>
+            </button>
           </div>
 
           <div css={mainNavigation}>
-            <Anchor href="/recommendation" data-test-id="recommendation">
-              find a cocktail
-            </Anchor>
-            <br />
+            <button onClick={() => closeMenu()}>
+              <Link href="/recommendation" data-test-id="recommendation">
+                find a cocktail
+              </Link>
+            </button>
 
-            <Anchor href="/collection">full collection</Anchor>
+            <br />
+            <button onClick={() => closeMenu()}>
+              <Link href="/collection">full collection</Link>{' '}
+            </button>
+
             <br />
             {props.user && (
-              <Anchor href={`/users/${props.user.id}`}>your selection</Anchor>
+              <button onClick={() => closeMenu()}>
+                <Link href={`/users/${props.user.id}`}>your selection</Link>{' '}
+              </button>
             )}
             <br />
           </div>
@@ -217,21 +274,38 @@ export default function Header(props) {
             <div css={smallNavigation}>
               <Anchor href="/logout">Logout</Anchor>
               <br />
-              <Anchor href="/imprint">imprint</Anchor>
+              <button onClick={() => closeMenu()}>
+                <Link href="/imprint">imprint</Link>{' '}
+              </button>
             </div>
           ) : (
             <div css={smallNavigation}>
               {/* <Link href="/register">Register</Link> */}
-              <Anchor href="/login">Login</Anchor> |{' '}
-              <Anchor href="register">Register</Anchor>
+              <button onClick={() => closeMenu()}>
+                <Link href="/login">Login</Link>&nbsp;|&nbsp;
+              </button>
+              <button onClick={() => closeMenu()}>
+                {' '}
+                <Link href="register">Register</Link>{' '}
+              </button>
               <br />
-              <Anchor href="/imprint" data-test-id="imprint">
-                Imprint
-              </Anchor>
+              <button onClick={() => closeMenu()}>
+                <Link href="/imprint" data-test-id="imprint">
+                  Imprint
+                </Link>{' '}
+              </button>
             </div>
           )}
         </div>
-      </div>
-    </header>
+      ) : (
+        <div css={openclose}>
+          <div className="open">
+            <button onClick={handleToggle}>
+              <span />
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

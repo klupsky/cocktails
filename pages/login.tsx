@@ -16,7 +16,8 @@ export const logo = css`
   letter-spacing: 0px;
   text-transform: uppercase;
   position: relative;
-  top: -30px;
+  top: 70px;
+  margin-bottom: 110px;
   a {
     color: black;
   }

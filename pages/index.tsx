@@ -14,30 +14,30 @@ import { getPreviewFromCollectionOfCocktails } from '../util/database';
 // CSS
 
 const titleSection = css`
-  height: 600px;
+  height: 660px;
   width: 100vw;
   overflow: hidden;
   text-align: center;
 
   @media (max-width: 1000px) {
-    height: 500px;
+    height: 560px;
   }
 
   // when bigger than 15000
   @media (min-width: 1500px) {
-    height: 900px;
+    height: 960px;
   }
 
   .doYou {
     text-transform: uppercase;
-    margin-top: 3.5%;
+    margin-top: 4rem;
     // when smaller than 1000
     @media (max-width: 1000px) {
-      margin-top: 10%;
+      margin-top: 5rem;
     }
     // when smaller than 600
     @media (max-width: 600px) {
-      margin-top: 17%;
+      margin-top: 5rem;
     }
   }
   h1 {

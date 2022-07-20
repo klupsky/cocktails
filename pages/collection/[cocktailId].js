@@ -18,7 +18,8 @@ const logo = css`
   letter-spacing: 0px;
   text-transform: uppercase;
   position: relative;
-  top: -30px;
+  top: 70px;
+  margin-bottom: 110px;
   color: #000000;
   z-index: 2;
 
@@ -89,6 +90,7 @@ const drinkGrid = css`
   gap: 0;
   border-bottom: 2px dotted #000;
   border-top: 2px dotted #000;
+  margin-bottom: 0.6rem;
 
   .item10 {
     grid-column: 1 / 1;
@@ -214,6 +216,7 @@ const drinkGrid = css`
     grid-column: 1 / 4;
     grid-row: 6;
     border-top: 2px dotted #000;
+
     // when smaller than 600px
 
     @media (max-width: 600px) {
@@ -367,7 +370,7 @@ export default function Cocktail(props) {
             z-index: 1;
             background-color: ${props.collectionCocktail.flavourcolour};
             position: relative;
-            margin-top: -150px;
+            margin-top: -170px;
           `}
         >
           <div css={wrapper}>
