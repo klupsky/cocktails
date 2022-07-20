@@ -60,8 +60,8 @@ const boxStyle = css`
   gap: 1.6rem;
   display: grid;
   grid-template-columns: 50% 50%;
-  // when smaller than 600px
-  @media (max-width: 600px) {
+  // when smaller than 700px
+  @media (max-width: 700px) {
     grid-template-columns: 100%;
   }
 `;

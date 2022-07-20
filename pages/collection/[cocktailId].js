@@ -209,6 +209,19 @@ const drinkGrid = css`
       border-left: none;
     }
   }
+
+  .item11 {
+    grid-column: 1 / 4;
+    grid-row: 6;
+    border-top: 2px dotted #000;
+    // when smaller than 600px
+
+    @media (max-width: 600px) {
+      grid-column: 1 / 4;
+      grid-row: 10;
+      border-left: none;
+    }
+  }
 `;
 
 const favouritesStyle = css`
@@ -287,6 +300,28 @@ const description = css`
   @media (max-width: 600px) {
     margin-top: 1rem;
     margin-bottom: 1rem;
+  }
+`;
+
+const bottomLink = css`
+  margin-top: 0.8rem;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  font-family: 'Messapia';
+  letter-spacing: 0px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1rem;
+
+  a {
+    color: black;
+  }
+
+  // when smaller than 600
+  @media (max-width: 600px) {
+    font-size: 0.6rem;
   }
 `;
 
@@ -413,8 +448,13 @@ export default function Cocktail(props) {
                   {props.collectionCocktail.description.toLowerCase()}
                 </div>
               </div>
-            </div>{' '}
-          </div>{' '}
+              <div className="item11">
+                <div css={bottomLink}>
+                  <Link href="/../collection">full collection</Link>{' '}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
