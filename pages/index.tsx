@@ -117,17 +117,17 @@ const wrapper = css`
     transform: rotate(-15deg);
     text-align: right;
     position: relative;
-    top: -280px;
+    top: -260px;
     // when smaller than 1400
     @media (max-width: 1400px) {
       position: relative;
-      top: -270px;
+      top: -260px;
     }
 
     // when smaller than 1000
     @media (max-width: 1000px) {
       position: relative;
-      top: -190px;
+      top: -170px;
     }
 
     // when smaller than 600
@@ -142,17 +142,6 @@ const wrapper = css`
       top: -420px;
     }
 
-    .swing {
-      -webkit-transform-origin: top center;
-      -ms-transform-origin: top center;
-      transform-origin: top center;
-      -webkit-animation-name: swing;
-      animation-name: swing;
-      -webkit-animation-duration: 1s;
-      animation-duration: 1s;
-      -webkit-animation-fill-mode: both;
-      animation-fill-mode: both;
-    }
     -webkit-transform-origin: top center;
     -ms-transform-origin: top center;
     transform-origin: top center;
@@ -165,29 +154,6 @@ const wrapper = css`
     animation-iteration-count: infinite;
   }
 
-  @-webkit-keyframes swing {
-    20% {
-      -webkit-transform: rotate3d(0, 0, 1, 10deg);
-      transform: rotate3d(0, 0, 1, 10deg);
-    }
-    40% {
-      -webkit-transform: rotate3d(0, 0, 1, -10deg);
-      transform: rotate3d(0, 0, 1, -10deg);
-    }
-    60% {
-      -webkit-transform: rotate3d(0, 0, 1, 8deg);
-      transform: rotate3d(0, 0, 1, 8deg);
-    }
-    80% {
-      -webkit-transform: rotate3d(0, 0, 1, -10deg);
-      transform: rotate3d(0, 0, 1, -10deg);
-    }
-    /* 100% {
-      -webkit-transform: rotate3d(0, 0, 1, 8deg);
-      transform: rotate3d(0, 0, 1, 8deg);
-    } */
-  }
-
   @keyframes swing {
     20% {
       -webkit-transform: rotate3d(0, 0, 1, 10deg);
@@ -198,8 +164,8 @@ const wrapper = css`
       transform: rotate3d(0, 0, 1, -10deg);
     }
     60% {
-      -webkit-transform: rotate3d(0, 0, 1, 8deg);
-      transform: rotate3d(0, 0, 1, 8deg);
+      -webkit-transform: rotate3d(0, 0, 1, 7deg);
+      transform: rotate3d(0, 0, 1, 7deg);
     }
     80% {
       -webkit-transform: rotate3d(0, 0, 1, -10deg);

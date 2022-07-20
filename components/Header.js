@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 const slidein = keyframes`
   0% {
-    left: 100vw;
+    left: 100%;
   }
 
   100% {
@@ -19,7 +19,7 @@ const slideout = keyframes`
   }
 
   100% {
-    left: 100vw;
+    left: 100%;
   }
 `;
 
