@@ -251,10 +251,8 @@ export default function Header(props) {
           </div>
 
           <div css={mainNavigation}>
-            <button onClick={() => closeMenu()}>
-              <Link href="/recommendation" data-test-id="recommendation">
-                find a cocktail
-              </Link>
+            <button onClick={() => closeMenu()} data-test-id="recommendation">
+              <Link href="/recommendation">find a cocktail</Link>
             </button>
 
             <br />
@@ -289,10 +287,8 @@ export default function Header(props) {
                 <Link href="register">Register</Link>{' '}
               </button>
               <br />
-              <button onClick={() => closeMenu()}>
-                <Link href="/imprint" data-test-id="imprint">
-                  Imprint
-                </Link>{' '}
+              <button onClick={() => closeMenu()} data-test-id="imprint">
+                <Link href="/imprint">Imprint</Link>
               </button>
             </div>
           )}
@@ -300,7 +296,7 @@ export default function Header(props) {
       ) : (
         <div css={openclose}>
           <div className="open">
-            <button onClick={handleToggle}>
+            <button data-test-id="menu" onClick={handleToggle}>
               <span />
             </button>
           </div>
