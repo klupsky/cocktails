@@ -39,6 +39,9 @@ export default function App({ Component, pageProps }) {
             margin: 0;
             padding: 0;
             background-color: #ffffff;
+            width: 100%;
+            height: 100%;
+            margin: 0;
 
             a {
               text-decoration: none;
@@ -55,7 +58,6 @@ export default function App({ Component, pageProps }) {
             li {
               list-style-type: none;
             }
-
           }
 
           * {

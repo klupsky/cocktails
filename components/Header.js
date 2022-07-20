@@ -1,58 +1,19 @@
-import { css, keyframes } from '@emotion/react';
+import { css } from '@emotion/react';
 import Link from 'next/link';
 import { useState } from 'react';
 
-const slidein = keyframes`
-  0% {
-    left: 110%;
-  }
-
-  100% {
-    left: 0px;
-  }
-`;
-
-const slideout = keyframes`
-  0% {
-    left: 0px;
-  }
-
-  100% {
-    left: 100rem%;
-  }
-`;
-
-const containter = css`
-  padding: 0;
-`;
+function Anchor({ children, ...restProps }) {
+  // using a instead of Link since we want to force a full refresh
+  return <a {...restProps}>{children}</a>;
+}
 
 const navigationOpen = css`
   z-index: 10;
   position: relative;
   position: fixed;
-  background-color: #e75c3c;
+  background: #e75c3c;
   height: 100vh;
   width: 100vw;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  animation: ${slidein} 1s;
-`;
-
-const navigationClosed = css`
-  z-index: 10;
-  position: absolute;
-  right: -101%;
-  background-color: #e75c3c;
-  height: 100vh;
-  width: 100vw;
-  overflow-x: hidden; /* Disable horizontal scroll */
-  animation: ${slideout} 1s;
-
-  // when smaller than 600
-  @media (max-width: 570px) {
-    height: 100vh;
-    width: 100vw;
-    right: -101%;
-  }
 `;
 
 const mainNavigation = css`
@@ -105,7 +66,6 @@ const mainNavigation = css`
 
 const logo = css`
   text-align: center;
-  transition: all 500ms ease-in-out;
 
   // when smaller than 600
   @media (max-width: 600px) {
@@ -211,7 +171,7 @@ const openclose = css`
 
   span {
     top: 0px;
-    left: 0.45rem;
+    left: 0.4rem;
     margin: 0px;
     height: 2px;
     width: 30px;
@@ -268,14 +228,70 @@ export default function Header(props) {
     console.log('is this onclick doing anything?');
   }
   return (
-    <div css={containter}>
+    <div>
       {navbarOpen ? (
-        <div css={openclose}>
-          <div className="close">
-            <button onClick={handleToggle}>
-              <span />
+        <div css={navigationOpen}>
+          <div css={openclose}>
+            <div className="close">
+              <button onClick={handleToggle}>
+                <span />
+              </button>
+            </div>
+          </div>
+
+          <div css={logo}>
+            <button onClick={() => closeMenu()}>
+              <Link href="/">
+                <span>
+                  FANCY A <br />
+                  COCKTAIL?
+                </span>
+              </Link>
             </button>
           </div>
+
+          <div css={mainNavigation}>
+            <button onClick={() => closeMenu()} data-test-id="recommendation">
+              <Link href="/recommendation">find a cocktail</Link>
+            </button>
+
+            <br />
+            <button onClick={() => closeMenu()}>
+              <Link href="/collection">full collection</Link>{' '}
+            </button>
+
+            <br />
+            {props.user && (
+              <button onClick={() => closeMenu()}>
+                <Link href={`/users/${props.user.id}`}>your selection</Link>{' '}
+              </button>
+            )}
+            <br />
+          </div>
+          {props.user ? (
+            <div css={smallNavigation}>
+              <Anchor href="/logout">Logout</Anchor>
+              <br />
+              <button onClick={() => closeMenu()}>
+                <Link href="/imprint">imprint</Link>{' '}
+              </button>
+            </div>
+          ) : (
+            <div css={smallNavigation}>
+              {/* <Link href="/register">Register</Link> */}
+              <button onClick={() => closeMenu()}>
+                <Link href="/login">Login</Link>&nbsp;|&nbsp;
+              </button>
+              <button onClick={() => closeMenu()}>
+                {' '}
+                <Link href="register">Register</Link>{' '}
+              </button>
+              <br />
+              <button onClick={() => closeMenu()} data-test-id="imprint">
+                <Link href="/imprint">Imprint</Link>
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <div css={openclose}>
@@ -284,124 +300,6 @@ export default function Header(props) {
               <span />
             </button>
           </div>
-        </div>
-      )}
-
-      {navbarOpen ? (
-        <div css={navigationOpen}>
-          <div css={logo}>
-            <button onClick={() => closeMenu()}>
-              <Link href="/">
-                <span>
-                  FANCY A <br />
-                  COCKTAIL?
-                </span>
-              </Link>
-            </button>
-          </div>
-
-          <div css={mainNavigation}>
-            <button onClick={() => closeMenu()} data-test-id="recommendation">
-              <Link href="/recommendation">find a cocktail</Link>
-            </button>
-
-            <br />
-            <button onClick={() => closeMenu()}>
-              <Link href="/collection">full collection</Link>{' '}
-            </button>
-
-            <br />
-            {props.user && (
-              <button onClick={() => closeMenu()}>
-                <Link href={`/users/${props.user.id}`}>your selection</Link>{' '}
-              </button>
-            )}
-            <br />
-          </div>
-          {props.user ? (
-            <div css={smallNavigation}>
-              <button onClick={() => closeMenu()}></button>
-
-              <Link href="/logout">Logout</Link>
-              <br />
-              <button onClick={() => closeMenu()}>
-                <Link href="/imprint">imprint</Link>{' '}
-              </button>
-            </div>
-          ) : (
-            <div css={smallNavigation}>
-              {/* <Link href="/register">Register</Link> */}
-              <button onClick={() => closeMenu()}>
-                <Link href="/login">Login</Link>&nbsp;|&nbsp;
-              </button>
-              <button onClick={() => closeMenu()}>
-                {' '}
-                <Link href="register">Register</Link>{' '}
-              </button>
-              <br />
-              <button onClick={() => closeMenu()} data-test-id="imprint">
-                <Link href="/imprint">Imprint</Link>
-              </button>
-            </div>
-          )}
-        </div>
-      ) : (
-        <div css={navigationClosed}>
-          <div css={logo}>
-            <button onClick={() => closeMenu()}>
-              <Link href="/">
-                <span>
-                  FANCY A <br />
-                  COCKTAIL?
-                </span>
-              </Link>
-            </button>
-          </div>
-
-          <div css={mainNavigation}>
-            <button onClick={() => closeMenu()} data-test-id="recommendation">
-              <Link href="/recommendation">find a cocktail</Link>
-            </button>
-
-            <br />
-            <button onClick={() => closeMenu()}>
-              <Link href="/collection">full collection</Link>{' '}
-            </button>
-
-            <br />
-            {props.user && (
-              <button onClick={() => closeMenu()}>
-                <Link href={`/users/${props.user.id}`}>your selection</Link>{' '}
-              </button>
-            )}
-            <br />
-          </div>
-          {props.user ? (
-            <div css={smallNavigation}>
-              <button onClick={() => closeMenu()}></button>
-
-              <Link href="/logout">Logout</Link>
-              <br />
-              <button onClick={() => closeMenu()}>
-                <Link href="/imprint">imprint</Link>{' '}
-              </button>
-            </div>
-          ) : (
-            <div css={smallNavigation}>
-              {/* <Link href="/register">Register</Link> */}
-              <button onClick={() => closeMenu()}>
-                <Link href="/login">Login</Link>&nbsp;|&nbsp;
-              </button>
-              <button onClick={() => closeMenu()}>
-                {' '}
-                <Link href="register">Register</Link>{' '}
-              </button>
-              <br />
-              <button onClick={() => closeMenu()} data-test-id="imprint">
-                <Link href="/imprint">Imprint</Link>
-              </button>
-            </div>
-          )}
         </div>
       )}
     </div>
