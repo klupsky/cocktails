@@ -2,11 +2,6 @@
 
 .env
 
-# test
-/test-results/
-/playwright-report
-/playwright/.cache/
-
 # dependencies
 /node_modules
 /.pnp
@@ -14,6 +9,9 @@
 
 # testing
 /coverage
+/test-results/
+/playwright-report
+/playwright/.cache/
 
 # next.js
 /.next/

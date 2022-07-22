@@ -12,8 +12,11 @@ have fun with it! cheers!
 
 ## Design
 
-this application is responsive for all screen sizes.
+this application is **responsive** for all screen sizes.
+
 the design, illustrations and css-styling were created and executed by myself.
+
+in case you are interested, view my figma design board: https://bit.ly/3ojmePc
 
 ## Technologies used
 
