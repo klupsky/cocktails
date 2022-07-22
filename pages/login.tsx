@@ -24,6 +24,9 @@ export const logo = css`
   :hover {
     cursor: pointer;
   }
+  a:hover {
+    cursor: pointer;
+  }
 
   // when smaller than 600
   @media (max-width: 600px) {

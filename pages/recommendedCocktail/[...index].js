@@ -59,6 +59,15 @@ const logo = css`
     font-size: 0.7rem;
     line-height: 100%;
   }
+  a:hover {
+    cursor: pointer;
+  }
+  :hover {
+    cursor: pointer;
+  }
+  a {
+    color: white;
+  }
 `;
 
 const title = css`

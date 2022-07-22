@@ -40,6 +40,10 @@ const logoWhite = css`
     cursor: pointer;
   }
 
+  a:hover {
+    cursor: pointer;
+  }
+
   // when smaller than 600
   @media (max-width: 600px) {
     font-size: 0.7rem;

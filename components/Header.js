@@ -93,6 +93,9 @@ const logo = css`
     :hover {
       cursor: pointer;
     }
+    a:hover {
+      cursor: pointer;
+    }
   }
 `;
 
@@ -166,7 +169,6 @@ const openclose = css`
     background: #e75c3c;
     cursor: pointer;
     position: relative;
-    z-index: 10;
   }
 
   span {
@@ -202,7 +204,7 @@ const openclose = css`
 
   .close {
     position: relative;
-    z-index: 13;
+    z-index: 0;
 
     span {
       background: transparent;
