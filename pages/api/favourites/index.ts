@@ -15,8 +15,6 @@ export default async function handler(
   }
 
   if (req.method === 'POST') {
-    //
-
     // 1. Get the cookie from the request
     const token = req.cookies.sessionToken;
 

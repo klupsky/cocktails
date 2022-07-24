@@ -746,55 +746,6 @@ export default function RecommendedCocktail(props) {
                       {error.message}
                     </div>
                   ))}
-
-                  {/* {props.urlInfoQuery.cocktailId}
-            {props.urlInfoQuery.name}
-            {props.urlInfoQuery.level}
-            {props.urlInfoQuery.flavour}
-            {props.urlInfoQuery.flavourColour}
-
-            {props.urlInfoQuery.spirit}
-            {props.urlInfoQuery.description}
-            {props.urlInfoQuery.glass}
-            {props.urlInfoQuery.method}
-            {props.urlInfoQuery.garnish}
-            {props.urlInfoQuery.category} */}
-                  {/* {!props.favouritesCheck ? (
-              <button
-                id="add to favourites"
-                disabled={disable}
-                onClick={() => {
-                  setDisable(true);
-                  addToFavouritesHandler().catch(() => {
-                    console.log('adding favourite failed');
-                  });
-                }}
-              >
-                ADD TO FAVOURITES
-              </button>
-            ) : (
-              <button id="add to favourites" disabled>
-                IS ALREADY FAVOURITE
-              </button>
-            )} */}
-                  {/*
-            {errors.map((error) => (
-              <div css={errorStyles} key={`error-${error.message}`}>
-                {error.message}
-              </div>
-            ))}
-            <br /> */}
-                  {/* <button
-              data-test-id="generate-recommendation-2"
-              type="button"
-              onClick={() => {
-                refreshPage().catch(() => {
-                  console.log('reload failed');
-                });
-              }}
-            >
-              GIVE ME ANOTHER!{' '}
-            </button> */}
                 </div>
               </div>
             </div>
@@ -831,7 +782,6 @@ export async function getServerSideProps(context) {
     context.query.spirit,
   );
 
-  // console.log(urlInfoQuery);
   if (!urlInfoQuery) {
     const favouritesCheckBackup = await checkFavourites(
       user.id,

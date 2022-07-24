@@ -69,10 +69,6 @@ export default function App({ Component, pageProps }) {
       />
 
       <Layout user={user}>
-        {/*
-          The "Component" component refers to
-          the current page that is being rendered
-        */}
         <Component {...pageProps} refreshUserProfile={refreshUserProfile} />
       </Layout>
     </>

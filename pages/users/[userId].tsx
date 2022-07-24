@@ -138,30 +138,12 @@ type Props = {
   }[];
 };
 
-// type Favourite = {
-//   id: number;
-//   name: string;
-//   userId: number;
-//   cocktailId: number;
-//   username: string;
-//   flavourcolour: string;
-// };
-
 // FUNCTIONALITY STARTS HERE
 
 export default function UserDetail(props: Props) {
-  // const [favouriteId, setFavouriteId] = useState<Favourite['id'] | ''>('');
-
   const [favouritesLists, setFavouritesLists] = useState(
     props.favouriteCocktails,
   );
-  // const [favouriteUserId, setFavouriteUserId] = useState<
-  //   Favourite['userId'] | ''
-  // >('');
-  // console.log(favouriteUserId);
-  // const [favouriteCocktailId, setFavouriteCocktailId] = useState<
-  //   Favourite['cocktailId'] | ''
-  // >('');
 
   async function deleteFavouriteHandler(
     cocktailId: number,

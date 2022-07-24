@@ -469,7 +469,7 @@ export async function getServerSideProps(context) {
   const collectionCocktail = await getSingleCocktailFromCollection(
     context.query.cocktailId,
   );
-
+  // get the sum of how many people have put this cocktail to their favourites list
   const numberOfFavourites = await getNumberOfFavourites(
     context.query.cocktailId,
   );

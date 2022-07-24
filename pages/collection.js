@@ -251,10 +251,6 @@ export async function getServerSideProps() {
   const collectionCocktail = await getFullCollectionOfCocktails();
   const categories = await getCategories();
 
-  // console.log(categories);
-
-  // console.log(collectionCocktail);
-
   return {
     props: {
       collectionCocktail,
