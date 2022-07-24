@@ -10,19 +10,23 @@ deployed version on heroku: https://fancycocktail.herokuapp.com
 
 have fun with it! cheers!
 
+## Technologies used
+
+**Client:** Next.js, React, TypeScript, Styled Components, Jest, Playwright
+
+**Server:** Node.js, PostgreSQL
+
 ## Design
 
 this application is **responsive** for all screen sizes.
 
 the design, illustrations and css-styling were created and executed by myself.
 
-in case you are interested, view my figma design board: https://bit.ly/3ojmePc
+## Planning
 
-## Technologies used
+in case you are interested, view my **figma design board**: https://bit.ly/3ojmePc
 
-**Client:** Next.js, React, TypeScript, Styled Components, Jest, Playwright
-
-**Server:** Node.js, PostgreSQL
+and this is my **drawSQL database schema**: https://drawsql.app/lupsky/diagrams/cocktails
 
 ## Screenshots
 
