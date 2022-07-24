@@ -24,6 +24,13 @@ test('navigation test', async ({ page }) => {
   const goToRecommendation = page.locator('data-test-id=recommendation');
   await goToRecommendation.click();
   await expect(page).toHaveURL(`${baseUrl}login?returnTo=/recommendation`);
+
+  // open menu and go to collection
+  const goToMenuAgainAgain = page.locator('data-test-id=menu');
+  await goToMenuAgainAgain.click();
+  const goToCollectionViaMenu = page.locator('data-test-id=collection');
+  await goToCollectionViaMenu.click();
+  await expect(page).toHaveURL(`${baseUrl}collection`);
 });
 
 // PWDEBUG=1 yarn playwright test

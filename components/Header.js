@@ -258,7 +258,7 @@ export default function Header(props) {
             </button>
 
             <br />
-            <button onClick={() => closeMenu()}>
+            <button data-test-id="collection" onClick={() => closeMenu()}>
               <Link href="/collection">full collection</Link>{' '}
             </button>
 
