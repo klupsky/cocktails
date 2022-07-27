@@ -70,8 +70,6 @@ const logo = css`
   // when smaller than 600
 
   button {
-    z-index: 11;
-
     color: black;
     background: transparent;
     box-shadow: 0px 0px 0px transparent;
@@ -84,6 +82,7 @@ const logo = css`
     text-transform: uppercase;
     position: relative;
     top: 67px;
+    z-index: 11;
 
     a {
       color: black;
