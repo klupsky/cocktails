@@ -66,6 +66,7 @@ const mainNavigation = css`
 
 const logo = css`
   text-align: center;
+  z-index: 11;
 
   // when smaller than 600
   @media (max-width: 600px) {
@@ -74,6 +75,7 @@ const logo = css`
   }
 
   button {
+    z-index: 11;
     color: black;
     background: transparent;
     box-shadow: 0px 0px 0px transparent;
@@ -86,7 +88,6 @@ const logo = css`
     text-transform: uppercase;
     position: relative;
     top: 67px;
-    z-index: 11;
 
     a {
       color: black;
