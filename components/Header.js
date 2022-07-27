@@ -37,7 +37,6 @@ const mainNavigation = css`
     font-size: 2.8rem;
     letter-spacing: 0em;
     margin-top: 0;
-    z-index: 11;
     // when smaller than 1000
     @media (max-width: 1000px) {
       font-size: 1.5rem;
@@ -87,6 +86,7 @@ const logo = css`
     text-transform: uppercase;
     position: relative;
     top: 67px;
+    z-index: 11;
 
     a {
       color: black;
@@ -259,7 +259,7 @@ export default function Header(props) {
             </button>
 
             <br />
-            <button onClick={() => closeMenu()}>
+            <button data-test-id="collection" onClick={() => closeMenu()}>
               <Link href="/collection">full collection</Link>{' '}
             </button>
 
