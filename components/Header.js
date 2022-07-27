@@ -68,10 +68,6 @@ const logo = css`
   text-align: center;
 
   // when smaller than 600
-  @media (max-width: 600px) {
-    font-size: 0.7rem;
-    line-height: 100%;
-  }
 
   button {
     color: black;
@@ -95,6 +91,11 @@ const logo = css`
     }
     a:hover {
       cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      font-size: 0.7rem;
+      line-height: 100%;
     }
   }
 `;
