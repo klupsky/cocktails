@@ -68,6 +68,10 @@ const logo = css`
   text-align: center;
 
   // when smaller than 600
+  @media (max-width: 600px) {
+    font-size: 0.7rem;
+    line-height: 100%;
+  }
 
   button {
     color: black;
@@ -82,7 +86,6 @@ const logo = css`
     text-transform: uppercase;
     position: relative;
     top: 67px;
-    z-index: 11;
 
     a {
       color: black;
@@ -92,10 +95,6 @@ const logo = css`
     }
     a:hover {
       cursor: pointer;
-    }
-    @media (max-width: 600px) {
-      font-size: 0.7rem;
-      line-height: 100%;
     }
   }
 `;
@@ -259,7 +258,7 @@ export default function Header(props) {
             </button>
 
             <br />
-            <button data-test-id="collection" onClick={() => closeMenu()}>
+            <button onClick={() => closeMenu()}>
               <Link href="/collection">full collection</Link>{' '}
             </button>
 
