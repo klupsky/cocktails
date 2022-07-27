@@ -66,14 +66,11 @@ const mainNavigation = css`
 
 const logo = css`
   text-align: center;
-
-  // when smaller than 600
-  @media (max-width: 600px) {
-    font-size: 0.7rem;
-    line-height: 100%;
-  }
+  z-index: 11;
 
   button {
+    z-index: 11;
+
     color: black;
     background: transparent;
     box-shadow: 0px 0px 0px transparent;
@@ -95,6 +92,11 @@ const logo = css`
     }
     a:hover {
       cursor: pointer;
+    }
+    // when smaller than 600
+    @media (max-width: 600px) {
+      font-size: 0.7rem;
+      line-height: 100%;
     }
   }
 `;

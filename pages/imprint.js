@@ -13,7 +13,7 @@ const imprintStyle = css`
   z-index: 1;
   background-color: black;
   position: relative;
-  margin-top: -150px;
+  margin-top: -160px;
   // when smaller than 600
   @media (max-width: 600px) {
     height: 100vh;
@@ -30,9 +30,9 @@ const logoWhite = css`
   position: relative;
   top: 70px;
   margin-bottom: 110px;
+  z-index: 5;
 
   color: #ffffff;
-  z-index: 2;
   a {
     color: white;
   }
