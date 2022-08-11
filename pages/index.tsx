@@ -166,7 +166,6 @@ const wrapper = css`
       -webkit-transform: rotate3d(0, 0, 1, -10deg);
       transform: rotate3d(0, 0, 1, -10deg);
     }
-
   }
 `;
 
@@ -259,7 +258,6 @@ const ellipsePosition = css`
 // TYPES
 
 type Props = {
-
   collectionPreview: {
     id: number;
     name: string;
@@ -281,9 +279,6 @@ type Props = {
 // FUNCTIONALITY STARTS HERE
 
 export default function Home(props: Props) {
-
-
-
   return (
     <>
       <Head>
