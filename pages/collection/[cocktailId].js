@@ -362,7 +362,6 @@ export default function Cocktail(props) {
             </span>
           </Link>
         </div>
-
         <div
           css={css`
             width: 100vw;
@@ -457,6 +456,7 @@ export default function Cocktail(props) {
                 </div>
               </div>
             </div>
+            here comes new feature
           </div>
         </div>
       </main>
