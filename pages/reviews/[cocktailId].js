@@ -557,90 +557,89 @@ export default function Review(props) {
           </div>
           <div css={wrapperReview}>
             <div>
-              <div>
-                {props.checkUserReview ? (
-                  <div>already reviewed</div>
-                ) : (
-                  <div>review</div>
-                )}
-
-                <fieldset>
-                  <label htmlFor="review">
-                    {props.user.username}, what do you think about this drink?
-                  </label>
-                  <input
-                    id="review"
-                    value={review}
-                    onChange={(event) => {
-                      setReview(event.currentTarget.value);
-                    }}
-                    required
-                  />
-                </fieldset>
-              </div>
-
-              <div>
-                <fieldset
-                  value={rating}
-                  onChange={(event) => handleRating(event)}
-                >
-                  <label htmlFor={rating}>how would you rate it?</label>
-                  <input
-                    type="radio"
-                    id="ratingRadio"
-                    name="rating"
-                    value={1}
-                  />
-                  <input
-                    type="radio"
-                    id="ratingRadio"
-                    name="rating"
-                    value={2}
-                  />
-                  <input
-                    type="radio"
-                    id="ratingRadio"
-                    name="rating"
-                    value={3}
-                  />
-                  <input
-                    type="radio"
-                    id="ratingRadio"
-                    name="rating"
-                    value={4}
-                  />
-                  <input
-                    type="radio"
-                    id="ratingRadio"
-                    name="rating"
-                    value={5}
-                  />
-                </fieldset>
-              </div>
-
-              <div>
-                {!review | !rating ? (
-                  <button
-                    id="disabled recommendation"
-                    onClick={() => {
-                      setErrors('please review and rate the cocktail');
-                    }}
+              {props.checkUserReview ? (
+                <div>
+                  {props.user.username}, you already reviewed this drink!
+                </div>
+              ) : (
+                <div>
+                  <fieldset>
+                    <label htmlFor="review">
+                      {props.user.username}, what do you think about this drink?
+                    </label>
+                    <input
+                      id="review"
+                      value={review}
+                      onChange={(event) => {
+                        setReview(event.currentTarget.value);
+                      }}
+                      required
+                    />
+                  </fieldset>
+                  <fieldset
+                    value={rating}
+                    onChange={(event) => handleRating(event)}
                   >
-                    review
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => {
-                      addToReviewsHandler().catch(console.log('error'));
-                      setReview('');
-                      setRating('');
-                    }}
-                  >
-                    review
-                  </button>
-                )}
-                <div css={errorStyles}>{errors}</div>
-              </div>
+                    <label htmlFor={rating}>how would you rate it?</label>
+                    <input
+                      type="radio"
+                      id="ratingRadio"
+                      name="rating"
+                      value={1}
+                    />
+                    <input
+                      type="radio"
+                      id="ratingRadio"
+                      name="rating"
+                      value={2}
+                    />
+                    <input
+                      type="radio"
+                      id="ratingRadio"
+                      name="rating"
+                      value={3}
+                    />
+                    <input
+                      type="radio"
+                      id="ratingRadio"
+                      name="rating"
+                      value={4}
+                    />
+                    <input
+                      type="radio"
+                      id="ratingRadio"
+                      name="rating"
+                      value={5}
+                    />
+                  </fieldset>
+
+                  <div>
+                    <div>
+                      {!review | !rating ? (
+                        <button
+                          id="disabled recommendation"
+                          onClick={() => {
+                            setErrors('please review and rate the cocktail');
+                          }}
+                        >
+                          review
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            addToReviewsHandler().catch(console.log('error'));
+                            setReview('');
+                            setRating('');
+                          }}
+                        >
+                          review
+                        </button>
+                      )}
+                      <div css={errorStyles}>{errors}</div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div css={wrapperReview}>
