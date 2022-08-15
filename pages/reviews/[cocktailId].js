@@ -2,7 +2,14 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import RatingStarFive from '../../components/RatingStars/RatingStarFive';
+import RatingStarFour from '../../components/RatingStars/RatingStarFour';
+import RatingStarOne from '../../components/RatingStars/RatingStarOne';
+import RatingStarThree from '../../components/RatingStars/RatingStarThree';
+import RatingStarTwo from '../../components/RatingStars/RatingStarTwo';
+import EmptyStar from '../../components/Stars/EmptyStar';
+import FullStar from '../../components/Stars/FullStar';
 import {
   checkReviews,
   getNumberOfFavourites,
@@ -23,6 +30,7 @@ const errorStyles = css`
   letter-spacing: 0px;
   text-transform: uppercase;
   margin-bottom: 10%;
+  margin-top: 5%;
 `;
 
 const logo = css`
@@ -65,7 +73,6 @@ export const wrapper = css`
 
   // when smaller than 800
   @media (max-width: 800px) {
-    margin-bottom: 10%;
     margin-left: 5%;
     margin-right: 5%;
   }
@@ -73,8 +80,7 @@ export const wrapper = css`
 export const wrapperReview = css`
   margin-left: 20%;
   margin-right: 20%;
-  margin-top: 100px;
-  margin-bottom: 10%;
+  margin-bottom: 2rem;
 
   @media (max-width: 1500px) {
     margin-left: 15%;
@@ -86,6 +92,14 @@ export const wrapperReview = css`
     margin-bottom: 10%;
     margin-left: 5%;
     margin-right: 5%;
+  }
+
+  .reviewAlreadyReviewedStyle {
+    margin-bottom: 2rem;
+
+    .reviewAlreadyReviewedStyleText {
+      margin-bottom: 4rem;
+    }
   }
 `;
 
@@ -361,24 +375,124 @@ const bottomLink = css`
   }
 `;
 
-// const reviewGrid = css`
-//   display: grid;
-//   grid-template-columns: 50% 50%;
-//   text-align: center;
-//   gap: 0;
+const reviewStyle = css`
+  text-align: center;
 
-//   .reviewItem1 {
-//     grid-column: 1 / 3;
-//     grid-row: 1;
-//     border-bottom: 2px dotted #000;
-//   }
-//   .reviewItem2 {
-//     grid-column: 1 / 3;
-//     grid-row: 2;
-//     margin-bottom: 0.8rem;
-//     border-bottom: 2px dotted #000;
-//   }
-// `;
+  .reviewHeadlineStyle {
+    margin-top: 0.8rem;
+    align-items: center;
+    text-transform: uppercase;
+    font-family: 'Messapia';
+    letter-spacing: 0px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1rem;
+    border-bottom: 2px dotted #000;
+    border-top: 2px dotted #000;
+
+    .textStyle {
+      margin-bottom: 0.8rem;
+      margin-top: 0.8rem;
+    }
+  }
+`;
+
+const reviewsStyle = css`
+  text-align: center;
+  margin-bottom: 4rem;
+
+  .starStyle {
+    letter-spacing: -3px;
+  }
+  .name {
+    text-transform: uppercase;
+    line-height: 100%;
+    margin-top: 0.5rem;
+    font-size: 0.4rem;
+    margin-top: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .reviewText {
+    line-height: 130%;
+    margin-top: 0.3rem;
+    font-size: 0.7rem;
+    margin-bottom: 0.1rem;
+  }
+`;
+
+const ratingForm = css`
+  text-align: center;
+  margin-top: 0.8rem;
+
+  fieldset {
+    border: 0;
+    .inputOne {
+      label {
+        margin-bottom: 1.5rem;
+      }
+      input {
+        margin-top: 1rem;
+        background-color: transparent;
+        width: 100%;
+        font-size: 1rem;
+        -webkit-text-size-adjust: 100%;
+        font-family: var(--typeBasePrimary);
+        font-weight: var(--typeBaseWeight);
+        font-style: var(--typeBaseStyle);
+        letter-spacing: var(--typeBaseSpacing);
+        line-height: var(--typeBaseLineHeight);
+        display: inline-block;
+        text-align: start;
+        border: 2px solid #000000;
+        border-radius: 20px;
+        padding: 1%;
+        height: 7rem;
+        // when smaller than 600
+
+        @media (max-width: 600px) {
+          width: 80%;
+        }
+      }
+    }
+
+    .inputTwo {
+      input[type='radio'] {
+        border: 2px solid #000000;
+
+        height: 2.2rem;
+        width: 7rem;
+      }
+    }
+  }
+
+  .button {
+    border-bottom: 2px dotted #000;
+    border-top: 2px dotted #000;
+
+    button {
+      color: black;
+      background: transparent;
+      box-shadow: 0px 0px 0px transparent;
+      border: 0px solid transparent;
+      text-shadow: 0px 0px 0px transparent;
+      margin-top: 0.8rem;
+      margin-bottom: 0.8rem;
+      align-items: center;
+      text-transform: uppercase;
+      font-family: 'Messapia';
+      letter-spacing: 0px;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    // when smaller than 600
+    @media (max-width: 600px) {
+      margin-top: 12%;
+    }
+  }
+`;
 
 // FUNCTIONALITY STARTS HERE
 
@@ -391,23 +505,6 @@ export default function Review(props) {
   function handleRating(event) {
     setRating(event.target.value);
   }
-
-  // POST a  review to a book
-
-  // useEffect(() => {
-  //   // GET reviews
-  //   async function getReviewByCocktailIdAgain() {
-  //     const response = await fetch(
-  //       `../api/reviews/${props.collectionCocktail.id}`,
-  //     );
-  //     const reviews = await response.json();
-
-  //     setReviewList(reviews);
-  //   }
-  //   getReviewByCocktailIdAgain().catch(() => {
-  //     console.log('Reviews request fails');
-  //   });
-  // }, [...reviewList]);
 
   // add the review
   async function addToReviewsHandler() {
@@ -556,71 +653,82 @@ export default function Review(props) {
               </div>
               <div className="item11">
                 <div css={bottomLink}>
-                  <Link href={`/users/${props.user.id}`}>your selection</Link>{' '}
+                  <Link href={`/users/${props.user.id}`}>your selection</Link>
                 </div>
               </div>
             </div>
           </div>
           <div css={wrapperReview}>
-            <div>
-              {props.checkUserReview ? (
-                <div>
-                  {props.user.username}, you already reviewed this drink!
+            <div css={reviewStyle}>
+              {!props.checkUserReview ? (
+                <div className="reviewAlreadyReviewedStyle">
+                  <div className="reviewAlreadyReviewedStyleText">
+                    {props.user.username}, you already reviewed this drink!
+                  </div>
+                  <div className="reviewHeadlineStyle">
+                    <div className="textStyle">Reviews</div>
+                  </div>
                 </div>
               ) : (
-                <div>
+                <div css={ratingForm}>
                   <fieldset>
-                    <label htmlFor="review">
-                      {props.user.username}, what do you think about this drink?
-                    </label>
-                    <input
-                      id="review"
-                      value={review}
-                      onChange={(event) => {
-                        setReview(event.currentTarget.value);
-                      }}
-                      required
-                    />
+                    <div className="inputOne">
+                      <label htmlFor="review">
+                        {props.user.username}, what do you think about this
+                        drink?
+                      </label>
+                      <input
+                        id="review"
+                        value={review}
+                        onChange={(event) => {
+                          setReview(event.currentTarget.value);
+                        }}
+                        required
+                      />
+                    </div>
                   </fieldset>
                   <fieldset
                     value={rating}
                     onChange={(event) => handleRating(event)}
                   >
-                    <label htmlFor={rating}>how would you rate it?</label>
-                    <input
-                      type="radio"
-                      id="ratingRadio"
-                      name="rating"
-                      value={1}
-                    />
-                    <input
-                      type="radio"
-                      id="ratingRadio"
-                      name="rating"
-                      value={2}
-                    />
-                    <input
-                      type="radio"
-                      id="ratingRadio"
-                      name="rating"
-                      value={3}
-                    />
-                    <input
-                      type="radio"
-                      id="ratingRadio"
-                      name="rating"
-                      value={4}
-                    />
-                    <input
-                      type="radio"
-                      id="ratingRadio"
-                      name="rating"
-                      value={5}
-                    />
+                    {' '}
+                    <div className="inputTwo">
+                      <label htmlFor={rating}>how would you rate it?</label>
+                      <input
+                        type="radio"
+                        id="ratingRadio"
+                        name="rating"
+                        value={1}
+                      />
+                      <input
+                        type="radio"
+                        id="ratingRadio"
+                        name="rating"
+                        value={2}
+                      />
+                      <input
+                        type="radio"
+                        id="ratingRadio"
+                        name="rating"
+                        value={3}
+                      />
+                      <input
+                        type="radio"
+                        id="ratingRadio"
+                        name="rating"
+                        value={4}
+                      />
+                      <input
+                        type="radio"
+                        id="ratingRadio"
+                        name="rating"
+                        value={5}
+                      />
+                    </div>
                   </fieldset>
 
-                  <div>
-                    <div>
+                  <div css={ratingForm}>
+                    <div className="button">
                       {!review | !rating ? (
                         <button
                           id="disabled recommendation"
@@ -641,23 +749,39 @@ export default function Review(props) {
                           review
                         </button>
                       )}
-                      <div css={errorStyles}>{errors}</div>
                     </div>
+                    <div css={errorStyles}>{errors}</div>
                   </div>
                 </div>
               )}
             </div>
           </div>
           <div css={wrapperReview}>
-            {[...reviewList].reverse().map((seereview) => {
-              return (
-                <div key={`review-${seereview.id}`}>
-                  {seereview.review}
-                  {seereview.rating}
-                  {seereview.username}
-                </div>
-              );
-            })}
+            <div css={reviewsStyle}>
+              {[...reviewList].reverse().map((seereview) => {
+                return (
+                  <div key={`review-${seereview.id}`}>
+                    <div className="starStyle">
+                      {seereview.rating === 1 ? (
+                        <RatingStarOne />
+                      ) : seereview.rating === 2 ? (
+                        <RatingStarTwo />
+                      ) : seereview.rating === 3 ? (
+                        <RatingStarThree />
+                      ) : seereview.rating === 4 ? (
+                        <RatingStarFour />
+                      ) : seereview.rating === 5 ? (
+                        <RatingStarFive />
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                    <div className="reviewText">{seereview.review}</div>
+                    <div className="name"> {seereview.username}</div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </main>
