@@ -386,27 +386,11 @@ export default function Review(props) {
   const [errors, setErrors] = useState([]);
   const [review, setReview] = useState('');
   const [rating, setRating] = useState('');
-  const [reviewList, setReviewList] = useState(props.reviews);
+  const [reviewList, setReviewList] = useState(props.allReviews);
 
   function handleRating(event) {
     setRating(event.target.value);
   }
-
-  useEffect(() => {
-    // GET reviews
-    async function getReviewByCocktailId() {
-      const response = await fetch(
-        `../api/reviews/${props.collectionCocktail.id}`,
-      );
-      const reviews = await response.json();
-
-      setReviewList(reviews);
-      console.log(reviewList);
-    }
-    getReviewByCocktailId().catch(() => {
-      console.log('Reviews request fails');
-    });
-  }, [...reviewList]);
 
   // add the review
   async function addToReviewsHandler() {
@@ -429,6 +413,22 @@ export default function Review(props) {
       return;
     }
   }
+
+  useEffect(() => {
+    // GET reviews
+    async function getReviewByCocktailIdAgain() {
+      const response = await fetch(
+        `../api/reviews/${props.collectionCocktail.id}`,
+      );
+      const reviews = await response.json();
+
+      setReviewList(reviews);
+      console.log(reviewList);
+    }
+    getReviewByCocktailIdAgain().catch(() => {
+      console.log('Reviews request fails');
+    });
+  }, [...reviewList]);
 
   if (props.collectionCocktail === null) {
     return (
@@ -685,6 +685,7 @@ export async function getServerSideProps(context) {
 
   // get the review of the cocktail
   const reviews = await getReviewByCocktailId(context.query.cocktailId);
+  const allReviews = await JSON.parse(JSON.stringify(reviews));
 
   // check if the user has already reviewed this cocktail
   const checkUserReview = await checkReviews(user.id, context.query.cocktailId);
@@ -696,6 +697,7 @@ export async function getServerSideProps(context) {
       numberOfFavourites: numberOfFavourites,
       reviews: reviews,
       checkUserReview: checkUserReview || null,
+      allReviews: allReviews,
     },
   };
 }
