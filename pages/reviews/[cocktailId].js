@@ -8,6 +8,7 @@ import RatingStarFour from '../../components/RatingStars/RatingStarFour';
 import RatingStarOne from '../../components/RatingStars/RatingStarOne';
 import RatingStarThree from '../../components/RatingStars/RatingStarThree';
 import RatingStarTwo from '../../components/RatingStars/RatingStarTwo';
+import Star from '../../components/Star';
 import EmptyStar from '../../components/Stars/EmptyStar';
 import FullStar from '../../components/Stars/FullStar';
 import {
@@ -427,41 +428,28 @@ const ratingForm = css`
 
   fieldset {
     border: 0;
-    .inputOne {
-      label {
-        margin-bottom: 1.5rem;
-      }
-      input {
-        margin-top: 1rem;
-        background-color: transparent;
-        width: 100%;
-        font-size: 1rem;
-        -webkit-text-size-adjust: 100%;
-        font-family: var(--typeBasePrimary);
-        font-weight: var(--typeBaseWeight);
-        font-style: var(--typeBaseStyle);
-        letter-spacing: var(--typeBaseSpacing);
-        line-height: var(--typeBaseLineHeight);
-        display: inline-block;
-        text-align: start;
-        border: 2px solid #000000;
-        border-radius: 20px;
-        padding: 1%;
-        height: 7rem;
-        // when smaller than 600
-
-        @media (max-width: 600px) {
-          width: 80%;
-        }
-      }
+    label {
+      margin-bottom: 1.5rem;
     }
+    input {
+      margin-top: 1rem;
+      background-color: transparent;
+      width: 100%;
+      font-size: 1rem;
+      -webkit-text-size-adjust: 100%;
+      font-family: var(--typeBasePrimary);
+      font-weight: var(--typeBaseWeight);
+      font-style: var(--typeBaseStyle);
+      letter-spacing: var(--typeBaseSpacing);
+      line-height: var(--typeBaseLineHeight);
+      border: 2px solid #000000;
+      border-radius: 20px;
+      padding: 5%;
+      height: 3rem;
+      // when smaller than 600
 
-    .inputTwo {
-      input[type='radio'] {
-        border: 2px solid #000000;
-
-        height: 2.2rem;
-        width: 7rem;
+      @media (max-width: 600px) {
+        width: 80%;
       }
     }
   }
@@ -492,6 +480,33 @@ const ratingForm = css`
       margin-top: 12%;
     }
   }
+
+  .container {
+    margin-top: 0.8rem;
+  }
+  .result {
+    text-align: center;
+  }
+  .stars {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+  }
+  .star {
+    position: relative;
+    cursor: pointer;
+  }
+  .stars_radio-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+    clip: rect(1px, 1px, 1px, 1px);
+  }
+  .stars_radio-input:checked ~ svg {
+    fill: yellow;
+  }
 `;
 
 // FUNCTIONALITY STARTS HERE
@@ -499,13 +514,22 @@ const ratingForm = css`
 export default function Review(props) {
   const [errors, setErrors] = useState([]);
   const [review, setReview] = useState('');
-  const [rating, setRating] = useState('');
+
+  // const [rating, setRating] = useState('');
   const [reviewList, setReviewList] = useState(props.allReviews);
 
-  function handleRating(event) {
-    setRating(event.target.value);
-  }
+  // function handleRating(event) {
+  //   setRating(event.target.value);
+  // }
 
+  const [rating, setRating] = useState();
+  const grades = [1, 2, 3, 4, 5];
+  const activeStar = {
+    fill: 'yellow',
+  };
+  const changeRating = (index) => {
+    setRating(index);
+  };
   // add the review
   async function addToReviewsHandler() {
     const reviewResponse = await fetch('../api/reviews', {
@@ -660,7 +684,7 @@ export default function Review(props) {
           </div>
           <div css={wrapperReview}>
             <div css={reviewStyle}>
-              {!props.checkUserReview ? (
+              {props.checkUserReview ? (
                 <div className="reviewAlreadyReviewedStyle">
                   <div className="reviewAlreadyReviewedStyleText">
                     {props.user.username}, you already reviewed this drink!
@@ -672,22 +696,36 @@ export default function Review(props) {
               ) : (
                 <div css={ratingForm}>
                   <fieldset>
-                    <div className="inputOne">
-                      <label htmlFor="review">
-                        {props.user.username}, what do you think about this
-                        drink?
-                      </label>
-                      <input
-                        id="review"
-                        value={review}
-                        onChange={(event) => {
-                          setReview(event.currentTarget.value);
-                        }}
-                        required
-                      />
-                    </div>
+                    <label htmlFor="review">
+                      {props.user.username}, what do you think about this drink?
+                    </label>
+                    <input
+                      id="review"
+                      value={review}
+                      onChange={(event) => {
+                        setReview(event.currentTarget.value);
+                      }}
+                      required
+                    />
                   </fieldset>
-                  <fieldset
+
+                  <div className="container">
+                    <div className="stars">
+                      {grades.map((grade, index) => (
+                        <Star
+                          index={index}
+                          key={grade}
+                          changeRating={changeRating}
+                          style={rating > index ? activeStar : {}}
+                        />
+                      ))}
+                    </div>
+                    <h1 className="result">
+                      {grades[rating] ? grades[rating] : ''}
+                    </h1>
+                  </div>
+
+                  {/* <fieldset
                     value={rating}
                     onChange={(event) => handleRating(event)}
                   >
@@ -725,7 +763,7 @@ export default function Review(props) {
                         value={5}
                       />
                     </div>
-                  </fieldset>
+                  </fieldset> */}
 
                   <div css={ratingForm}>
                     <div className="button">
@@ -762,18 +800,18 @@ export default function Review(props) {
                 return (
                   <div key={`review-${seereview.id}`}>
                     <div className="starStyle">
-                      {seereview.rating === 1 ? (
+                      {seereview.rating === 0 ? (
                         <RatingStarOne />
-                      ) : seereview.rating === 2 ? (
+                      ) : seereview.rating === 1 ? (
                         <RatingStarTwo />
-                      ) : seereview.rating === 3 ? (
+                      ) : seereview.rating === 2 ? (
                         <RatingStarThree />
-                      ) : seereview.rating === 4 ? (
+                      ) : seereview.rating === 3 ? (
                         <RatingStarFour />
-                      ) : seereview.rating === 5 ? (
+                      ) : seereview.rating === 4 ? (
                         <RatingStarFive />
                       ) : (
-                        <></>
+                        <div />
                       )}
                     </div>
                     <div className="reviewText">{seereview.review}</div>
