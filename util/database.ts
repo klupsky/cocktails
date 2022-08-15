@@ -566,3 +566,82 @@ export async function getPreviewFromCollectionOfCocktails() {
     camelcaseKeys(previewCocktail),
   );
 }
+
+export async function addReview(
+  userId: number,
+  cocktailId: number,
+  review: string,
+  rating: number,
+) {
+  const [addReviews] = await sql`
+    INSERT INTO
+    reviews
+      (user_id, cocktail_id, review, rating)
+
+    VALUES
+      (${userId}, ${cocktailId}, ${review}, ${rating})
+
+    RETURNING
+      *
+  `;
+  return camelcaseKeys(addReviews);
+}
+
+type UserWithCocktailId = User & {
+  cocktailId: number;
+};
+export async function getReviewByCocktailId(cocktailId: number) {
+  if (!cocktailId) return undefined;
+
+  const review = await sql<[UserWithCocktailId | undefined]>`
+
+    SELECT
+    review,
+    rating,
+    username,
+    cocktail_id
+
+    FROM
+      reviews,
+      users
+
+    WHERE
+      cocktail_id = ${cocktailId} AND
+      users.id = user_id
+  `;
+  return review && camelcaseKeys(review);
+}
+
+export async function getAllReviews() {
+  const reviews = await sql`
+
+    SELECT
+      *
+
+    FROM
+      reviews
+
+
+
+  `;
+  return camelcaseKeys(reviews);
+}
+
+type ReviewCocktail = {
+  cocktailId: number;
+};
+
+export async function checkReviews(userId: number, cocktailId: number) {
+  const [reviewCheck] = await sql<[ReviewCocktail | undefined]>`
+    SELECT
+      id
+
+    FROM
+      reviews
+
+    WHERE
+      reviews.user_Id = ${userId} AND
+      reviews.cocktail_Id = ${cocktailId}
+  `;
+  return reviewCheck && camelcaseKeys(reviewCheck);
+}

@@ -352,7 +352,7 @@ export default function RecommendedCocktail(props) {
 
   const router = useRouter();
 
-  // get the user favourites
+  // add the user favourite
 
   async function addToFavouritesHandler() {
     const favouriteResponse = await fetch('../api/favourites', {
@@ -601,7 +601,7 @@ export default function RecommendedCocktail(props) {
             z-index: 1;
             background-color: ${props.urlInfoQuery.flavourcolour};
             position: relative;
-            margin-top: -150px;
+            margin-top: -170px;
             // when smaller than 600
             @media (max-width: 600px) {
             }

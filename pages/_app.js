@@ -42,6 +42,7 @@ export default function App({ Component, pageProps }) {
             width: 100%;
             height: 100%;
             margin: 0;
+            scroll-behavior: smooth;
 
             a {
               text-decoration: none;

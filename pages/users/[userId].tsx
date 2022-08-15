@@ -255,7 +255,7 @@ export default function UserDetail(props: Props) {
                         />
                       </div>
                       <div css={title}>
-                        <Link href={`/../collection/${favourite.cocktailId}`}>
+                        <Link href={`/../reviews/${favourite.cocktailId}`}>
                           {favourite.name}
                         </Link>
                       </div>
