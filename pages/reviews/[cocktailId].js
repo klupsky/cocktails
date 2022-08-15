@@ -392,6 +392,23 @@ export default function Review(props) {
     setRating(event.target.value);
   }
 
+  // POST a  review to a book
+
+  // useEffect(() => {
+  //   // GET reviews
+  //   async function getReviewByCocktailIdAgain() {
+  //     const response = await fetch(
+  //       `../api/reviews/${props.collectionCocktail.id}`,
+  //     );
+  //     const reviews = await response.json();
+
+  //     setReviewList(reviews);
+  //   }
+  //   getReviewByCocktailIdAgain().catch(() => {
+  //     console.log('Reviews request fails');
+  //   });
+  // }, [...reviewList]);
+
   // add the review
   async function addToReviewsHandler() {
     const reviewResponse = await fetch('../api/reviews', {
@@ -407,28 +424,17 @@ export default function Review(props) {
       }),
     });
     const createdReview = await reviewResponse.json();
+    const cocktailId = { cocktailId: props.collectionCocktail.id };
+    const newReviewObject = { ...cocktailId, ...createdReview };
+    const newState = [...reviewList, newReviewObject];
+
+    setReviewList(newState);
     // if we have error show an error message
     if ('errors' in createdReview) {
       setErrors(createdReview.errors);
       return;
     }
   }
-
-  useEffect(() => {
-    // GET reviews
-    async function getReviewByCocktailIdAgain() {
-      const response = await fetch(
-        `../api/reviews/${props.collectionCocktail.id}`,
-      );
-      const reviews = await response.json();
-
-      setReviewList(reviews);
-      console.log(reviewList);
-    }
-    getReviewByCocktailIdAgain().catch(() => {
-      console.log('Reviews request fails');
-    });
-  }, [...reviewList]);
 
   if (props.collectionCocktail === null) {
     return (
@@ -695,7 +701,6 @@ export async function getServerSideProps(context) {
       user: user,
       collectionCocktail: collectionCocktail,
       numberOfFavourites: numberOfFavourites,
-      reviews: reviews,
       checkUserReview: checkUserReview || null,
       allReviews: allReviews,
     },
