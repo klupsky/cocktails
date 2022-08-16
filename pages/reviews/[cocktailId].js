@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import DisabledStar from '../../components/DisabledStars';
 import RatingStarFive from '../../components/RatingStars/RatingStarFive';
 import RatingStarFour from '../../components/RatingStars/RatingStarFour';
 import RatingStarOne from '../../components/RatingStars/RatingStarOne';
@@ -487,28 +488,52 @@ const ratingForm = css`
     text-align: center;
   }
   .stars {
+    margin-top: 0.5rem;
     display: flex;
     justify-content: center;
     gap: 3px;
-  }
-  .star {
-    position: relative;
-    cursor: pointer;
-  }
-  .stars_radio-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 1px;
-    clip: rect(1px, 1px, 1px, 1px);
-  }
-  .stars_radio-input:checked ~ svg {
-    fill: yellow;
-  }
 
-  .stars_radio-input:checked:before ~ svg {
-    fill: yellow;
+    .star {
+      position: relative;
+      cursor: pointer;
+    }
+    .starDisabled {
+      position: relative;
+    }
+
+    .star_radio-input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 1px;
+      clip: rect(1px, 1px, 1px, 1px);
+    }
+
+    .star_radio-input:checked ~ svg {
+      fill: yellow;
+    }
+
+    .star_radio-input:checked:before ~ svg {
+      fill: yellow;
+    }
+
+    .starDisabled_radio-input {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 1px;
+      clip: rect(1px, 1px, 1px, 1px);
+    }
+
+    .starDisabled_radio-input:checked ~ svg {
+      fill: none;
+    }
+
+    .starDisabled_radio-input:checked:before ~ svg {
+      fill: none;
+    }
   }
 `;
 
@@ -524,6 +549,10 @@ export default function Review(props) {
   const activeStar = {
     fill: 'yellow',
   };
+  const notActiveStar = {
+    fill: 'none',
+  };
+
   const changeRating = (index) => {
     setRating(index);
   };
@@ -710,16 +739,29 @@ export default function Review(props) {
 
                   <div className="container">
                     how would you rate it?
-                    <div className="stars">
-                      {grades.map((grade, index) => (
-                        <Star
-                          index={index}
-                          key={grade}
-                          changeRating={changeRating}
-                          style={rating > index ? activeStar : {}}
-                        />
-                      ))}
-                    </div>
+                    {active === false ? (
+                      <div className="stars">
+                        {grades.map((grade, index) => (
+                          <Star
+                            index={index}
+                            key={grade}
+                            changeRating={changeRating}
+                            style={rating > index ? activeStar : {}}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="stars">
+                        {grades.map((grade, index) => (
+                          <DisabledStar
+                            index={index}
+                            key={grade}
+                            changeRating={changeRating}
+                            style={rating > index ? notActiveStar : {}}
+                          />
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <div css={ratingForm}>

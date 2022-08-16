@@ -1,15 +1,15 @@
-const Star = (props) => {
+const DisabledStar = (props) => {
   const changeRating = (e) => {
     props.changeRating(e.target.value);
   };
 
   return (
-    <label className="star">
+    <label className="starDisabled">
       <input
         type="radio"
         name="rating"
         value={props.index}
-        className="star_radio-input"
+        className="starDisabled_radio-input"
         onClick={changeRating}
       />
 
@@ -30,4 +30,4 @@ const Star = (props) => {
   );
 };
 
-export default Star;
+export default DisabledStar;
