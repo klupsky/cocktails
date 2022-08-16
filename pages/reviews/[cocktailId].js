@@ -765,29 +765,43 @@ export default function Review(props) {
                   </div>
 
                   <div css={ratingForm}>
-                    <div className="button">
-                      {!review | !rating ? (
+                    {active === false ? (
+                      <div className="button">
+                        {!review | !rating ? (
+                          <button
+                            id="disabled recommendation"
+                            onClick={() => {
+                              setErrors('please review and rate the cocktail');
+                            }}
+                          >
+                            review
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              addToReviewsHandler().catch(console.log('error'));
+                              setReview('');
+                              setRating('');
+                              setActive(true);
+                            }}
+                          >
+                            review
+                          </button>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="button">
                         <button
                           id="disabled recommendation"
                           onClick={() => {
                             setErrors('please review and rate the cocktail');
                           }}
+                          disabled
                         >
                           review
                         </button>
-                      ) : (
-                        <button
-                          onClick={() => {
-                            addToReviewsHandler().catch(console.log('error'));
-                            setReview('');
-                            setRating('');
-                            setActive(true);
-                          }}
-                        >
-                          review
-                        </button>
-                      )}
-                    </div>
+                      </div>
+                    )}
                     <div css={errorStyles}>{errors}</div>
                   </div>
                 </div>
