@@ -417,6 +417,25 @@ export async function getUserFavourites(userId: any) {
   return favouriteCocktails.map((cocktail) => camelcaseKeys(cocktail));
 }
 
+export async function getCocktailRating(cocktailId: number) {
+  const collectionCocktail = await sql`
+    SELECT
+      reviews.rating,
+      reviews.id
+
+    FROM
+      cocktails,
+      reviews
+
+    WHERE
+      cocktails.id = ${cocktailId} AND
+      reviews.cocktail_id = ${cocktailId}
+
+
+      `;
+  return camelcaseKeys(collectionCocktail);
+}
+
 export async function addUserFavourite(userId: number, cocktailId: number) {
   const [addFavouriteCocktail] = await sql`
     INSERT INTO

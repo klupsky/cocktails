@@ -9,8 +9,6 @@ import RatingStarOne from '../../components/RatingStars/RatingStarOne';
 import RatingStarThree from '../../components/RatingStars/RatingStarThree';
 import RatingStarTwo from '../../components/RatingStars/RatingStarTwo';
 import Star from '../../components/Star';
-import EmptyStar from '../../components/Stars/EmptyStar';
-import FullStar from '../../components/Stars/FullStar';
 import {
   checkReviews,
   getNumberOfFavourites,
@@ -518,23 +516,18 @@ const ratingForm = css`
 
 export default function Review(props) {
   const [errors, setErrors] = useState([]);
+  const [active, setActive] = useState(false);
   const [review, setReview] = useState('');
-
-  // const [rating, setRating] = useState('');
+  const [rating, setRating] = useState('');
   const [reviewList, setReviewList] = useState(props.allReviews);
-
-  // function handleRating(event) {
-  //   setRating(event.target.value);
-  // }
-
-  const [rating, setRating] = useState();
-  const grades = [1, 2, 3, 4, 5];
+  const grades = [0, 1, 2, 3, 4];
   const activeStar = {
     fill: 'yellow',
   };
   const changeRating = (index) => {
     setRating(index);
   };
+
   // add the review
   async function addToReviewsHandler() {
     const reviewResponse = await fetch('../api/reviews', {
@@ -711,11 +704,12 @@ export default function Review(props) {
                         setReview(event.currentTarget.value);
                       }}
                       required
+                      disabled={active}
                     />
                   </fieldset>
 
                   <div className="container">
-                    how would you rate it?{' '}
+                    how would you rate it?
                     <div className="stars">
                       {grades.map((grade, index) => (
                         <Star
@@ -745,6 +739,7 @@ export default function Review(props) {
                             addToReviewsHandler().catch(console.log('error'));
                             setReview('');
                             setRating('');
+                            setActive(true);
                           }}
                         >
                           review

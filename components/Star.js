@@ -8,11 +8,11 @@ const Star = (props) => {
       <input
         type="radio"
         name="rating"
-        id={props.grade}
         value={props.index}
         className="stars_radio-input"
         onClick={changeRating}
       />
+
       <svg
         width="35"
         height="35"
@@ -24,7 +24,7 @@ const Star = (props) => {
         strokeLinejoin="round"
         style={props.style}
       >
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
       </svg>
     </label>
   );
