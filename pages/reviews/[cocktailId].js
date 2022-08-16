@@ -482,7 +482,8 @@ const ratingForm = css`
   }
 
   .container {
-    margin-top: 0.8rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
   .result {
     text-align: center;
@@ -505,6 +506,10 @@ const ratingForm = css`
     clip: rect(1px, 1px, 1px, 1px);
   }
   .stars_radio-input:checked ~ svg {
+    fill: yellow;
+  }
+
+  .stars_radio-input:checked:before ~ svg {
     fill: yellow;
   }
 `;
@@ -710,6 +715,7 @@ export default function Review(props) {
                   </fieldset>
 
                   <div className="container">
+                    how would you rate it?{' '}
                     <div className="stars">
                       {grades.map((grade, index) => (
                         <Star
@@ -720,50 +726,7 @@ export default function Review(props) {
                         />
                       ))}
                     </div>
-                    <h1 className="result">
-                      {grades[rating] ? grades[rating] : ''}
-                    </h1>
                   </div>
-
-                  {/* <fieldset
-                    value={rating}
-                    onChange={(event) => handleRating(event)}
-                  >
-                    {' '}
-                    <div className="inputTwo">
-                      <label htmlFor={rating}>how would you rate it?</label>
-                      <input
-                        type="radio"
-                        id="ratingRadio"
-                        name="rating"
-                        value={1}
-                      />
-                      <input
-                        type="radio"
-                        id="ratingRadio"
-                        name="rating"
-                        value={2}
-                      />
-                      <input
-                        type="radio"
-                        id="ratingRadio"
-                        name="rating"
-                        value={3}
-                      />
-                      <input
-                        type="radio"
-                        id="ratingRadio"
-                        name="rating"
-                        value={4}
-                      />
-                      <input
-                        type="radio"
-                        id="ratingRadio"
-                        name="rating"
-                        value={5}
-                      />
-                    </div>
-                  </fieldset> */}
 
                   <div css={ratingForm}>
                     <div className="button">
