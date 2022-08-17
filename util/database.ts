@@ -617,7 +617,7 @@ export async function getReviewByCocktailId(cocktailId: number) {
     SELECT
     review,
     rating,
-    username,
+    users.username,
     cocktail_id
 
     FROM

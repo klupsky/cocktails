@@ -572,8 +572,9 @@ export default function Review(props) {
       }),
     });
     const createdReview = await reviewResponse.json();
+    const userId = { userId: props.user.id };
     const cocktailId = { cocktailId: props.collectionCocktail.id };
-    const newReviewObject = { ...cocktailId, ...createdReview };
+    const newReviewObject = { ...userId, ...cocktailId, ...createdReview };
     const newState = [...reviewList, newReviewObject];
 
     setReviewList(newState);
