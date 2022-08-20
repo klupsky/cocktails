@@ -2,7 +2,9 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import {
+  getCocktailRating,
   getNumberOfFavourites,
   getSingleCocktailFromCollection,
 } from '../../util/database';
@@ -230,11 +232,17 @@ const drinkGrid = css`
 const favouritesStyle = css`
   margin-top: 0.4rem;
   display: flex;
+  flex-direction: row;
+
   .numberStyle {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     line-height: 100%;
-    margin-left: 0.5rem;
-    margin-top: 0.5rem;
+    margin-left: 0.3rem;
+    margin-right: 0.6rem;
+
+    margin-top: 0.3rem;
+    display: flex;
+    flex-direction: column;
   }
 `;
 
@@ -331,6 +339,23 @@ const bottomLink = css`
 // FUNCTIONALITY STARTS HERE
 
 export default function Cocktail(props) {
+  const [sum, setSum] = useState(0);
+
+  // calculate sum
+  useEffect(() => {
+    function calculateTotalSum() {
+      let total = 1;
+      props.cocktailRating.map((cocktailRating) => {
+        return (total +=
+          props.cocktailRating.find((cocktail) => {
+            return cocktailRating.id === cocktail.id;
+          }).rating / props.cocktailRating.length);
+      });
+      setSum(total);
+    }
+    calculateTotalSum();
+  }, [props.cocktailRating, props.collectionCocktail]);
+
   if (props.collectionCocktail === null) {
     return (
       <div>
@@ -362,7 +387,6 @@ export default function Cocktail(props) {
             </span>
           </Link>
         </div>
-
         <div
           css={css`
             width: 100vw;
@@ -378,16 +402,25 @@ export default function Cocktail(props) {
             <div css={title}>{props.collectionCocktail.name}</div>
             <div css={drinkGrid}>
               <div className="item10">
-                <div css={favouritesStyle}>
-                  <Image
-                    src="/../../images/components/heart1.svg"
-                    width="35px"
-                    height="35px"
-                    alt="add to favourites"
-                  />
-                  <div className="numberStyle">
-                    {props.numberOfFavourites.length}
-                  </div>
+                <div>
+                  <div css={favouritesStyle}>
+                    <Image
+                      src="/../../images/components/heart1.svg"
+                      width="24px"
+                      height="24px"
+                      alt="add to favourites"
+                    />
+                    <div className="numberStyle">
+                      {props.numberOfFavourites.length}
+                    </div>
+                    <Image
+                      src="/../../images/components/star1.svg"
+                      width="25px"
+                      height="25px"
+                      alt="average rating"
+                    />
+                    <div className="numberStyle">{sum}/5</div>
+                  </div>{' '}
                 </div>
               </div>
               <div className="item1">
@@ -474,10 +507,14 @@ export async function getServerSideProps(context) {
     context.query.cocktailId,
   );
 
+  const cocktailRating = await getCocktailRating(context.query.cocktailId);
+  //console.log(cocktailRating);
+
   return {
     props: {
       collectionCocktail: collectionCocktail,
       numberOfFavourites: numberOfFavourites,
+      cocktailRating: cocktailRating,
     },
   };
 }

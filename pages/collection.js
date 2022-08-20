@@ -197,7 +197,6 @@ export default function Collection(props) {
               browse through the full collection and get some inspiration
             </div>
             <div css={smallText}>filter by category</div>
-
             <div css={buttonBox}>
               {props.categories.map((category) => {
                 return (

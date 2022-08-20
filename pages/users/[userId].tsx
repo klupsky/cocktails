@@ -209,7 +209,7 @@ export default function UserDetail(props: Props) {
             </div>
 
             <div css={boxStyle}>
-              {favouritesLists.map((favourite) => {
+              {[...favouritesLists].reverse().map((favourite) => {
                 return (
                   <div key={`cocktailName-${favourite.id}`}>
                     <div
@@ -223,9 +223,6 @@ export default function UserDetail(props: Props) {
                       <div css={removeStyle}>
                         <button
                           onClick={() => {
-                            // setFavouriteUserId(favourite.userId);
-                            // setFavouriteCocktailId(favourite.cocktailId);
-                            // setFavouriteId(favourite.id);
                             deleteFavouriteHandler(
                               favourite.id,
                               favourite.userId,
@@ -255,7 +252,7 @@ export default function UserDetail(props: Props) {
                         />
                       </div>
                       <div css={title}>
-                        <Link href={`/../collection/${favourite.cocktailId}`}>
+                        <Link href={`/../reviews/${favourite.cocktailId}`}>
                           {favourite.name}
                         </Link>
                       </div>
@@ -287,6 +284,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   );
   const favouriteCocktails = await getUserFavourites(context.query.userId);
   // console.log(favouriteCocktails);
+
   if (!user) {
     context.res.statusCode = 404;
     return { props: {} };
