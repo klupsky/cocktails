@@ -34,7 +34,6 @@ export default function App({ Component, pageProps }) {
             font-size: 23px;
             line-height: 33px;
             letter-spacing: 0.07em;
-            width: 100%;
             align-items: center;
             margin: 0;
             padding: 0;

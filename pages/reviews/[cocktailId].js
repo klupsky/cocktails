@@ -566,15 +566,15 @@ export default function Review(props) {
       },
       body: JSON.stringify({
         userId: props.user.id,
+        username: props.user.username,
         cocktailId: props.collectionCocktail.id,
         review: review,
         rating: rating,
       }),
     });
     const createdReview = await reviewResponse.json();
-    const userId = { userId: props.user.id };
     const cocktailId = { cocktailId: props.collectionCocktail.id };
-    const newReviewObject = { ...userId, ...cocktailId, ...createdReview };
+    const newReviewObject = { ...cocktailId, ...createdReview };
     const newState = [...reviewList, newReviewObject];
 
     setReviewList(newState);

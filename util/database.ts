@@ -588,6 +588,7 @@ export async function getPreviewFromCollectionOfCocktails() {
 
 export async function addReview(
   userId: number,
+  username: string,
   cocktailId: number,
   review: string,
   rating: number,
@@ -595,10 +596,10 @@ export async function addReview(
   const [addReviews] = await sql`
     INSERT INTO
     reviews
-      (user_id, cocktail_id, review, rating)
+      (user_id, username, cocktail_id, review, rating)
 
     VALUES
-      (${userId}, ${cocktailId}, ${review}, ${rating})
+      (${userId}, ${username}, ${cocktailId}, ${review}, ${rating})
 
     RETURNING
       *

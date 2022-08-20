@@ -40,9 +40,9 @@ export default async function handler(
         error: 'Please write a review and give a Rating',
       });
     }
-
     const newReview = await addReview(
       user.id,
+      req.body.username,
       req.body.cocktailId,
       req.body.review,
       req.body.rating,
