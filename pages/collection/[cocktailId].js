@@ -404,23 +404,32 @@ export default function Cocktail(props) {
               <div className="item10">
                 <div>
                   <div css={favouritesStyle}>
-                    <Image
-                      src="/../../images/components/heart1.svg"
-                      width="24px"
-                      height="24px"
-                      alt="add to favourites"
-                    />
-                    <div className="numberStyle">
-                      {props.numberOfFavourites.length}
-                    </div>
-                    <Image
-                      src="/../../images/components/star1.svg"
-                      width="25px"
-                      height="25px"
-                      alt="average rating"
-                    />
-                    <div className="numberStyle">{sum}/5</div>
-                  </div>{' '}
+                    {props.numberOfFavourites.length !== 0 && (
+                      <>
+                        <Image
+                          src="/../../images/components/heart1.svg"
+                          width="24px"
+                          height="24px"
+                          alt="add to favourites"
+                        />
+                        <div className="numberStyle">
+                          {props.numberOfFavourites.length}
+                        </div>
+                      </>
+                    )}
+
+                    {props.cocktailRating.length !== 0 && (
+                      <>
+                        <Image
+                          src="/../../images/components/star1.svg"
+                          width="25px"
+                          height="25px"
+                          alt="average rating"
+                        />
+                        <div className="numberStyle">{sum}/5</div>{' '}
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
               <div className="item1">
