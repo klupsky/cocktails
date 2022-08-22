@@ -416,7 +416,7 @@ const reviewsStyle = css`
   .reviewText {
     line-height: 130%;
     margin-top: 0.3rem;
-    font-size: 0.7rem;
+    font-size: 1rem;
     margin-bottom: 0.1rem;
   }
 `;
@@ -448,7 +448,8 @@ const ratingForm = css`
       // when smaller than 600
 
       @media (max-width: 600px) {
-        width: 80%;
+        width: 100%;
+        height: 5rem;
       }
     }
   }
