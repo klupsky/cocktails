@@ -340,7 +340,6 @@ const bottomLink = css`
 
 export default function Cocktail(props) {
   const [sum, setSum] = useState(0);
-
   // calculate sum
   useEffect(() => {
     function calculateTotalSum() {
@@ -517,7 +516,6 @@ export async function getServerSideProps(context) {
   );
 
   const cocktailRating = await getCocktailRating(context.query.cocktailId);
-  //console.log(cocktailRating);
 
   return {
     props: {
